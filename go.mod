@@ -8,7 +8,7 @@ require (
 	github.com/go-kratos/kratos/v2 v2.7.1
 	github.com/golang/protobuf v1.5.3
 	github.com/json-iterator/go v1.1.12
-	github.com/limes-cloud/kratosx v1.0.4
+	github.com/limes-cloud/kratosx v1.0.8
 	github.com/limes-cloud/resource v1.0.2
 	go.uber.org/automaxprocs v1.5.1
 	golang.org/x/crypto v0.14.0
@@ -113,5 +113,3 @@ require (
 	modernc.org/memory v1.5.0 // indirect
 	modernc.org/sqlite v1.23.1 // indirect
 )
-
-replace github.com/limes-cloud/kratosx v1.0.4 => ../go-platform/kratosx
