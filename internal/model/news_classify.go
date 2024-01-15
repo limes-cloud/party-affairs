@@ -2,12 +2,13 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type NewsClassify struct {
 	Name   string `json:"name" gorm:"not null;size:128;comment:分类名称"`
 	Weight uint32 `json:"weight" gorm:"comment:分类权重"`
-	BaseModel
+	types.BaseModel
 }
 
 // All 查询全部数据

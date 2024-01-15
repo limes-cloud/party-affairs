@@ -3,6 +3,7 @@ package logic
 import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 	resourceV1 "github.com/limes-cloud/resource/api/v1"
 	"gorm.io/gorm"
 
@@ -25,7 +26,7 @@ func NewNews(conf *config.Config) *News {
 
 func (l *News) Page(ctx kratosx.Context, in *v1.PageNewsRequest) (*v1.PageNewsReply, error) {
 	news := model.News{}
-	list, total, err := news.Page(ctx, &model.PageOptions{
+	list, total, err := news.Page(ctx, &types.PageOptions{
 		Page:     in.Page,
 		PageSize: in.PageSize,
 		Scopes: func(db *gorm.DB) *gorm.DB {

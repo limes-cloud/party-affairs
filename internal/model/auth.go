@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type Auth struct {
@@ -9,7 +10,7 @@ type Auth struct {
 	AuthID   string `json:"auth_id" gorm:"not null;size:128;comment:认证ID"`
 	UnionID  string `json:"union_id" gorm:"default null;size:128;comment:联合ID"`
 	UserID   uint32 `json:"user_id" gorm:"not null;comment:用户ID"`
-	CreateModel
+	types.CreateModel
 }
 
 // OneByAuthId 通过uid查询用户信息

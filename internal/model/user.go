@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type User struct {
@@ -14,7 +15,7 @@ type User struct {
 	Status    *bool  `json:"status,omitempty" gorm:"not null;comment:用户状态"`
 	Token     string `json:"-" gorm:"default null;type:text;comment:登录token"`
 	LastLogin uint32 `json:"last_login" gorm:"comment:最后登陆时间"`
-	BaseModel
+	types.BaseModel
 }
 
 // OneByID 通过id查询用户信息
@@ -33,7 +34,7 @@ func (u *User) OneByEmail(ctx kratosx.Context, email string) error {
 }
 
 // Page 查询分页数据
-func (u *User) Page(ctx kratosx.Context, options *PageOptions) ([]*User, uint32, error) {
+func (u *User) Page(ctx kratosx.Context, options *types.PageOptions) ([]*User, uint32, error) {
 	var list []*User
 	var total int64
 

@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type TaskValue struct {
@@ -9,7 +10,7 @@ type TaskValue struct {
 	UserID uint32 `json:"user_id" gorm:"not null;comment:用户id"`
 	Value  string `json:"value"  gorm:"not null;type:text;comment:数据值"`
 	User   User   `json:"user"`
-	BaseModel
+	types.BaseModel
 }
 
 // OneByID 通过id查询新闻信息
@@ -18,7 +19,7 @@ func (u *TaskValue) OneByID(ctx kratosx.Context, taskId uint32, userId uint32) e
 }
 
 // Page 查询分页数据
-func (u *TaskValue) Page(ctx kratosx.Context, options *PageOptions) ([]*TaskValue, uint32, error) {
+func (u *TaskValue) Page(ctx kratosx.Context, options *types.PageOptions) ([]*TaskValue, uint32, error) {
 	var list []*TaskValue
 	var total int64
 

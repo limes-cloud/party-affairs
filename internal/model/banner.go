@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type Banner struct {
@@ -11,7 +12,7 @@ type Banner struct {
 	Url    string `json:"url" gorm:"default null;size:128;comment:跳转链接"`
 	Params string `json:"params" gorm:"default null;size:128;comment:跳转参数"`
 	Weight uint32 `json:"weight" gorm:"default 0;comment:轮播权重"`
-	BaseModel
+	types.BaseModel
 }
 
 // OneByID 通过id查询新闻信息

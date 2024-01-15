@@ -4,6 +4,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"gorm.io/gorm"
 
@@ -26,7 +27,7 @@ func NewUser(conf *config.Config) *User {
 
 func (l *User) Page(ctx kratosx.Context, in *v1.PageUserRequest) (*v1.PageUserReply, error) {
 	user := model.User{}
-	list, total, err := user.Page(ctx, &model.PageOptions{
+	list, total, err := user.Page(ctx, &types.PageOptions{
 		Page:     in.Page,
 		PageSize: in.PageSize,
 		Scopes: func(db *gorm.DB) *gorm.DB {
@@ -81,7 +82,7 @@ func (l *User) Current(ctx kratosx.Context) (*v1.User, error) {
 // ChangeStatus 改变用户状态
 func (l *User) ChangeStatus(ctx kratosx.Context, in *v1.ChangeUserStatusRequest) (*emptypb.Empty, error) {
 	user := model.User{
-		BaseModel: model.BaseModel{ID: in.Id},
+		BaseModel: types.BaseModel{ID: in.Id},
 		Status:    &in.Status,
 	}
 

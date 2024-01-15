@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type News struct {
@@ -13,7 +14,7 @@ type News struct {
 	Read         uint32       `json:"read" gorm:"default 0;comment:阅读人数"`
 	ClassifyID   uint32       `json:"classify_id" gorm:"not null;comment:新闻分类"`
 	NewsClassify NewsClassify `json:"news_classify" gorm:"foreignKey:classify_id"`
-	BaseModel
+	types.BaseModel
 }
 
 // OneByID 通过id查询新闻信息
@@ -22,7 +23,7 @@ func (u *News) OneByID(ctx kratosx.Context, id uint32) error {
 }
 
 // Page 查询分页数据
-func (u *News) Page(ctx kratosx.Context, options *PageOptions) ([]*News, uint32, error) {
+func (u *News) Page(ctx kratosx.Context, options *types.PageOptions) ([]*News, uint32, error) {
 	var list []*News
 	var total int64
 

@@ -7,10 +7,12 @@ require (
 	github.com/forgoer/openssl v1.6.0
 	github.com/go-kratos/kratos/v2 v2.7.1
 	github.com/golang/protobuf v1.5.3
+	github.com/gookit/color v1.5.4
 	github.com/json-iterator/go v1.1.12
 	github.com/limes-cloud/configure v1.0.14
 	github.com/limes-cloud/kratosx v1.0.8
 	github.com/limes-cloud/resource v1.0.2
+	github.com/mbndr/figlet4go v0.0.0-20190224160619-d6cef5b186ea
 	go.uber.org/automaxprocs v1.5.1
 	golang.org/x/crypto v0.14.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20230822172742-b8732ec3820d
@@ -84,6 +86,7 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
+	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.opentelemetry.io/otel v1.21.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.21.0 // indirect

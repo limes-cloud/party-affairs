@@ -3,6 +3,7 @@ package logic
 import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 	resourceV1 "github.com/limes-cloud/resource/api/v1"
 	"gorm.io/gorm"
 
@@ -25,7 +26,7 @@ func NewResource(conf *config.Config) *Resource {
 
 func (l *Resource) Page(ctx kratosx.Context, in *v1.PageResourceRequest) (*v1.PageResourceReply, error) {
 	rs := model.Resource{}
-	list, total, err := rs.Page(ctx, &model.PageOptions{
+	list, total, err := rs.Page(ctx, &types.PageOptions{
 		Page:     in.Page,
 		PageSize: in.PageSize,
 		Scopes: func(db *gorm.DB) *gorm.DB {

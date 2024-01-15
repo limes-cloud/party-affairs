@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type Task struct {
@@ -11,7 +12,7 @@ type Task struct {
 	Start    uint32 `json:"start" gorm:"not null;comment:开始时间"`
 	End      uint32 `json:"end" gorm:"not null;comment:结束时间"`
 	Config   string `json:"config" gorm:"not null;type:text;comment:任务配置"`
-	BaseModel
+	types.BaseModel
 }
 
 // OneByID 通过id查询新闻信息
@@ -20,7 +21,7 @@ func (u *Task) OneByID(ctx kratosx.Context, id uint32) error {
 }
 
 // Page 查询分页数据
-func (u *Task) Page(ctx kratosx.Context, options *PageOptions) ([]*Task, uint32, error) {
+func (u *Task) Page(ctx kratosx.Context, options *types.PageOptions) ([]*Task, uint32, error) {
 	var list []*Task
 	var total int64
 

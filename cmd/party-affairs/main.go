@@ -11,6 +11,7 @@ import (
 
 	v1 "party-affairs/api/v1"
 	systemconfig "party-affairs/config"
+	"party-affairs/internal/initiator"
 	"party-affairs/internal/service"
 )
 
@@ -37,6 +38,12 @@ func RegisterServer(c config.Config, hs *http.Server, gs *grpc.Server) {
 			log.Error("business 配置变更失败")
 		}
 	})
+
+	// 初始化逻辑
+	ior := initiator.New(conf)
+	if err := ior.Run(); err != nil {
+		panic("initiator error:" + err.Error())
+	}
 
 	srv := service.New(conf)
 	v1.RegisterServiceHTTPServer(hs, srv)

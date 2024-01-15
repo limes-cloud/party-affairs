@@ -3,6 +3,7 @@ package logic
 import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 	"gorm.io/gorm"
 
 	v1 "party-affairs/api/v1"
@@ -24,7 +25,7 @@ func NewTaskValue(conf *config.Config) *TaskValue {
 
 func (l *TaskValue) Page(ctx kratosx.Context, in *v1.PageTaskValueRequest) (*v1.PageTaskValueReply, error) {
 	task := model.TaskValue{}
-	list, total, err := task.Page(ctx, &model.PageOptions{
+	list, total, err := task.Page(ctx, &types.PageOptions{
 		Page:     in.Page,
 		PageSize: in.PageSize,
 		Scopes: func(db *gorm.DB) *gorm.DB {

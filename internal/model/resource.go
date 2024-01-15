@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/limes-cloud/kratosx"
+	"github.com/limes-cloud/kratosx/types"
 )
 
 type Resource struct {
@@ -11,7 +12,7 @@ type Resource struct {
 	DownloadCount    uint32           `json:"download_count" gorm:"default 0;comment:下载次数"`
 	ClassifyID       uint32           `json:"classify_id" gorm:"not null;comment:新闻分类"`
 	ResourceClassify ResourceClassify `json:"resource_classify" gorm:"foreignKey:classify_id"`
-	BaseModel
+	types.BaseModel
 }
 
 // OneByID 通过id查询新闻信息
@@ -20,7 +21,7 @@ func (u *Resource) OneByID(ctx kratosx.Context, id uint32) error {
 }
 
 // Page 查询分页数据
-func (u *Resource) Page(ctx kratosx.Context, options *PageOptions) ([]*Resource, uint32, error) {
+func (u *Resource) Page(ctx kratosx.Context, options *types.PageOptions) ([]*Resource, uint32, error) {
 	var list []*Resource
 	var total int64
 
