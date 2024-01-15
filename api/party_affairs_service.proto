@@ -1,0 +1,337 @@
+syntax = "proto3";
+
+package admin;
+option go_package = "./v1;v1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "party_affairs_user.proto";
+import "party_affairs_news_classify.proto";
+import "party_affairs_news.proto";
+import "party_affairs_resource_classify.proto";
+import "party_affairs_resource.proto";
+import "party_affairs_banner.proto";
+import "party_affairs_task.proto";
+import "party_affairs_auth.proto";
+import "party_affairs_task_value.proto";
+service Service {
+
+
+  rpc Login (LoginRequest) returns (LoginReply) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/login",
+      body: "*"
+    };
+  }
+
+  rpc RefreshToken (google.protobuf.Empty) returns (RefreshTokenReply) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/refresh_token"
+    };
+  }
+
+
+  rpc SendBindEmail (SendBindEmailRequest) returns (SendBindEmailReply) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/bind/email",
+      body: "*"
+    };
+  }
+
+  rpc Bind (BindRequest) returns (BindReply) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/bind",
+      body: "*"
+    };
+  }
+
+  rpc PageUser (PageUserRequest) returns (PageUserReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/users",
+    };
+  }
+
+  rpc CurrentUser (google.protobuf.Empty) returns (User) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/user",
+    };
+  }
+
+  rpc ChangeUserStatus (ChangeUserStatusRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/user/status",
+      body: "*"
+    };
+  }
+
+  rpc AddUser (AddUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/user",
+      body: "*"
+    };
+  }
+
+  rpc UpdateUser (UpdateUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/user",
+      body: "*"
+    };
+  }
+
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/user"
+    };
+  }
+
+
+  rpc AllNewsClassify (google.protobuf.Empty) returns (AllNewsClassifyReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/news/classify",
+      response_body: "list",
+      // 可以添加附加接口
+      additional_bindings {
+        get: "/party-affairs/client/v1/news/classify",
+        response_body: "list",
+      },
+    };
+  }
+
+  rpc AddNewsClassify (AddNewsClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/news/classify",
+      body: "*"
+    };
+  }
+
+  rpc UpdateNewsClassify (UpdateNewsClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/news/classify",
+      body: "*"
+    };
+  }
+
+  rpc DeleteNewsClassify (DeleteNewsClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/news/classify"
+    };
+  }
+
+  rpc PageNews (PageNewsRequest) returns (PageNewsReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/news/contents",
+      additional_bindings {
+        get: "/party-affairs/client/v1/news/contents"
+      },
+    };
+  }
+
+  rpc GetNews (GetNewsRequest) returns (GetNewsReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/news/content",
+      response_body: "news",
+      additional_bindings {
+        get: "/party-affairs/client/v1/news/content",
+        response_body: "news",
+      },
+    };
+  }
+
+  rpc AddNews (AddNewsRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/news/content",
+      body: "*"
+    };
+  }
+
+  rpc UpdateNews (UpdateNewsRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/news/content",
+      body: "*"
+    };
+  }
+
+  rpc DeleteNews (DeleteNewsRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/news/content"
+    };
+  }
+
+  rpc AllResourceClassify (google.protobuf.Empty) returns (AllResourceClassifyReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/resource/classify",
+      response_body: "list",
+      additional_bindings {
+        get: "/party-affairs/client/v1/resource/classify",
+        response_body: "list",
+      },
+    };
+  }
+
+  rpc AddResourceClassify (AddResourceClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/resource/classify",
+      body: "*"
+    };
+  }
+
+  rpc UpdateResourceClassify (UpdateResourceClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/resource/classify",
+      body: "*"
+    };
+  }
+
+  rpc DeleteResourceClassify (DeleteResourceClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/resource/classify"
+    };
+  }
+
+  rpc PageResource (PageResourceRequest) returns (PageResourceReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/resource/contents",
+      additional_bindings {
+        get: "/party-affairs/client/v1/resource/contents",
+      },
+    };
+  }
+
+  rpc GetResource (GetResourceRequest) returns (GetResourceReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/resource/content",
+      response_body: "resource",
+      additional_bindings {
+        get: "/party-affairs/client/v1/resource/content",
+      },
+    };
+  }
+
+  rpc AddResource (AddResourceRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/resource/content",
+      body: "*"
+    };
+  }
+
+  rpc UpdateResource (UpdateResourceRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/resource/content",
+      body: "*"
+    };
+  }
+
+  rpc DeleteResource (DeleteResourceRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/resource/content"
+    };
+  }
+
+  rpc AllBanner (google.protobuf.Empty) returns (AllBannerReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/banners",
+      additional_bindings {
+        get: "/party-affairs/client/v1/banners"
+      },
+    };
+  }
+
+  rpc AddBanner (AddBannerRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/banner",
+      body: "*"
+    };
+  }
+
+  rpc UpdateBanner (UpdateBannerRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/banner",
+      body: "*"
+    };
+  }
+
+  rpc DeleteBanner (DeleteBannerRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/banner"
+    };
+  }
+
+  rpc PageTask (PageTaskRequest) returns (PageTaskReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/tasks",
+      additional_bindings {
+        get: "/party-affairs/client/v1/tasks"
+      },
+    };
+  }
+
+  rpc GetTask (GetTaskRequest) returns (GetTaskReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/task",
+      response_body: "task",
+      additional_bindings {
+        get: "/party-affairs/client/v1/task",
+        response_body: "task",
+      },
+    };
+  }
+
+  rpc AddTask (AddTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/task",
+      body: "*"
+    };
+  }
+
+  rpc UpdateTask (UpdateTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/task",
+      body: "*"
+    };
+  }
+
+  rpc DeleteTask (DeleteTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/task"
+    };
+  }
+
+  rpc PageTaskValue (PageTaskValueRequest) returns (PageTaskValueReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/task/values",
+    };
+  }
+
+  rpc GetTaskValue (GetTaskValueRequest) returns (GetTaskValueReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/task/value",
+      response_body: "value",
+      additional_bindings {
+        get: "/party-affairs/client/v1/task/value",
+        response_body: "value",
+      },
+    };
+  }
+
+  rpc AddTaskValue (AddTaskValueRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/task/value",
+      body: "*"
+    };
+  }
+
+  rpc UpdateTaskValue (UpdateTaskValueRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/client/v1/task/value",
+      body: "*"
+    };
+  }
+
+  rpc DeleteTaskValue (DeleteTaskValueRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/task/value"
+    };
+  }
+}
+
+

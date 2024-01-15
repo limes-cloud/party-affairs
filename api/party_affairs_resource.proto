@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package admin;
+
+option go_package = "./v1;v1";
+
+import "validate/validate.proto";
+
+import "party_affairs_resource_classify.proto";
+import "resource/resource.proto";
+
+message Resource{
+  uint32 id = 1;
+  string title = 2;
+  string desc = 3;
+  string url = 4;
+  uint32 download_count = 6;
+  uint32 classify_id = 7;
+  uint32 created_at = 8;
+  uint32 updated_at = 9;
+  ResourceClassify resource_classify = 10;
+  resource.File resource =  13;
+}
+
+message GetResourceRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+message GetResourceReply{
+  Resource resource = 1;
+}
+
+message PageResourceRequest{
+  uint32 page = 1[(validate.rules).uint32 = {gt: 0}];
+  uint32 page_size = 2[(validate.rules).uint32 = {gt: 0,lte:50}];
+  optional uint32 classify_id = 3;
+  optional string title = 4;
+}
+
+message PageResourceReply{
+  uint32 total = 1;
+  repeated Resource list = 2;
+}
+
+message AddResourceRequest {
+  string title = 1[(validate.rules).string = {min_len: 1}];
+  string desc = 2[(validate.rules).string = {min_len: 1}];
+  string url = 3[(validate.rules).string = {min_len: 1}];
+  uint32 classify_id = 4[(validate.rules).uint32 = {gt: 0}];
+}
+
+message UpdateResourceRequest {
+  string title = 1[(validate.rules).string = {min_len: 1}];
+  string desc = 2[(validate.rules).string = {min_len: 1}];
+  string url = 3[(validate.rules).string = {min_len: 1}];
+  uint32 classify_id = 4[(validate.rules).uint32 = {gt: 0}];
+  uint32 id = 5[(validate.rules).uint32 = {gt: 0}];
+}
+
+message DeleteResourceRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+

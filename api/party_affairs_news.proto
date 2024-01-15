@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package admin;
+
+option go_package = "./v1;v1";
+
+import "validate/validate.proto";
+
+import "party_affairs_news_classify.proto";
+import "resource/resource.proto";
+
+message News{
+  uint32 id = 1;
+  string title = 2;
+  string unit = 3;
+  string cover = 4;
+  string desc = 6;
+  uint32 read = 7;
+  string content = 8;
+  uint32 classify_id = 9;
+  uint32 created_at = 10;
+  uint32 updated_at = 11;
+  NewsClassify news_classify = 12;
+  resource.File resource =  13;
+}
+
+message GetNewsRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+message GetNewsReply{
+    News news = 1;
+}
+
+message PageNewsRequest{
+  uint32 page = 1[(validate.rules).uint32 = {gt: 0}];
+  uint32 page_size = 2[(validate.rules).uint32 = {gt: 0,lte:50}];
+  optional uint32 classify_id = 3;
+  optional string title = 4;
+}
+
+message PageNewsReply{
+  uint32 total = 1;
+  repeated News list = 2;
+}
+
+message AddNewsRequest {
+  string title = 1[(validate.rules).string = {min_len: 1}];
+  string unit = 2[(validate.rules).string = {min_len: 1}];
+  string cover = 3[(validate.rules).string = {min_len: 1}];
+  string desc = 4[(validate.rules).string = {min_len: 1}];
+  string content = 5[(validate.rules).string = {min_len: 1}];
+  uint32 classify_id = 6[(validate.rules).uint32 = {gt: 0}];
+}
+
+message UpdateNewsRequest {
+  string title = 1[(validate.rules).string = {min_len: 1}];
+  string unit = 2[(validate.rules).string = {min_len: 1}];
+  string cover = 3[(validate.rules).string = {min_len: 1}];
+  string desc = 4[(validate.rules).string = {min_len: 1}];
+  string content = 5[(validate.rules).string = {min_len: 1}];
+  uint32 classify_id = 6[(validate.rules).uint32 = {gt: 0}];
+  uint32 id = 7[(validate.rules).uint32 = {gt: 0}];
+}
+
+message DeleteNewsRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+

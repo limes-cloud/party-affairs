@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package admin;
+
+option go_package = "./v1;v1";
+
+import "validate/validate.proto";
+import "resource/resource.proto";
+
+message Banner{
+  uint32 id = 1;
+  string title = 2;
+  string src = 3;
+  string app = 4;
+  string url = 5;
+  string params = 6;
+  uint32 weight = 7;
+  uint32 created_at = 8;
+  uint32 updated_at = 9;
+  resource.File resource =  10;
+}
+
+message AllBannerReply{
+  repeated Banner list = 1;
+}
+
+message AddBannerRequest {
+  string title = 1[(validate.rules).string = {min_len: 1}];
+  string src = 2[(validate.rules).string = {min_len: 1}];
+  optional string app = 3;
+  optional string url = 4;
+  optional string params = 5;
+}
+
+message UpdateBannerRequest {
+  string title = 1[(validate.rules).string = {min_len: 1}];
+  string src = 2[(validate.rules).string = {min_len: 1}];
+  optional string app = 3;
+  optional string url = 4;
+  optional string params = 5;
+  uint32 id = 6[(validate.rules).uint32 = {gt: 0}];
+}
+
+message DeleteBannerRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+

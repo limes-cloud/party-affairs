@@ -1,0 +1,1818 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Service API
+    version: 0.0.1
+paths:
+    /party-affairs/admin/v1/banner:
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateBanner
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateBannerRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddBanner
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddBannerRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteBanner
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/banners:
+        get:
+            tags:
+                - Service
+            operationId: Service_AllBanner
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllBannerReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/news/classify:
+        get:
+            tags:
+                - Service
+            operationId: Service_AllNewsClassify
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllNewsClassifyReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateNewsClassify
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateNewsClassifyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddNewsClassify
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddNewsClassifyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteNewsClassify
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/news/content:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetNews
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetNewsReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateNews
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateNewsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddNews
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddNewsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteNews
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/news/contents:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageNews
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: classifyId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageNewsReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/resource/classify:
+        get:
+            tags:
+                - Service
+            operationId: Service_AllResourceClassify
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllResourceClassifyReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateResourceClassify
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateResourceClassifyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddResourceClassify
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddResourceClassifyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteResourceClassify
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/resource/content:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetResource
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetResourceReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateResource
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateResourceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddResource
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddResourceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteResource
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/resource/contents:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageResource
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: classifyId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageResourceReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/task:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetTask
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateTask
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateTaskRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddTask
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddTaskRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteTask
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/task/value:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetTaskValue
+            parameters:
+                - name: taskId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskValueReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteTaskValue
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/task/values:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageTaskValue
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: taskId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: userId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageTaskValueReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/tasks:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageTask
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageTaskReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/user:
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - Service
+            operationId: Service_DeleteUser
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/user/status:
+        post:
+            tags:
+                - Service
+            operationId: Service_ChangeUserStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ChangeUserStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/admin/v1/users:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageUser
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: phone
+                  in: query
+                  schema:
+                    type: string
+                - name: email
+                  in: query
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  schema:
+                    type: boolean
+                - name: startTime
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: endTime
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageUserReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/banners:
+        get:
+            tags:
+                - Service
+            operationId: Service_AllBanner
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllBannerReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/bind:
+        post:
+            tags:
+                - Service
+            operationId: Service_Bind
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BindRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BindReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/bind/email:
+        post:
+            tags:
+                - Service
+            operationId: Service_SendBindEmail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SendBindEmailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SendBindEmailReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/login:
+        post:
+            tags:
+                - Service
+            operationId: Service_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LoginReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/news/classify:
+        get:
+            tags:
+                - Service
+            operationId: Service_AllNewsClassify
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllNewsClassifyReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/news/content:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetNews
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetNewsReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/news/contents:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageNews
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: classifyId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageNewsReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/refresh_token:
+        post:
+            tags:
+                - Service
+            operationId: Service_RefreshToken
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RefreshTokenReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/resource/classify:
+        get:
+            tags:
+                - Service
+            operationId: Service_AllResourceClassify
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllResourceClassifyReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/resource/content:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetResource
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetResourceReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/resource/contents:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageResource
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: classifyId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageResourceReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/task:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetTask
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/task/value:
+        get:
+            tags:
+                - Service
+            operationId: Service_GetTaskValue
+            parameters:
+                - name: taskId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskValueReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - Service
+            operationId: Service_UpdateTaskValue
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateTaskValueRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_AddTaskValue
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddTaskValueRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/tasks:
+        get:
+            tags:
+                - Service
+            operationId: Service_PageTask
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PageTaskReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /party-affairs/client/v1/user:
+        post:
+            tags:
+                - Service
+            operationId: Service_CurrentUser
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        AddBannerRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                src:
+                    type: string
+                app:
+                    type: string
+                url:
+                    type: string
+                params:
+                    type: string
+        AddNewsClassifyRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+        AddNewsRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                unit:
+                    type: string
+                cover:
+                    type: string
+                desc:
+                    type: string
+                content:
+                    type: string
+                classifyId:
+                    type: integer
+                    format: uint32
+        AddResourceClassifyRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+        AddResourceRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                desc:
+                    type: string
+                url:
+                    type: string
+                classifyId:
+                    type: integer
+                    format: uint32
+        AddTaskRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                desc:
+                    type: string
+                isUpdate:
+                    type: boolean
+                start:
+                    type: integer
+                    format: uint32
+                end:
+                    type: integer
+                    format: uint32
+                config:
+                    type: string
+        AddTaskValueRequest:
+            type: object
+            properties:
+                taskId:
+                    type: integer
+                    format: uint32
+                value:
+                    type: string
+        AddUserRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                gender:
+                    type: string
+                phone:
+                    type: string
+                email:
+                    type: string
+        AllBannerReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Banner'
+        AllNewsClassifyReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/NewsClassify'
+        AllResourceClassifyReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ResourceClassify'
+        Banner:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                title:
+                    type: string
+                src:
+                    type: string
+                app:
+                    type: string
+                url:
+                    type: string
+                params:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+                resource:
+                    $ref: '#/components/schemas/File'
+        BindReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        BindRequest:
+            type: object
+            properties:
+                code:
+                    type: string
+                platform:
+                    type: string
+                username:
+                    type: string
+                captchaId:
+                    type: string
+                captcha:
+                    type: string
+        ChangeUserStatusRequest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                status:
+                    type: boolean
+        File:
+            type: object
+            properties: {}
+        GetNewsReply:
+            type: object
+            properties:
+                news:
+                    $ref: '#/components/schemas/News'
+        GetResourceReply:
+            type: object
+            properties:
+                resource:
+                    $ref: '#/components/schemas/Resource'
+        GetTaskReply:
+            type: object
+            properties:
+                task:
+                    $ref: '#/components/schemas/Task'
+        GetTaskValueReply:
+            type: object
+            properties:
+                value:
+                    $ref: '#/components/schemas/TaskValue'
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        LoginReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        LoginRequest:
+            type: object
+            properties:
+                code:
+                    type: string
+                platform:
+                    type: string
+        News:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                title:
+                    type: string
+                unit:
+                    type: string
+                cover:
+                    type: string
+                desc:
+                    type: string
+                read:
+                    type: integer
+                    format: uint32
+                content:
+                    type: string
+                classifyId:
+                    type: integer
+                    format: uint32
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+                newsClassify:
+                    $ref: '#/components/schemas/NewsClassify'
+                resource:
+                    $ref: '#/components/schemas/File'
+        NewsClassify:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+        PageNewsReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/News'
+        PageResourceReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Resource'
+        PageTaskReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Task'
+        PageTaskValueReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TaskValue'
+        PageUserReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: uint32
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/User'
+        RefreshTokenReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        Resource:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                title:
+                    type: string
+                desc:
+                    type: string
+                url:
+                    type: string
+                downloadCount:
+                    type: integer
+                    format: uint32
+                classifyId:
+                    type: integer
+                    format: uint32
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+                resourceClassify:
+                    $ref: '#/components/schemas/ResourceClassify'
+                resource:
+                    $ref: '#/components/schemas/File'
+        ResourceClassify:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+        SendBindEmailReply:
+            type: object
+            properties:
+                uuid:
+                    type: string
+                captcha:
+                    type: string
+                expire:
+                    type: integer
+                    format: uint32
+        SendBindEmailRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        Task:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                title:
+                    type: string
+                desc:
+                    type: string
+                isUpdate:
+                    type: boolean
+                start:
+                    type: integer
+                    format: uint32
+                end:
+                    type: integer
+                    format: uint32
+                config:
+                    type: string
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+        TaskValue:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                taskId:
+                    type: integer
+                    format: uint32
+                userId:
+                    type: integer
+                    format: uint32
+                value:
+                    type: string
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+                user:
+                    $ref: '#/components/schemas/User'
+        UpdateBannerRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                src:
+                    type: string
+                app:
+                    type: string
+                url:
+                    type: string
+                params:
+                    type: string
+                id:
+                    type: integer
+                    format: uint32
+        UpdateNewsClassifyRequest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+        UpdateNewsRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                unit:
+                    type: string
+                cover:
+                    type: string
+                desc:
+                    type: string
+                content:
+                    type: string
+                classifyId:
+                    type: integer
+                    format: uint32
+                id:
+                    type: integer
+                    format: uint32
+        UpdateResourceClassifyRequest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                weight:
+                    type: integer
+                    format: uint32
+        UpdateResourceRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                desc:
+                    type: string
+                url:
+                    type: string
+                classifyId:
+                    type: integer
+                    format: uint32
+                id:
+                    type: integer
+                    format: uint32
+        UpdateTaskRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                desc:
+                    type: string
+                isUpdate:
+                    type: boolean
+                start:
+                    type: integer
+                    format: uint32
+                end:
+                    type: integer
+                    format: uint32
+                config:
+                    type: string
+                id:
+                    type: integer
+                    format: uint32
+        UpdateTaskValueRequest:
+            type: object
+            properties:
+                taskId:
+                    type: integer
+                    format: uint32
+                value:
+                    type: string
+        UpdateUserRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                gender:
+                    type: string
+                phone:
+                    type: string
+                email:
+                    type: string
+                status:
+                    type: boolean
+                id:
+                    type: integer
+                    format: uint32
+        User:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                nickname:
+                    type: string
+                avatar:
+                    type: string
+                name:
+                    type: string
+                gender:
+                    type: string
+                phone:
+                    type: string
+                email:
+                    type: string
+                lastLogin:
+                    type: integer
+                    format: uint32
+                status:
+                    type: boolean
+                createdAt:
+                    type: integer
+                    format: uint32
+                updatedAt:
+                    type: integer
+                    format: uint32
+tags:
+    - name: Service
