@@ -26,9 +26,9 @@ const (
 	Service_DeleteNewsClassify_FullMethodName     = "/admin.Service/DeleteNewsClassify"
 	Service_PageNewsContent_FullMethodName        = "/admin.Service/PageNewsContent"
 	Service_GetNewsContent_FullMethodName         = "/admin.Service/GetNewsContent"
-	Service_AddNews_FullMethodName                = "/admin.Service/AddNews"
-	Service_UpdateNews_FullMethodName             = "/admin.Service/UpdateNews"
-	Service_DeleteNews_FullMethodName             = "/admin.Service/DeleteNews"
+	Service_AddNewsContent_FullMethodName         = "/admin.Service/AddNewsContent"
+	Service_UpdateNewsContent_FullMethodName      = "/admin.Service/UpdateNewsContent"
+	Service_DeleteNewsContent_FullMethodName      = "/admin.Service/DeleteNewsContent"
 	Service_AllResourceClassify_FullMethodName    = "/admin.Service/AllResourceClassify"
 	Service_AddResourceClassify_FullMethodName    = "/admin.Service/AddResourceClassify"
 	Service_UpdateResourceClassify_FullMethodName = "/admin.Service/UpdateResourceClassify"
@@ -64,9 +64,9 @@ type ServiceClient interface {
 	DeleteNewsClassify(ctx context.Context, in *DeleteNewsClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	PageNewsContent(ctx context.Context, in *PageNewsRequest, opts ...grpc.CallOption) (*PageNewsReply, error)
 	GetNewsContent(ctx context.Context, in *GetNewsRequest, opts ...grpc.CallOption) (*News, error)
-	AddNews(ctx context.Context, in *AddNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateNews(ctx context.Context, in *UpdateNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeleteNews(ctx context.Context, in *DeleteNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddNewsContent(ctx context.Context, in *AddNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateNewsContent(ctx context.Context, in *UpdateNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteNewsContent(ctx context.Context, in *DeleteNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AllResourceClassify(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AllResourceClassifyReply, error)
 	AddResourceClassify(ctx context.Context, in *AddResourceClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateResourceClassify(ctx context.Context, in *UpdateResourceClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -154,27 +154,27 @@ func (c *serviceClient) GetNewsContent(ctx context.Context, in *GetNewsRequest, 
 	return out, nil
 }
 
-func (c *serviceClient) AddNews(ctx context.Context, in *AddNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *serviceClient) AddNewsContent(ctx context.Context, in *AddNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_AddNews_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_AddNewsContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) UpdateNews(ctx context.Context, in *UpdateNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *serviceClient) UpdateNewsContent(ctx context.Context, in *UpdateNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_UpdateNews_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_UpdateNewsContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) DeleteNews(ctx context.Context, in *DeleteNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *serviceClient) DeleteNewsContent(ctx context.Context, in *DeleteNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_DeleteNews_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_DeleteNewsContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -398,9 +398,9 @@ type ServiceServer interface {
 	DeleteNewsClassify(context.Context, *DeleteNewsClassifyRequest) (*emptypb.Empty, error)
 	PageNewsContent(context.Context, *PageNewsRequest) (*PageNewsReply, error)
 	GetNewsContent(context.Context, *GetNewsRequest) (*News, error)
-	AddNews(context.Context, *AddNewsRequest) (*emptypb.Empty, error)
-	UpdateNews(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error)
-	DeleteNews(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error)
+	AddNewsContent(context.Context, *AddNewsRequest) (*emptypb.Empty, error)
+	UpdateNewsContent(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error)
+	DeleteNewsContent(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error)
 	AllResourceClassify(context.Context, *emptypb.Empty) (*AllResourceClassifyReply, error)
 	AddResourceClassify(context.Context, *AddResourceClassifyRequest) (*emptypb.Empty, error)
 	UpdateResourceClassify(context.Context, *UpdateResourceClassifyRequest) (*emptypb.Empty, error)
@@ -449,14 +449,14 @@ func (UnimplementedServiceServer) PageNewsContent(context.Context, *PageNewsRequ
 func (UnimplementedServiceServer) GetNewsContent(context.Context, *GetNewsRequest) (*News, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNewsContent not implemented")
 }
-func (UnimplementedServiceServer) AddNews(context.Context, *AddNewsRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddNews not implemented")
+func (UnimplementedServiceServer) AddNewsContent(context.Context, *AddNewsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNewsContent not implemented")
 }
-func (UnimplementedServiceServer) UpdateNews(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateNews not implemented")
+func (UnimplementedServiceServer) UpdateNewsContent(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewsContent not implemented")
 }
-func (UnimplementedServiceServer) DeleteNews(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteNews not implemented")
+func (UnimplementedServiceServer) DeleteNewsContent(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteNewsContent not implemented")
 }
 func (UnimplementedServiceServer) AllResourceClassify(context.Context, *emptypb.Empty) (*AllResourceClassifyReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AllResourceClassify not implemented")
@@ -648,56 +648,56 @@ func _Service_GetNewsContent_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_AddNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_AddNewsContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddNewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).AddNews(ctx, in)
+		return srv.(ServiceServer).AddNewsContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_AddNews_FullMethodName,
+		FullMethod: Service_AddNewsContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).AddNews(ctx, req.(*AddNewsRequest))
+		return srv.(ServiceServer).AddNewsContent(ctx, req.(*AddNewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_UpdateNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_UpdateNewsContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateNewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).UpdateNews(ctx, in)
+		return srv.(ServiceServer).UpdateNewsContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_UpdateNews_FullMethodName,
+		FullMethod: Service_UpdateNewsContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).UpdateNews(ctx, req.(*UpdateNewsRequest))
+		return srv.(ServiceServer).UpdateNewsContent(ctx, req.(*UpdateNewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_DeleteNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_DeleteNewsContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteNewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).DeleteNews(ctx, in)
+		return srv.(ServiceServer).DeleteNewsContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_DeleteNews_FullMethodName,
+		FullMethod: Service_DeleteNewsContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).DeleteNews(ctx, req.(*DeleteNewsRequest))
+		return srv.(ServiceServer).DeleteNewsContent(ctx, req.(*DeleteNewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1148,16 +1148,16 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_GetNewsContent_Handler,
 		},
 		{
-			MethodName: "AddNews",
-			Handler:    _Service_AddNews_Handler,
+			MethodName: "AddNewsContent",
+			Handler:    _Service_AddNewsContent_Handler,
 		},
 		{
-			MethodName: "UpdateNews",
-			Handler:    _Service_UpdateNews_Handler,
+			MethodName: "UpdateNewsContent",
+			Handler:    _Service_UpdateNewsContent_Handler,
 		},
 		{
-			MethodName: "DeleteNews",
-			Handler:    _Service_DeleteNews_Handler,
+			MethodName: "DeleteNewsContent",
+			Handler:    _Service_DeleteNewsContent_Handler,
 		},
 		{
 			MethodName: "AllResourceClassify",

@@ -190,7 +190,7 @@ paths:
         put:
             tags:
                 - Service
-            operationId: Service_UpdateNews
+            operationId: Service_UpdateNewsContent
             requestBody:
                 content:
                     application/json:
@@ -210,7 +210,7 @@ paths:
         post:
             tags:
                 - Service
-            operationId: Service_AddNews
+            operationId: Service_AddNewsContent
             requestBody:
                 content:
                     application/json:
@@ -230,7 +230,7 @@ paths:
         delete:
             tags:
                 - Service
-            operationId: Service_DeleteNews
+            operationId: Service_DeleteNewsContent
             parameters:
                 - name: id
                   in: query

@@ -61,21 +61,21 @@ service Service {
     };
   }
 
-  rpc AddNews (AddNewsRequest) returns (google.protobuf.Empty) {
+  rpc AddNewsContent (AddNewsRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/party-affairs/admin/v1/news/content",
       body: "*"
     };
   }
 
-  rpc UpdateNews (UpdateNewsRequest) returns (google.protobuf.Empty) {
+  rpc UpdateNewsContent (UpdateNewsRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       put: "/party-affairs/admin/v1/news/content",
       body: "*"
     };
   }
 
-  rpc DeleteNews (DeleteNewsRequest) returns (google.protobuf.Empty) {
+  rpc DeleteNewsContent (DeleteNewsRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/party-affairs/admin/v1/news/content"
     };

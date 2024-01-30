@@ -21,8 +21,8 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationServiceAddBanner = "/admin.Service/AddBanner"
-const OperationServiceAddNews = "/admin.Service/AddNews"
 const OperationServiceAddNewsClassify = "/admin.Service/AddNewsClassify"
+const OperationServiceAddNewsContent = "/admin.Service/AddNewsContent"
 const OperationServiceAddResourceClassify = "/admin.Service/AddResourceClassify"
 const OperationServiceAddResourceContent = "/admin.Service/AddResourceContent"
 const OperationServiceAddTask = "/admin.Service/AddTask"
@@ -31,8 +31,8 @@ const OperationServiceAllBanner = "/admin.Service/AllBanner"
 const OperationServiceAllNewsClassify = "/admin.Service/AllNewsClassify"
 const OperationServiceAllResourceClassify = "/admin.Service/AllResourceClassify"
 const OperationServiceDeleteBanner = "/admin.Service/DeleteBanner"
-const OperationServiceDeleteNews = "/admin.Service/DeleteNews"
 const OperationServiceDeleteNewsClassify = "/admin.Service/DeleteNewsClassify"
+const OperationServiceDeleteNewsContent = "/admin.Service/DeleteNewsContent"
 const OperationServiceDeleteResourceClassify = "/admin.Service/DeleteResourceClassify"
 const OperationServiceDeleteResourceContent = "/admin.Service/DeleteResourceContent"
 const OperationServiceDeleteTask = "/admin.Service/DeleteTask"
@@ -46,8 +46,8 @@ const OperationServicePageResourceContent = "/admin.Service/PageResourceContent"
 const OperationServicePageTask = "/admin.Service/PageTask"
 const OperationServicePageTaskValue = "/admin.Service/PageTaskValue"
 const OperationServiceUpdateBanner = "/admin.Service/UpdateBanner"
-const OperationServiceUpdateNews = "/admin.Service/UpdateNews"
 const OperationServiceUpdateNewsClassify = "/admin.Service/UpdateNewsClassify"
+const OperationServiceUpdateNewsContent = "/admin.Service/UpdateNewsContent"
 const OperationServiceUpdateResourceClassify = "/admin.Service/UpdateResourceClassify"
 const OperationServiceUpdateResourceContent = "/admin.Service/UpdateResourceContent"
 const OperationServiceUpdateTask = "/admin.Service/UpdateTask"
@@ -55,8 +55,8 @@ const OperationServiceUpdateTaskValue = "/admin.Service/UpdateTaskValue"
 
 type ServiceHTTPServer interface {
 	AddBanner(context.Context, *AddBannerRequest) (*emptypb.Empty, error)
-	AddNews(context.Context, *AddNewsRequest) (*emptypb.Empty, error)
 	AddNewsClassify(context.Context, *AddNewsClassifyRequest) (*emptypb.Empty, error)
+	AddNewsContent(context.Context, *AddNewsRequest) (*emptypb.Empty, error)
 	AddResourceClassify(context.Context, *AddResourceClassifyRequest) (*emptypb.Empty, error)
 	AddResourceContent(context.Context, *AddResourceRequest) (*emptypb.Empty, error)
 	AddTask(context.Context, *AddTaskRequest) (*emptypb.Empty, error)
@@ -65,8 +65,8 @@ type ServiceHTTPServer interface {
 	AllNewsClassify(context.Context, *emptypb.Empty) (*AllNewsClassifyReply, error)
 	AllResourceClassify(context.Context, *emptypb.Empty) (*AllResourceClassifyReply, error)
 	DeleteBanner(context.Context, *DeleteBannerRequest) (*emptypb.Empty, error)
-	DeleteNews(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error)
 	DeleteNewsClassify(context.Context, *DeleteNewsClassifyRequest) (*emptypb.Empty, error)
+	DeleteNewsContent(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error)
 	DeleteResourceClassify(context.Context, *DeleteResourceClassifyRequest) (*emptypb.Empty, error)
 	DeleteResourceContent(context.Context, *DeleteResourceRequest) (*emptypb.Empty, error)
 	DeleteTask(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error)
@@ -80,8 +80,8 @@ type ServiceHTTPServer interface {
 	PageTask(context.Context, *PageTaskRequest) (*PageTaskReply, error)
 	PageTaskValue(context.Context, *PageTaskValueRequest) (*PageTaskValueReply, error)
 	UpdateBanner(context.Context, *UpdateBannerRequest) (*emptypb.Empty, error)
-	UpdateNews(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error)
 	UpdateNewsClassify(context.Context, *UpdateNewsClassifyRequest) (*emptypb.Empty, error)
+	UpdateNewsContent(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error)
 	UpdateResourceClassify(context.Context, *UpdateResourceClassifyRequest) (*emptypb.Empty, error)
 	UpdateResourceContent(context.Context, *UpdateResourceRequest) (*emptypb.Empty, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*emptypb.Empty, error)
@@ -99,9 +99,9 @@ func RegisterServiceHTTPServer(s *http.Server, srv ServiceHTTPServer) {
 	r.GET("/party-affairs/admin/v1/news/contents", _Service_PageNewsContent1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/news/content", _Service_GetNewsContent0_HTTP_Handler(srv))
 	r.GET("/party-affairs/admin/v1/news/content", _Service_GetNewsContent1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/news/content", _Service_AddNews0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/news/content", _Service_UpdateNews0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/news/content", _Service_DeleteNews0_HTTP_Handler(srv))
+	r.POST("/party-affairs/admin/v1/news/content", _Service_AddNewsContent0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/admin/v1/news/content", _Service_UpdateNewsContent0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/admin/v1/news/content", _Service_DeleteNewsContent0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/resource/classify", _Service_AllResourceClassify0_HTTP_Handler(srv))
 	r.GET("/party-affairs/admin/v1/resource/classify", _Service_AllResourceClassify1_HTTP_Handler(srv))
 	r.POST("/party-affairs/admin/v1/resource/classify", _Service_AddResourceClassify0_HTTP_Handler(srv))
@@ -311,7 +311,7 @@ func _Service_GetNewsContent1_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.
 	}
 }
 
-func _Service_AddNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
+func _Service_AddNewsContent0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddNewsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -320,9 +320,9 @@ func _Service_AddNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationServiceAddNews)
+		http.SetOperation(ctx, OperationServiceAddNewsContent)
 		h := ctx.Middleware(func(ctx context.Context, req any) (any, error) {
-			return srv.AddNews(ctx, req.(*AddNewsRequest))
+			return srv.AddNewsContent(ctx, req.(*AddNewsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -333,7 +333,7 @@ func _Service_AddNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context
 	}
 }
 
-func _Service_UpdateNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
+func _Service_UpdateNewsContent0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateNewsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -342,9 +342,9 @@ func _Service_UpdateNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Cont
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationServiceUpdateNews)
+		http.SetOperation(ctx, OperationServiceUpdateNewsContent)
 		h := ctx.Middleware(func(ctx context.Context, req any) (any, error) {
-			return srv.UpdateNews(ctx, req.(*UpdateNewsRequest))
+			return srv.UpdateNewsContent(ctx, req.(*UpdateNewsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -355,15 +355,15 @@ func _Service_UpdateNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Cont
 	}
 }
 
-func _Service_DeleteNews0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
+func _Service_DeleteNewsContent0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteNewsRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationServiceDeleteNews)
+		http.SetOperation(ctx, OperationServiceDeleteNewsContent)
 		h := ctx.Middleware(func(ctx context.Context, req any) (any, error) {
-			return srv.DeleteNews(ctx, req.(*DeleteNewsRequest))
+			return srv.DeleteNewsContent(ctx, req.(*DeleteNewsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -976,8 +976,8 @@ func _Service_DeleteTaskValue0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http
 
 type ServiceHTTPClient interface {
 	AddBanner(ctx context.Context, req *AddBannerRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
-	AddNews(ctx context.Context, req *AddNewsRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	AddNewsClassify(ctx context.Context, req *AddNewsClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	AddNewsContent(ctx context.Context, req *AddNewsRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	AddResourceClassify(ctx context.Context, req *AddResourceClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	AddResourceContent(ctx context.Context, req *AddResourceRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	AddTask(ctx context.Context, req *AddTaskRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
@@ -986,8 +986,8 @@ type ServiceHTTPClient interface {
 	AllNewsClassify(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *AllNewsClassifyReply, err error)
 	AllResourceClassify(ctx context.Context, req *emptypb.Empty, opts ...http.CallOption) (rsp *AllResourceClassifyReply, err error)
 	DeleteBanner(ctx context.Context, req *DeleteBannerRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
-	DeleteNews(ctx context.Context, req *DeleteNewsRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	DeleteNewsClassify(ctx context.Context, req *DeleteNewsClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	DeleteNewsContent(ctx context.Context, req *DeleteNewsRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	DeleteResourceClassify(ctx context.Context, req *DeleteResourceClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	DeleteResourceContent(ctx context.Context, req *DeleteResourceRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	DeleteTask(ctx context.Context, req *DeleteTaskRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
@@ -1001,8 +1001,8 @@ type ServiceHTTPClient interface {
 	PageTask(ctx context.Context, req *PageTaskRequest, opts ...http.CallOption) (rsp *PageTaskReply, err error)
 	PageTaskValue(ctx context.Context, req *PageTaskValueRequest, opts ...http.CallOption) (rsp *PageTaskValueReply, err error)
 	UpdateBanner(ctx context.Context, req *UpdateBannerRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
-	UpdateNews(ctx context.Context, req *UpdateNewsRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	UpdateNewsClassify(ctx context.Context, req *UpdateNewsClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	UpdateNewsContent(ctx context.Context, req *UpdateNewsRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	UpdateResourceClassify(ctx context.Context, req *UpdateResourceClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	UpdateResourceContent(ctx context.Context, req *UpdateResourceRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	UpdateTask(ctx context.Context, req *UpdateTaskRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
@@ -1030,11 +1030,11 @@ func (c *ServiceHTTPClientImpl) AddBanner(ctx context.Context, in *AddBannerRequ
 	return &out, err
 }
 
-func (c *ServiceHTTPClientImpl) AddNews(ctx context.Context, in *AddNewsRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+func (c *ServiceHTTPClientImpl) AddNewsClassify(ctx context.Context, in *AddNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/admin/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationServiceAddNews))
+	opts = append(opts, http.Operation(OperationServiceAddNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1043,11 +1043,11 @@ func (c *ServiceHTTPClientImpl) AddNews(ctx context.Context, in *AddNewsRequest,
 	return &out, err
 }
 
-func (c *ServiceHTTPClientImpl) AddNewsClassify(ctx context.Context, in *AddNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+func (c *ServiceHTTPClientImpl) AddNewsContent(ctx context.Context, in *AddNewsRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/admin/v1/news/content"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationServiceAddNewsClassify))
+	opts = append(opts, http.Operation(OperationServiceAddNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1160,11 +1160,11 @@ func (c *ServiceHTTPClientImpl) DeleteBanner(ctx context.Context, in *DeleteBann
 	return &out, err
 }
 
-func (c *ServiceHTTPClientImpl) DeleteNews(ctx context.Context, in *DeleteNewsRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+func (c *ServiceHTTPClientImpl) DeleteNewsClassify(ctx context.Context, in *DeleteNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/admin/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationServiceDeleteNews))
+	opts = append(opts, http.Operation(OperationServiceDeleteNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -1173,11 +1173,11 @@ func (c *ServiceHTTPClientImpl) DeleteNews(ctx context.Context, in *DeleteNewsRe
 	return &out, err
 }
 
-func (c *ServiceHTTPClientImpl) DeleteNewsClassify(ctx context.Context, in *DeleteNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+func (c *ServiceHTTPClientImpl) DeleteNewsContent(ctx context.Context, in *DeleteNewsRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/admin/v1/news/content"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationServiceDeleteNewsClassify))
+	opts = append(opts, http.Operation(OperationServiceDeleteNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -1355,11 +1355,11 @@ func (c *ServiceHTTPClientImpl) UpdateBanner(ctx context.Context, in *UpdateBann
 	return &out, err
 }
 
-func (c *ServiceHTTPClientImpl) UpdateNews(ctx context.Context, in *UpdateNewsRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+func (c *ServiceHTTPClientImpl) UpdateNewsClassify(ctx context.Context, in *UpdateNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/admin/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationServiceUpdateNews))
+	opts = append(opts, http.Operation(OperationServiceUpdateNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -1368,11 +1368,11 @@ func (c *ServiceHTTPClientImpl) UpdateNews(ctx context.Context, in *UpdateNewsRe
 	return &out, err
 }
 
-func (c *ServiceHTTPClientImpl) UpdateNewsClassify(ctx context.Context, in *UpdateNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+func (c *ServiceHTTPClientImpl) UpdateNewsContent(ctx context.Context, in *UpdateNewsRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/admin/v1/news/content"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationServiceUpdateNewsClassify))
+	opts = append(opts, http.Operation(OperationServiceUpdateNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
