@@ -24,9 +24,6 @@ message GetTaskRequest{
   uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 
-message GetTaskReply{
-    Task task = 1;
-}
 
 message PageTaskRequest{
   uint32 page = 1[(validate.rules).uint32 = {gt: 0}];

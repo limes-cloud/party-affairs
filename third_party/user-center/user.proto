@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package user_center;
+
+option go_package = "github.com/limes-cloud/user-center/api/v1;user_center";
+
+
+import "google/protobuf/descriptor.proto";
+
+message User {
+};

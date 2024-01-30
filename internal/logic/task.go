@@ -45,14 +45,14 @@ func (l *Task) Page(ctx kratosx.Context, in *v1.PageTaskRequest) (*v1.PageTaskRe
 	return &reply, nil
 }
 
-func (l *Task) Get(ctx kratosx.Context, in *v1.GetTaskRequest) (*v1.GetTaskReply, error) {
+func (l *Task) Get(ctx kratosx.Context, in *v1.GetTaskRequest) (*v1.Task, error) {
 	task := model.Task{}
 	if err := task.OneByID(ctx, in.Id); err != nil {
 		return nil, v1.NotFoundError()
 	}
 
-	reply := v1.GetTaskReply{}
-	if err := util.Transform(task, &reply.Task); err != nil {
+	reply := v1.Task{}
+	if err := util.Transform(task, &reply); err != nil {
 		return nil, v1.TransformErrorFormat(err.Error())
 	}
 	return &reply, nil

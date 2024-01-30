@@ -25,22 +25,22 @@ func (s *Service) DeleteNewsClassify(ctx context.Context, in *v1.DeleteNewsClass
 	return s.NewsClassify.Delete(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) PageNews(ctx context.Context, in *v1.PageNewsRequest) (*v1.PageNewsReply, error) {
+func (s *Service) PageNewsContent(ctx context.Context, in *v1.PageNewsRequest) (*v1.PageNewsReply, error) {
 	return s.News.Page(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) GetNews(ctx context.Context, in *v1.GetNewsRequest) (*v1.GetNewsReply, error) {
+func (s *Service) GetNewsContent(ctx context.Context, in *v1.GetNewsRequest) (*v1.News, error) {
 	return s.News.Get(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) AddNews(ctx context.Context, in *v1.AddNewsRequest) (*empty.Empty, error) {
+func (s *Service) AddNewsContent(ctx context.Context, in *v1.AddNewsRequest) (*empty.Empty, error) {
 	return s.News.Add(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) UpdateNews(ctx context.Context, in *v1.UpdateNewsRequest) (*empty.Empty, error) {
+func (s *Service) UpdateNewsContent(ctx context.Context, in *v1.UpdateNewsRequest) (*empty.Empty, error) {
 	return s.News.Update(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) DeleteNews(ctx context.Context, in *v1.DeleteNewsRequest) (*empty.Empty, error) {
+func (s *Service) DeleteNewsContent(ctx context.Context, in *v1.DeleteNewsRequest) (*empty.Empty, error) {
 	return s.News.Delete(kratosx.MustContext(ctx), in)
 }

@@ -25,22 +25,22 @@ func (s *Service) DeleteResourceClassify(ctx context.Context, in *v1.DeleteResou
 	return s.ResourceClassify.Delete(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) PageResource(ctx context.Context, in *v1.PageResourceRequest) (*v1.PageResourceReply, error) {
+func (s *Service) PageResourceContent(ctx context.Context, in *v1.PageResourceRequest) (*v1.PageResourceReply, error) {
 	return s.Resource.Page(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) GetResource(ctx context.Context, in *v1.GetResourceRequest) (*v1.GetResourceReply, error) {
+func (s *Service) GetResourceContent(ctx context.Context, in *v1.GetResourceRequest) (*v1.Resource, error) {
 	return s.Resource.Get(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) AddResource(ctx context.Context, in *v1.AddResourceRequest) (*empty.Empty, error) {
+func (s *Service) AddResourceContent(ctx context.Context, in *v1.AddResourceRequest) (*empty.Empty, error) {
 	return s.Resource.Add(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) UpdateResource(ctx context.Context, in *v1.UpdateResourceRequest) (*empty.Empty, error) {
+func (s *Service) UpdateResourceContent(ctx context.Context, in *v1.UpdateResourceRequest) (*empty.Empty, error) {
 	return s.Resource.Update(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) DeleteResource(ctx context.Context, in *v1.DeleteResourceRequest) (*empty.Empty, error) {
+func (s *Service) DeleteResourceContent(ctx context.Context, in *v1.DeleteResourceRequest) (*empty.Empty, error) {
 	return s.Resource.Delete(kratosx.MustContext(ctx), in)
 }

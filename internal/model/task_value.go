@@ -9,7 +9,6 @@ type TaskValue struct {
 	TaskID uint32 `json:"task_id"  gorm:"not null;comment:任务id"`
 	UserID uint32 `json:"user_id" gorm:"not null;comment:用户id"`
 	Value  string `json:"value"  gorm:"not null;type:text;comment:数据值"`
-	User   User   `json:"user"`
 	types.BaseModel
 }
 
@@ -23,7 +22,7 @@ func (u *TaskValue) Page(ctx kratosx.Context, options *types.PageOptions) ([]*Ta
 	var list []*TaskValue
 	var total int64
 
-	db := ctx.DB().Model(u).Preload("User")
+	db := ctx.DB().Model(u)
 	if options.Scopes != nil {
 		db = db.Scopes(options.Scopes)
 	}

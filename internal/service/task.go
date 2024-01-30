@@ -13,7 +13,7 @@ func (s *Service) PageTask(ctx context.Context, in *v1.PageTaskRequest) (*v1.Pag
 	return s.Task.Page(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) GetTask(ctx context.Context, in *v1.GetTaskRequest) (*v1.GetTaskReply, error) {
+func (s *Service) GetTask(ctx context.Context, in *v1.GetTaskRequest) (*v1.Task, error) {
 	return s.Task.Get(kratosx.MustContext(ctx), in)
 }
 
@@ -33,7 +33,7 @@ func (s *Service) PageTaskValue(ctx context.Context, in *v1.PageTaskValueRequest
 	return s.TaskValue.Page(kratosx.MustContext(ctx), in)
 }
 
-func (s *Service) GetTaskValue(ctx context.Context, in *v1.GetTaskValueRequest) (*v1.GetTaskValueReply, error) {
+func (s *Service) GetTaskValue(ctx context.Context, in *v1.GetTaskValueRequest) (*v1.TaskValue, error) {
 	return s.TaskValue.Get(kratosx.MustContext(ctx), in)
 }
 

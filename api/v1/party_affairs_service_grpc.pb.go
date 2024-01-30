@@ -20,22 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Service_Login_FullMethodName                  = "/admin.Service/Login"
-	Service_RefreshToken_FullMethodName           = "/admin.Service/RefreshToken"
-	Service_SendBindEmail_FullMethodName          = "/admin.Service/SendBindEmail"
-	Service_Bind_FullMethodName                   = "/admin.Service/Bind"
-	Service_PageUser_FullMethodName               = "/admin.Service/PageUser"
-	Service_CurrentUser_FullMethodName            = "/admin.Service/CurrentUser"
-	Service_ChangeUserStatus_FullMethodName       = "/admin.Service/ChangeUserStatus"
-	Service_AddUser_FullMethodName                = "/admin.Service/AddUser"
-	Service_UpdateUser_FullMethodName             = "/admin.Service/UpdateUser"
-	Service_DeleteUser_FullMethodName             = "/admin.Service/DeleteUser"
 	Service_AllNewsClassify_FullMethodName        = "/admin.Service/AllNewsClassify"
 	Service_AddNewsClassify_FullMethodName        = "/admin.Service/AddNewsClassify"
 	Service_UpdateNewsClassify_FullMethodName     = "/admin.Service/UpdateNewsClassify"
 	Service_DeleteNewsClassify_FullMethodName     = "/admin.Service/DeleteNewsClassify"
-	Service_PageNews_FullMethodName               = "/admin.Service/PageNews"
-	Service_GetNews_FullMethodName                = "/admin.Service/GetNews"
+	Service_PageNewsContent_FullMethodName        = "/admin.Service/PageNewsContent"
+	Service_GetNewsContent_FullMethodName         = "/admin.Service/GetNewsContent"
 	Service_AddNews_FullMethodName                = "/admin.Service/AddNews"
 	Service_UpdateNews_FullMethodName             = "/admin.Service/UpdateNews"
 	Service_DeleteNews_FullMethodName             = "/admin.Service/DeleteNews"
@@ -43,11 +33,11 @@ const (
 	Service_AddResourceClassify_FullMethodName    = "/admin.Service/AddResourceClassify"
 	Service_UpdateResourceClassify_FullMethodName = "/admin.Service/UpdateResourceClassify"
 	Service_DeleteResourceClassify_FullMethodName = "/admin.Service/DeleteResourceClassify"
-	Service_PageResource_FullMethodName           = "/admin.Service/PageResource"
-	Service_GetResource_FullMethodName            = "/admin.Service/GetResource"
-	Service_AddResource_FullMethodName            = "/admin.Service/AddResource"
-	Service_UpdateResource_FullMethodName         = "/admin.Service/UpdateResource"
-	Service_DeleteResource_FullMethodName         = "/admin.Service/DeleteResource"
+	Service_PageResourceContent_FullMethodName    = "/admin.Service/PageResourceContent"
+	Service_GetResourceContent_FullMethodName     = "/admin.Service/GetResourceContent"
+	Service_AddResourceContent_FullMethodName     = "/admin.Service/AddResourceContent"
+	Service_UpdateResourceContent_FullMethodName  = "/admin.Service/UpdateResourceContent"
+	Service_DeleteResourceContent_FullMethodName  = "/admin.Service/DeleteResourceContent"
 	Service_AllBanner_FullMethodName              = "/admin.Service/AllBanner"
 	Service_AddBanner_FullMethodName              = "/admin.Service/AddBanner"
 	Service_UpdateBanner_FullMethodName           = "/admin.Service/UpdateBanner"
@@ -68,22 +58,12 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServiceClient interface {
-	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error)
-	RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RefreshTokenReply, error)
-	SendBindEmail(ctx context.Context, in *SendBindEmailRequest, opts ...grpc.CallOption) (*SendBindEmailReply, error)
-	Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindReply, error)
-	PageUser(ctx context.Context, in *PageUserRequest, opts ...grpc.CallOption) (*PageUserReply, error)
-	CurrentUser(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*User, error)
-	ChangeUserStatus(ctx context.Context, in *ChangeUserStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AllNewsClassify(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AllNewsClassifyReply, error)
 	AddNewsClassify(ctx context.Context, in *AddNewsClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateNewsClassify(ctx context.Context, in *UpdateNewsClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteNewsClassify(ctx context.Context, in *DeleteNewsClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	PageNews(ctx context.Context, in *PageNewsRequest, opts ...grpc.CallOption) (*PageNewsReply, error)
-	GetNews(ctx context.Context, in *GetNewsRequest, opts ...grpc.CallOption) (*GetNewsReply, error)
+	PageNewsContent(ctx context.Context, in *PageNewsRequest, opts ...grpc.CallOption) (*PageNewsReply, error)
+	GetNewsContent(ctx context.Context, in *GetNewsRequest, opts ...grpc.CallOption) (*News, error)
 	AddNews(ctx context.Context, in *AddNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateNews(ctx context.Context, in *UpdateNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteNews(ctx context.Context, in *DeleteNewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -91,22 +71,22 @@ type ServiceClient interface {
 	AddResourceClassify(ctx context.Context, in *AddResourceClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateResourceClassify(ctx context.Context, in *UpdateResourceClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteResourceClassify(ctx context.Context, in *DeleteResourceClassifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	PageResource(ctx context.Context, in *PageResourceRequest, opts ...grpc.CallOption) (*PageResourceReply, error)
-	GetResource(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*GetResourceReply, error)
-	AddResource(ctx context.Context, in *AddResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateResource(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeleteResource(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	PageResourceContent(ctx context.Context, in *PageResourceRequest, opts ...grpc.CallOption) (*PageResourceReply, error)
+	GetResourceContent(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*Resource, error)
+	AddResourceContent(ctx context.Context, in *AddResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateResourceContent(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteResourceContent(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AllBanner(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AllBannerReply, error)
 	AddBanner(ctx context.Context, in *AddBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateBanner(ctx context.Context, in *UpdateBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteBanner(ctx context.Context, in *DeleteBannerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	PageTask(ctx context.Context, in *PageTaskRequest, opts ...grpc.CallOption) (*PageTaskReply, error)
-	GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*GetTaskReply, error)
+	GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*Task, error)
 	AddTask(ctx context.Context, in *AddTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	PageTaskValue(ctx context.Context, in *PageTaskValueRequest, opts ...grpc.CallOption) (*PageTaskValueReply, error)
-	GetTaskValue(ctx context.Context, in *GetTaskValueRequest, opts ...grpc.CallOption) (*GetTaskValueReply, error)
+	GetTaskValue(ctx context.Context, in *GetTaskValueRequest, opts ...grpc.CallOption) (*TaskValue, error)
 	AddTaskValue(ctx context.Context, in *AddTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateTaskValue(ctx context.Context, in *UpdateTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteTaskValue(ctx context.Context, in *DeleteTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -118,96 +98,6 @@ type serviceClient struct {
 
 func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
 	return &serviceClient{cc}
-}
-
-func (c *serviceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginReply, error) {
-	out := new(LoginReply)
-	err := c.cc.Invoke(ctx, Service_Login_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RefreshTokenReply, error) {
-	out := new(RefreshTokenReply)
-	err := c.cc.Invoke(ctx, Service_RefreshToken_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) SendBindEmail(ctx context.Context, in *SendBindEmailRequest, opts ...grpc.CallOption) (*SendBindEmailReply, error) {
-	out := new(SendBindEmailReply)
-	err := c.cc.Invoke(ctx, Service_SendBindEmail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) Bind(ctx context.Context, in *BindRequest, opts ...grpc.CallOption) (*BindReply, error) {
-	out := new(BindReply)
-	err := c.cc.Invoke(ctx, Service_Bind_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) PageUser(ctx context.Context, in *PageUserRequest, opts ...grpc.CallOption) (*PageUserReply, error) {
-	out := new(PageUserReply)
-	err := c.cc.Invoke(ctx, Service_PageUser_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) CurrentUser(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*User, error) {
-	out := new(User)
-	err := c.cc.Invoke(ctx, Service_CurrentUser_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) ChangeUserStatus(ctx context.Context, in *ChangeUserStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_ChangeUserStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_AddUser_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_UpdateUser_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_DeleteUser_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *serviceClient) AllNewsClassify(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AllNewsClassifyReply, error) {
@@ -246,18 +136,18 @@ func (c *serviceClient) DeleteNewsClassify(ctx context.Context, in *DeleteNewsCl
 	return out, nil
 }
 
-func (c *serviceClient) PageNews(ctx context.Context, in *PageNewsRequest, opts ...grpc.CallOption) (*PageNewsReply, error) {
+func (c *serviceClient) PageNewsContent(ctx context.Context, in *PageNewsRequest, opts ...grpc.CallOption) (*PageNewsReply, error) {
 	out := new(PageNewsReply)
-	err := c.cc.Invoke(ctx, Service_PageNews_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_PageNewsContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) GetNews(ctx context.Context, in *GetNewsRequest, opts ...grpc.CallOption) (*GetNewsReply, error) {
-	out := new(GetNewsReply)
-	err := c.cc.Invoke(ctx, Service_GetNews_FullMethodName, in, out, opts...)
+func (c *serviceClient) GetNewsContent(ctx context.Context, in *GetNewsRequest, opts ...grpc.CallOption) (*News, error) {
+	out := new(News)
+	err := c.cc.Invoke(ctx, Service_GetNewsContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -327,45 +217,45 @@ func (c *serviceClient) DeleteResourceClassify(ctx context.Context, in *DeleteRe
 	return out, nil
 }
 
-func (c *serviceClient) PageResource(ctx context.Context, in *PageResourceRequest, opts ...grpc.CallOption) (*PageResourceReply, error) {
+func (c *serviceClient) PageResourceContent(ctx context.Context, in *PageResourceRequest, opts ...grpc.CallOption) (*PageResourceReply, error) {
 	out := new(PageResourceReply)
-	err := c.cc.Invoke(ctx, Service_PageResource_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_PageResourceContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) GetResource(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*GetResourceReply, error) {
-	out := new(GetResourceReply)
-	err := c.cc.Invoke(ctx, Service_GetResource_FullMethodName, in, out, opts...)
+func (c *serviceClient) GetResourceContent(ctx context.Context, in *GetResourceRequest, opts ...grpc.CallOption) (*Resource, error) {
+	out := new(Resource)
+	err := c.cc.Invoke(ctx, Service_GetResourceContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) AddResource(ctx context.Context, in *AddResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *serviceClient) AddResourceContent(ctx context.Context, in *AddResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_AddResource_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_AddResourceContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) UpdateResource(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *serviceClient) UpdateResourceContent(ctx context.Context, in *UpdateResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_UpdateResource_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_UpdateResourceContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) DeleteResource(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *serviceClient) DeleteResourceContent(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Service_DeleteResource_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_DeleteResourceContent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -417,8 +307,8 @@ func (c *serviceClient) PageTask(ctx context.Context, in *PageTaskRequest, opts 
 	return out, nil
 }
 
-func (c *serviceClient) GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*GetTaskReply, error) {
-	out := new(GetTaskReply)
+func (c *serviceClient) GetTask(ctx context.Context, in *GetTaskRequest, opts ...grpc.CallOption) (*Task, error) {
+	out := new(Task)
 	err := c.cc.Invoke(ctx, Service_GetTask_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -462,8 +352,8 @@ func (c *serviceClient) PageTaskValue(ctx context.Context, in *PageTaskValueRequ
 	return out, nil
 }
 
-func (c *serviceClient) GetTaskValue(ctx context.Context, in *GetTaskValueRequest, opts ...grpc.CallOption) (*GetTaskValueReply, error) {
-	out := new(GetTaskValueReply)
+func (c *serviceClient) GetTaskValue(ctx context.Context, in *GetTaskValueRequest, opts ...grpc.CallOption) (*TaskValue, error) {
+	out := new(TaskValue)
 	err := c.cc.Invoke(ctx, Service_GetTaskValue_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -502,22 +392,12 @@ func (c *serviceClient) DeleteTaskValue(ctx context.Context, in *DeleteTaskValue
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
 type ServiceServer interface {
-	Login(context.Context, *LoginRequest) (*LoginReply, error)
-	RefreshToken(context.Context, *emptypb.Empty) (*RefreshTokenReply, error)
-	SendBindEmail(context.Context, *SendBindEmailRequest) (*SendBindEmailReply, error)
-	Bind(context.Context, *BindRequest) (*BindReply, error)
-	PageUser(context.Context, *PageUserRequest) (*PageUserReply, error)
-	CurrentUser(context.Context, *emptypb.Empty) (*User, error)
-	ChangeUserStatus(context.Context, *ChangeUserStatusRequest) (*emptypb.Empty, error)
-	AddUser(context.Context, *AddUserRequest) (*emptypb.Empty, error)
-	UpdateUser(context.Context, *UpdateUserRequest) (*emptypb.Empty, error)
-	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	AllNewsClassify(context.Context, *emptypb.Empty) (*AllNewsClassifyReply, error)
 	AddNewsClassify(context.Context, *AddNewsClassifyRequest) (*emptypb.Empty, error)
 	UpdateNewsClassify(context.Context, *UpdateNewsClassifyRequest) (*emptypb.Empty, error)
 	DeleteNewsClassify(context.Context, *DeleteNewsClassifyRequest) (*emptypb.Empty, error)
-	PageNews(context.Context, *PageNewsRequest) (*PageNewsReply, error)
-	GetNews(context.Context, *GetNewsRequest) (*GetNewsReply, error)
+	PageNewsContent(context.Context, *PageNewsRequest) (*PageNewsReply, error)
+	GetNewsContent(context.Context, *GetNewsRequest) (*News, error)
 	AddNews(context.Context, *AddNewsRequest) (*emptypb.Empty, error)
 	UpdateNews(context.Context, *UpdateNewsRequest) (*emptypb.Empty, error)
 	DeleteNews(context.Context, *DeleteNewsRequest) (*emptypb.Empty, error)
@@ -525,22 +405,22 @@ type ServiceServer interface {
 	AddResourceClassify(context.Context, *AddResourceClassifyRequest) (*emptypb.Empty, error)
 	UpdateResourceClassify(context.Context, *UpdateResourceClassifyRequest) (*emptypb.Empty, error)
 	DeleteResourceClassify(context.Context, *DeleteResourceClassifyRequest) (*emptypb.Empty, error)
-	PageResource(context.Context, *PageResourceRequest) (*PageResourceReply, error)
-	GetResource(context.Context, *GetResourceRequest) (*GetResourceReply, error)
-	AddResource(context.Context, *AddResourceRequest) (*emptypb.Empty, error)
-	UpdateResource(context.Context, *UpdateResourceRequest) (*emptypb.Empty, error)
-	DeleteResource(context.Context, *DeleteResourceRequest) (*emptypb.Empty, error)
+	PageResourceContent(context.Context, *PageResourceRequest) (*PageResourceReply, error)
+	GetResourceContent(context.Context, *GetResourceRequest) (*Resource, error)
+	AddResourceContent(context.Context, *AddResourceRequest) (*emptypb.Empty, error)
+	UpdateResourceContent(context.Context, *UpdateResourceRequest) (*emptypb.Empty, error)
+	DeleteResourceContent(context.Context, *DeleteResourceRequest) (*emptypb.Empty, error)
 	AllBanner(context.Context, *emptypb.Empty) (*AllBannerReply, error)
 	AddBanner(context.Context, *AddBannerRequest) (*emptypb.Empty, error)
 	UpdateBanner(context.Context, *UpdateBannerRequest) (*emptypb.Empty, error)
 	DeleteBanner(context.Context, *DeleteBannerRequest) (*emptypb.Empty, error)
 	PageTask(context.Context, *PageTaskRequest) (*PageTaskReply, error)
-	GetTask(context.Context, *GetTaskRequest) (*GetTaskReply, error)
+	GetTask(context.Context, *GetTaskRequest) (*Task, error)
 	AddTask(context.Context, *AddTaskRequest) (*emptypb.Empty, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*emptypb.Empty, error)
 	DeleteTask(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error)
 	PageTaskValue(context.Context, *PageTaskValueRequest) (*PageTaskValueReply, error)
-	GetTaskValue(context.Context, *GetTaskValueRequest) (*GetTaskValueReply, error)
+	GetTaskValue(context.Context, *GetTaskValueRequest) (*TaskValue, error)
 	AddTaskValue(context.Context, *AddTaskValueRequest) (*emptypb.Empty, error)
 	UpdateTaskValue(context.Context, *UpdateTaskValueRequest) (*emptypb.Empty, error)
 	DeleteTaskValue(context.Context, *DeleteTaskValueRequest) (*emptypb.Empty, error)
@@ -551,36 +431,6 @@ type ServiceServer interface {
 type UnimplementedServiceServer struct {
 }
 
-func (UnimplementedServiceServer) Login(context.Context, *LoginRequest) (*LoginReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (UnimplementedServiceServer) RefreshToken(context.Context, *emptypb.Empty) (*RefreshTokenReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
-}
-func (UnimplementedServiceServer) SendBindEmail(context.Context, *SendBindEmailRequest) (*SendBindEmailReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendBindEmail not implemented")
-}
-func (UnimplementedServiceServer) Bind(context.Context, *BindRequest) (*BindReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Bind not implemented")
-}
-func (UnimplementedServiceServer) PageUser(context.Context, *PageUserRequest) (*PageUserReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PageUser not implemented")
-}
-func (UnimplementedServiceServer) CurrentUser(context.Context, *emptypb.Empty) (*User, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CurrentUser not implemented")
-}
-func (UnimplementedServiceServer) ChangeUserStatus(context.Context, *ChangeUserStatusRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeUserStatus not implemented")
-}
-func (UnimplementedServiceServer) AddUser(context.Context, *AddUserRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
-}
-func (UnimplementedServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
-}
-func (UnimplementedServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
-}
 func (UnimplementedServiceServer) AllNewsClassify(context.Context, *emptypb.Empty) (*AllNewsClassifyReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AllNewsClassify not implemented")
 }
@@ -593,11 +443,11 @@ func (UnimplementedServiceServer) UpdateNewsClassify(context.Context, *UpdateNew
 func (UnimplementedServiceServer) DeleteNewsClassify(context.Context, *DeleteNewsClassifyRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteNewsClassify not implemented")
 }
-func (UnimplementedServiceServer) PageNews(context.Context, *PageNewsRequest) (*PageNewsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PageNews not implemented")
+func (UnimplementedServiceServer) PageNewsContent(context.Context, *PageNewsRequest) (*PageNewsReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PageNewsContent not implemented")
 }
-func (UnimplementedServiceServer) GetNews(context.Context, *GetNewsRequest) (*GetNewsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetNews not implemented")
+func (UnimplementedServiceServer) GetNewsContent(context.Context, *GetNewsRequest) (*News, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNewsContent not implemented")
 }
 func (UnimplementedServiceServer) AddNews(context.Context, *AddNewsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddNews not implemented")
@@ -620,20 +470,20 @@ func (UnimplementedServiceServer) UpdateResourceClassify(context.Context, *Updat
 func (UnimplementedServiceServer) DeleteResourceClassify(context.Context, *DeleteResourceClassifyRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteResourceClassify not implemented")
 }
-func (UnimplementedServiceServer) PageResource(context.Context, *PageResourceRequest) (*PageResourceReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PageResource not implemented")
+func (UnimplementedServiceServer) PageResourceContent(context.Context, *PageResourceRequest) (*PageResourceReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PageResourceContent not implemented")
 }
-func (UnimplementedServiceServer) GetResource(context.Context, *GetResourceRequest) (*GetResourceReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetResource not implemented")
+func (UnimplementedServiceServer) GetResourceContent(context.Context, *GetResourceRequest) (*Resource, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResourceContent not implemented")
 }
-func (UnimplementedServiceServer) AddResource(context.Context, *AddResourceRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddResource not implemented")
+func (UnimplementedServiceServer) AddResourceContent(context.Context, *AddResourceRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResourceContent not implemented")
 }
-func (UnimplementedServiceServer) UpdateResource(context.Context, *UpdateResourceRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateResource not implemented")
+func (UnimplementedServiceServer) UpdateResourceContent(context.Context, *UpdateResourceRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateResourceContent not implemented")
 }
-func (UnimplementedServiceServer) DeleteResource(context.Context, *DeleteResourceRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteResource not implemented")
+func (UnimplementedServiceServer) DeleteResourceContent(context.Context, *DeleteResourceRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteResourceContent not implemented")
 }
 func (UnimplementedServiceServer) AllBanner(context.Context, *emptypb.Empty) (*AllBannerReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AllBanner not implemented")
@@ -650,7 +500,7 @@ func (UnimplementedServiceServer) DeleteBanner(context.Context, *DeleteBannerReq
 func (UnimplementedServiceServer) PageTask(context.Context, *PageTaskRequest) (*PageTaskReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PageTask not implemented")
 }
-func (UnimplementedServiceServer) GetTask(context.Context, *GetTaskRequest) (*GetTaskReply, error) {
+func (UnimplementedServiceServer) GetTask(context.Context, *GetTaskRequest) (*Task, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTask not implemented")
 }
 func (UnimplementedServiceServer) AddTask(context.Context, *AddTaskRequest) (*emptypb.Empty, error) {
@@ -665,7 +515,7 @@ func (UnimplementedServiceServer) DeleteTask(context.Context, *DeleteTaskRequest
 func (UnimplementedServiceServer) PageTaskValue(context.Context, *PageTaskValueRequest) (*PageTaskValueReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PageTaskValue not implemented")
 }
-func (UnimplementedServiceServer) GetTaskValue(context.Context, *GetTaskValueRequest) (*GetTaskValueReply, error) {
+func (UnimplementedServiceServer) GetTaskValue(context.Context, *GetTaskValueRequest) (*TaskValue, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaskValue not implemented")
 }
 func (UnimplementedServiceServer) AddTaskValue(context.Context, *AddTaskValueRequest) (*emptypb.Empty, error) {
@@ -688,186 +538,6 @@ type UnsafeServiceServer interface {
 
 func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
 	s.RegisterService(&Service_ServiceDesc, srv)
-}
-
-func _Service_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).Login(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_Login_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).Login(ctx, req.(*LoginRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).RefreshToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_RefreshToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).RefreshToken(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_SendBindEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendBindEmailRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).SendBindEmail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_SendBindEmail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).SendBindEmail(ctx, req.(*SendBindEmailRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_Bind_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BindRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).Bind(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_Bind_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).Bind(ctx, req.(*BindRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_PageUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PageUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).PageUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_PageUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).PageUser(ctx, req.(*PageUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_CurrentUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).CurrentUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_CurrentUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).CurrentUser(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_ChangeUserStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChangeUserStatusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).ChangeUserStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_ChangeUserStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).ChangeUserStatus(ctx, req.(*ChangeUserStatusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).AddUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_AddUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).AddUser(ctx, req.(*AddUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).UpdateUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_UpdateUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).DeleteUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_DeleteUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).DeleteUser(ctx, req.(*DeleteUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Service_AllNewsClassify_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -942,38 +612,38 @@ func _Service_DeleteNewsClassify_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_PageNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_PageNewsContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PageNewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).PageNews(ctx, in)
+		return srv.(ServiceServer).PageNewsContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_PageNews_FullMethodName,
+		FullMethod: Service_PageNewsContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).PageNews(ctx, req.(*PageNewsRequest))
+		return srv.(ServiceServer).PageNewsContent(ctx, req.(*PageNewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_GetNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetNewsContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetNewsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).GetNews(ctx, in)
+		return srv.(ServiceServer).GetNewsContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_GetNews_FullMethodName,
+		FullMethod: Service_GetNewsContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).GetNews(ctx, req.(*GetNewsRequest))
+		return srv.(ServiceServer).GetNewsContent(ctx, req.(*GetNewsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1104,92 +774,92 @@ func _Service_DeleteResourceClassify_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_PageResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_PageResourceContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PageResourceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).PageResource(ctx, in)
+		return srv.(ServiceServer).PageResourceContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_PageResource_FullMethodName,
+		FullMethod: Service_PageResourceContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).PageResource(ctx, req.(*PageResourceRequest))
+		return srv.(ServiceServer).PageResourceContent(ctx, req.(*PageResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_GetResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetResourceContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetResourceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).GetResource(ctx, in)
+		return srv.(ServiceServer).GetResourceContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_GetResource_FullMethodName,
+		FullMethod: Service_GetResourceContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).GetResource(ctx, req.(*GetResourceRequest))
+		return srv.(ServiceServer).GetResourceContent(ctx, req.(*GetResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_AddResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_AddResourceContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddResourceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).AddResource(ctx, in)
+		return srv.(ServiceServer).AddResourceContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_AddResource_FullMethodName,
+		FullMethod: Service_AddResourceContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).AddResource(ctx, req.(*AddResourceRequest))
+		return srv.(ServiceServer).AddResourceContent(ctx, req.(*AddResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_UpdateResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_UpdateResourceContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateResourceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).UpdateResource(ctx, in)
+		return srv.(ServiceServer).UpdateResourceContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_UpdateResource_FullMethodName,
+		FullMethod: Service_UpdateResourceContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).UpdateResource(ctx, req.(*UpdateResourceRequest))
+		return srv.(ServiceServer).UpdateResourceContent(ctx, req.(*UpdateResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_DeleteResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_DeleteResourceContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteResourceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).DeleteResource(ctx, in)
+		return srv.(ServiceServer).DeleteResourceContent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_DeleteResource_FullMethodName,
+		FullMethod: Service_DeleteResourceContent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).DeleteResource(ctx, req.(*DeleteResourceRequest))
+		return srv.(ServiceServer).DeleteResourceContent(ctx, req.(*DeleteResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1454,46 +1124,6 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _Service_Login_Handler,
-		},
-		{
-			MethodName: "RefreshToken",
-			Handler:    _Service_RefreshToken_Handler,
-		},
-		{
-			MethodName: "SendBindEmail",
-			Handler:    _Service_SendBindEmail_Handler,
-		},
-		{
-			MethodName: "Bind",
-			Handler:    _Service_Bind_Handler,
-		},
-		{
-			MethodName: "PageUser",
-			Handler:    _Service_PageUser_Handler,
-		},
-		{
-			MethodName: "CurrentUser",
-			Handler:    _Service_CurrentUser_Handler,
-		},
-		{
-			MethodName: "ChangeUserStatus",
-			Handler:    _Service_ChangeUserStatus_Handler,
-		},
-		{
-			MethodName: "AddUser",
-			Handler:    _Service_AddUser_Handler,
-		},
-		{
-			MethodName: "UpdateUser",
-			Handler:    _Service_UpdateUser_Handler,
-		},
-		{
-			MethodName: "DeleteUser",
-			Handler:    _Service_DeleteUser_Handler,
-		},
-		{
 			MethodName: "AllNewsClassify",
 			Handler:    _Service_AllNewsClassify_Handler,
 		},
@@ -1510,12 +1140,12 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_DeleteNewsClassify_Handler,
 		},
 		{
-			MethodName: "PageNews",
-			Handler:    _Service_PageNews_Handler,
+			MethodName: "PageNewsContent",
+			Handler:    _Service_PageNewsContent_Handler,
 		},
 		{
-			MethodName: "GetNews",
-			Handler:    _Service_GetNews_Handler,
+			MethodName: "GetNewsContent",
+			Handler:    _Service_GetNewsContent_Handler,
 		},
 		{
 			MethodName: "AddNews",
@@ -1546,24 +1176,24 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Service_DeleteResourceClassify_Handler,
 		},
 		{
-			MethodName: "PageResource",
-			Handler:    _Service_PageResource_Handler,
+			MethodName: "PageResourceContent",
+			Handler:    _Service_PageResourceContent_Handler,
 		},
 		{
-			MethodName: "GetResource",
-			Handler:    _Service_GetResource_Handler,
+			MethodName: "GetResourceContent",
+			Handler:    _Service_GetResourceContent_Handler,
 		},
 		{
-			MethodName: "AddResource",
-			Handler:    _Service_AddResource_Handler,
+			MethodName: "AddResourceContent",
+			Handler:    _Service_AddResourceContent_Handler,
 		},
 		{
-			MethodName: "UpdateResource",
-			Handler:    _Service_UpdateResource_Handler,
+			MethodName: "UpdateResourceContent",
+			Handler:    _Service_UpdateResourceContent_Handler,
 		},
 		{
-			MethodName: "DeleteResource",
-			Handler:    _Service_DeleteResource_Handler,
+			MethodName: "DeleteResourceContent",
+			Handler:    _Service_DeleteResourceContent_Handler,
 		},
 		{
 			MethodName: "AllBanner",

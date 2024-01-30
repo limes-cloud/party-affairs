@@ -46,13 +46,13 @@ func (l *TaskValue) Page(ctx kratosx.Context, in *v1.PageTaskValueRequest) (*v1.
 	return &reply, nil
 }
 
-func (l *TaskValue) Get(ctx kratosx.Context, in *v1.GetTaskValueRequest) (*v1.GetTaskValueReply, error) {
+func (l *TaskValue) Get(ctx kratosx.Context, in *v1.GetTaskValueRequest) (*v1.TaskValue, error) {
 	task := model.TaskValue{}
 	if err := task.OneByID(ctx, in.TaskId, md.UserId(ctx)); err != nil {
 		return nil, v1.NotFoundError()
 	}
 
-	reply := v1.GetTaskValueReply{}
+	reply := v1.TaskValue{}
 	if err := util.Transform(task, &reply.Value); err != nil {
 		return nil, v1.TransformErrorFormat(err.Error())
 	}

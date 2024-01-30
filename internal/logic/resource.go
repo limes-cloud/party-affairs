@@ -59,13 +59,13 @@ func (l *Resource) Page(ctx kratosx.Context, in *v1.PageResourceRequest) (*v1.Pa
 	return &reply, nil
 }
 
-func (l *Resource) Get(ctx kratosx.Context, in *v1.GetResourceRequest) (*v1.GetResourceReply, error) {
+func (l *Resource) Get(ctx kratosx.Context, in *v1.GetResourceRequest) (*v1.Resource, error) {
 	rs := model.Resource{}
 	if err := rs.OneByID(ctx, in.Id); err != nil {
 		return nil, v1.NotFoundError()
 	}
 
-	reply := v1.GetResourceReply{}
+	reply := v1.Resource{}
 	if err := util.Transform(rs, &reply.Resource); err != nil {
 		return nil, v1.TransformErrorFormat(err.Error())
 	}
@@ -74,7 +74,7 @@ func (l *Resource) Get(ctx kratosx.Context, in *v1.GetResourceRequest) (*v1.GetR
 	if err != nil {
 		return nil, v1.ResourceServiceError()
 	}
-	reply.Resource.Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.Resource.Url})
+	reply.Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.Url})
 	return &reply, nil
 }
 

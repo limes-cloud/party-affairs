@@ -59,14 +59,14 @@ func (l *News) Page(ctx kratosx.Context, in *v1.PageNewsRequest) (*v1.PageNewsRe
 	return &reply, nil
 }
 
-func (l *News) Get(ctx kratosx.Context, in *v1.GetNewsRequest) (*v1.GetNewsReply, error) {
+func (l *News) Get(ctx kratosx.Context, in *v1.GetNewsRequest) (*v1.News, error) {
 	news := model.News{}
 	if err := news.OneByID(ctx, in.Id); err != nil {
 		return nil, v1.NotFoundError()
 	}
 
-	reply := v1.GetNewsReply{}
-	if err := util.Transform(news, &reply.News); err != nil {
+	reply := v1.News{}
+	if err := util.Transform(news, &reply); err != nil {
 		return nil, v1.TransformErrorFormat(err.Error())
 	}
 
@@ -74,7 +74,7 @@ func (l *News) Get(ctx kratosx.Context, in *v1.GetNewsRequest) (*v1.GetNewsReply
 	if err != nil {
 		return nil, v1.ResourceServiceError()
 	}
-	reply.News.Resource, err = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.News.Cover})
+	reply.Resource, err = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.Cover})
 	return &reply, nil
 }
 

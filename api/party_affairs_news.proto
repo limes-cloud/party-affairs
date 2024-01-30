@@ -28,9 +28,6 @@ message GetNewsRequest{
   uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 
-message GetNewsReply{
-    News news = 1;
-}
 
 message PageNewsRequest{
   uint32 page = 1[(validate.rules).uint32 = {gt: 0}];

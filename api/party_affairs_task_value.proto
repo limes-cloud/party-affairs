@@ -7,7 +7,7 @@ option go_package = "./v1;v1";
 import "validate/validate.proto";
 
 import "resource/resource.proto";
-import "party_affairs_user.proto";
+import "user-center/user.proto";
 
 message TaskValue{
   uint32 id = 1;
@@ -16,15 +16,11 @@ message TaskValue{
   string value = 4;
   uint32 created_at = 5;
   uint32 updated_at = 6;
-  User user = 7;
+  user_center.User user = 7;
 }
 
 message GetTaskValueRequest{
   uint32 task_id = 1[(validate.rules).uint32 = {gt: 0}];
-}
-
-message GetTaskValueReply{
-    TaskValue value = 1;
 }
 
 message PageTaskValueRequest{
