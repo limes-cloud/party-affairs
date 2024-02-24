@@ -310,6 +310,10 @@ func (m *PageTaskRequest) validate(all bool) error {
 		// no validation rules for Title
 	}
 
+	if m.NotFinish != nil {
+		// no validation rules for NotFinish
+	}
+
 	if len(errors) > 0 {
 		return PageTaskRequestMultiError(errors)
 	}

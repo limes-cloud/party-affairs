@@ -5,62 +5,127 @@ package admin;
 option go_package = "./v1;v1";
 
 import "validate/validate.proto";
-
-import "party_affairs_news_classify.proto";
 import "resource/resource.proto";
+import "user-center/user.proto";
 
-message News{
+message NewsComment{
+  uint32 id = 1;
+  user.SimpleUser from = 2;
+  optional user.SimpleUser reply = 3;
+  optional string text = 4;
+  uint32 created_at = 6;
+}
+
+message AddNewsCommentRequest{
+  uint32 content_id = 1[(validate.rules).uint32 = {gt: 0}];
+  optional uint32 reply_uid = 2;
+  optional string text = 3;
+}
+
+message AddNewsCommentReply{
+  uint32 id = 1;
+}
+
+message DeleteNewsCommentRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gte: 0}];
+}
+
+message PageNewsCommentRequest{
+  uint32 page = 1[(validate.rules).uint32 = {gt: 0}];
+  uint32 page_size = 2[(validate.rules).uint32 = {gt: 0,lte:50}];
+  uint32 content_id = 3[(validate.rules).uint32 = {gt: 0}];
+  optional string text = 4;
+}
+
+message PageNewsCommentReply{
+  uint32 total = 1;
+  repeated NewsComment list = 2;
+}
+
+message NewsClassify{
+  uint32 id = 1;
+  string name = 2;
+  optional uint32 weight = 3;
+  uint32 created_at = 4;
+  uint32 updated_at = 5;
+}
+
+message AllNewsClassifyReply{
+  repeated NewsClassify list = 1;
+}
+
+message AddNewsClassifyRequest {
+  string name = 1[(validate.rules).string = {min_len: 1}];
+  uint32 weight = 2[(validate.rules).uint32 = {gte: 0}];
+}
+
+message UpdateNewsClassifyRequest {
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+  string name = 2[(validate.rules).string = {min_len: 1}];
+  uint32 weight = 3[(validate.rules).uint32 = {gte: 0}];
+}
+
+message DeleteNewsClassifyRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+
+message NewsContent{
   uint32 id = 1;
   string title = 2;
   string unit = 3;
   string cover = 4;
   string desc = 6;
   uint32 read = 7;
-  string content = 8;
-  uint32 classify_id = 9;
-  uint32 created_at = 10;
-  uint32 updated_at = 11;
-  NewsClassify news_classify = 12;
-  resource.File resource =  13;
+  bool is_top = 8;
+  string content = 9;
+  uint32 classify_id = 10;
+  uint32 created_at = 11;
+  uint32 updated_at = 12;
+  NewsClassify classify = 13;
+  resource.File resource =  14;
+  repeated NewsComment comments = 15;
 }
 
-message GetNewsRequest{
+message GetNewsContentRequest{
   uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 
 
-message PageNewsRequest{
+message PageNewsContentRequest{
   uint32 page = 1[(validate.rules).uint32 = {gt: 0}];
   uint32 page_size = 2[(validate.rules).uint32 = {gt: 0,lte:50}];
   optional uint32 classify_id = 3;
   optional string title = 4;
 }
 
-message PageNewsReply{
+message PageNewsContentReply{
   uint32 total = 1;
-  repeated News list = 2;
+  repeated NewsContent list = 2;
 }
 
-message AddNewsRequest {
+message AddNewsContentRequest {
   string title = 1[(validate.rules).string = {min_len: 1}];
   string unit = 2[(validate.rules).string = {min_len: 1}];
   string cover = 3[(validate.rules).string = {min_len: 1}];
   string desc = 4[(validate.rules).string = {min_len: 1}];
   string content = 5[(validate.rules).string = {min_len: 1}];
   uint32 classify_id = 6[(validate.rules).uint32 = {gt: 0}];
+  optional bool is_top = 7;
 }
 
-message UpdateNewsRequest {
+message UpdateNewsContentRequest {
   string title = 1[(validate.rules).string = {min_len: 1}];
   string unit = 2[(validate.rules).string = {min_len: 1}];
   string cover = 3[(validate.rules).string = {min_len: 1}];
   string desc = 4[(validate.rules).string = {min_len: 1}];
   string content = 5[(validate.rules).string = {min_len: 1}];
   uint32 classify_id = 6[(validate.rules).uint32 = {gt: 0}];
-  uint32 id = 7[(validate.rules).uint32 = {gt: 0}];
+  optional bool is_top = 7;
+  uint32 id = 8[(validate.rules).uint32 = {gt: 0}];
 }
 
-message DeleteNewsRequest{
+message DeleteNewsContentRequest{
   uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 

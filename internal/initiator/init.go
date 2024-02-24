@@ -7,7 +7,6 @@ import (
 
 	"party-affairs/config"
 	"party-affairs/internal/initiator/migrate"
-	"party-affairs/pkg/pt"
 )
 
 type Initiator struct {
@@ -23,11 +22,11 @@ func New(conf *config.Config) *Initiator {
 // Run 执行系统初始化
 func (a *Initiator) Run() error {
 	ctx := kratosx.MustContext(context.Background())
-
-	if migrate.IsInit(ctx) {
-		pt.Cyan("already init server")
-		return nil
-	}
+	//
+	// if migrate.IsInit(ctx) {
+	//	pt.Cyan("already init server")
+	//	return nil
+	// }
 
 	// 自动迁移
 	migrate.Init(ctx, a.conf)

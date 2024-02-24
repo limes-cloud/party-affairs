@@ -266,3 +266,35 @@ func RefreshTokenErrorFormat(format string, args ...any) *errors.Error {
 func RefreshTokenError() *errors.Error {
 	return errors.New(401, ErrorReason_RefreshTokenError.String(), "刷新token失败")
 }
+
+func IsAuthInfoError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_AuthInfoError.String() && e.Code == 200
+}
+
+func AuthInfoErrorFormat(format string, args ...any) *errors.Error {
+	return errors.New(200, ErrorReason_AuthInfoError.String(), "授权信息错误:"+fmt.Sprintf(format, args...))
+}
+
+func AuthInfoError() *errors.Error {
+	return errors.New(200, ErrorReason_AuthInfoError.String(), "授权信息错误")
+}
+
+func IsUserCenterError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UserCenterError.String() && e.Code == 200
+}
+
+func UserCenterErrorFormat(format string, args ...any) *errors.Error {
+	return errors.New(200, ErrorReason_UserCenterError.String(), "用户中心连接失败:"+fmt.Sprintf(format, args...))
+}
+
+func UserCenterError() *errors.Error {
+	return errors.New(200, ErrorReason_UserCenterError.String(), "用户中心连接失败")
+}

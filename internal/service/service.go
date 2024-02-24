@@ -3,29 +3,30 @@ package service
 import (
 	v1 "party-affairs/api/v1"
 	"party-affairs/config"
-	"party-affairs/internal/logic"
+	"party-affairs/internal/biz"
+	"party-affairs/internal/data"
 )
 
 // Service is a admin service.
 type Service struct {
 	v1.UnimplementedServiceServer
-	News             *logic.News
-	NewsClassify     *logic.NewsClassify
-	Resource         *logic.Resource
-	ResourceClassify *logic.ResourceClassify
-	Banner           *logic.Banner
-	Task             *logic.Task
-	TaskValue        *logic.TaskValue
+	conf     *config.Config
+	notice   *biz.NoticeUseCase
+	banner   *biz.BannerUseCase
+	news     *biz.NewsUseCase
+	resource *biz.ResourceUseCase
+	task     *biz.TaskUseCase
+	video    *biz.VideoUseCase
 }
 
 func New(conf *config.Config) *Service {
 	return &Service{
-		News:             logic.NewNews(conf),
-		NewsClassify:     logic.NewNewsClassify(conf),
-		Resource:         logic.NewResource(conf),
-		ResourceClassify: logic.NewResourceClassify(conf),
-		Banner:           logic.NewBanner(conf),
-		Task:             logic.NewTask(conf),
-		TaskValue:        logic.NewTaskValue(conf),
+		conf:     conf,
+		notice:   biz.NewNoticeUseCase(conf, data.NewNoticeRepo()),
+		banner:   biz.NewBannerUseCase(conf, data.NewBannerRepo()),
+		news:     biz.NewNewsUseCase(conf, data.NewNewsRepo()),
+		resource: biz.NewResourceUseCase(conf, data.NewResourceRepo()),
+		task:     biz.NewTaskUseCase(conf, data.NewTaskRepo()),
+		video:    biz.NewVideoUseCase(conf, data.NewVideoRepo()),
 	}
 }

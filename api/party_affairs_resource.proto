@@ -5,11 +5,36 @@ package admin;
 option go_package = "./v1;v1";
 
 import "validate/validate.proto";
-
-import "party_affairs_resource_classify.proto";
 import "resource/resource.proto";
 
-message Resource{
+message ResourceClassify{
+  uint32 id = 1;
+  string name = 2;
+  optional uint32 weight = 3;
+  uint32 created_at = 4;
+  uint32 updated_at = 5;
+}
+
+message AllResourceClassifyReply{
+  repeated ResourceClassify list = 1;
+}
+
+message AddResourceClassifyRequest {
+  string name = 1[(validate.rules).string = {min_len: 1}];
+  uint32 weight = 2[(validate.rules).uint32 = {gte: 0}];
+}
+
+message UpdateResourceClassifyRequest {
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+  string name = 2[(validate.rules).string = {min_len: 1}];
+  uint32 weight = 3[(validate.rules).uint32 = {gte: 0}];
+}
+
+message DeleteResourceClassifyRequest{
+  uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
+message ResourceContent{
   uint32 id = 1;
   string title = 2;
   string desc = 3;
@@ -22,30 +47,30 @@ message Resource{
   resource.File resource =  13;
 }
 
-message GetResourceRequest{
+message GetResourceContentRequest{
   uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 
-message PageResourceRequest{
+message PageResourceContentRequest{
   uint32 page = 1[(validate.rules).uint32 = {gt: 0}];
   uint32 page_size = 2[(validate.rules).uint32 = {gt: 0,lte:50}];
   optional uint32 classify_id = 3;
   optional string title = 4;
 }
 
-message PageResourceReply{
+message PageResourceContentReply{
   uint32 total = 1;
-  repeated Resource list = 2;
+  repeated ResourceContent list = 2;
 }
 
-message AddResourceRequest {
+message AddResourceContentRequest {
   string title = 1[(validate.rules).string = {min_len: 1}];
   string desc = 2[(validate.rules).string = {min_len: 1}];
   string url = 3[(validate.rules).string = {min_len: 1}];
   uint32 classify_id = 4[(validate.rules).uint32 = {gt: 0}];
 }
 
-message UpdateResourceRequest {
+message UpdateResourceContentRequest {
   string title = 1[(validate.rules).string = {min_len: 1}];
   string desc = 2[(validate.rules).string = {min_len: 1}];
   string url = 3[(validate.rules).string = {min_len: 1}];
@@ -53,7 +78,7 @@ message UpdateResourceRequest {
   uint32 id = 5[(validate.rules).uint32 = {gt: 0}];
 }
 
-message DeleteResourceRequest{
+message DeleteResourceContentRequest{
   uint32 id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 

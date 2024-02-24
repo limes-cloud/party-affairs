@@ -35,22 +35,644 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on Resource with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Resource) Validate() error {
+// Validate checks the field values on ResourceClassify with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ResourceClassify) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Resource with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ResourceMultiError, or nil
-// if none found.
-func (m *Resource) ValidateAll() error {
+// ValidateAll checks the field values on ResourceClassify with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ResourceClassifyMultiError, or nil if none found.
+func (m *ResourceClassify) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Resource) validate(all bool) error {
+func (m *ResourceClassify) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	if m.Weight != nil {
+		// no validation rules for Weight
+	}
+
+	if len(errors) > 0 {
+		return ResourceClassifyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ResourceClassifyMultiError is an error wrapping multiple validation errors
+// returned by ResourceClassify.ValidateAll() if the designated constraints
+// aren't met.
+type ResourceClassifyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ResourceClassifyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ResourceClassifyMultiError) AllErrors() []error { return m }
+
+// ResourceClassifyValidationError is the validation error returned by
+// ResourceClassify.Validate if the designated constraints aren't met.
+type ResourceClassifyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ResourceClassifyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ResourceClassifyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ResourceClassifyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ResourceClassifyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ResourceClassifyValidationError) ErrorName() string { return "ResourceClassifyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ResourceClassifyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sResourceClassify.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ResourceClassifyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ResourceClassifyValidationError{}
+
+// Validate checks the field values on AllResourceClassifyReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AllResourceClassifyReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AllResourceClassifyReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AllResourceClassifyReplyMultiError, or nil if none found.
+func (m *AllResourceClassifyReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AllResourceClassifyReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AllResourceClassifyReplyValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AllResourceClassifyReplyValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AllResourceClassifyReplyValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return AllResourceClassifyReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// AllResourceClassifyReplyMultiError is an error wrapping multiple validation
+// errors returned by AllResourceClassifyReply.ValidateAll() if the designated
+// constraints aren't met.
+type AllResourceClassifyReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AllResourceClassifyReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AllResourceClassifyReplyMultiError) AllErrors() []error { return m }
+
+// AllResourceClassifyReplyValidationError is the validation error returned by
+// AllResourceClassifyReply.Validate if the designated constraints aren't met.
+type AllResourceClassifyReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AllResourceClassifyReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AllResourceClassifyReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AllResourceClassifyReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AllResourceClassifyReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AllResourceClassifyReplyValidationError) ErrorName() string {
+	return "AllResourceClassifyReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AllResourceClassifyReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAllResourceClassifyReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AllResourceClassifyReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AllResourceClassifyReplyValidationError{}
+
+// Validate checks the field values on AddResourceClassifyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddResourceClassifyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddResourceClassifyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddResourceClassifyRequestMultiError, or nil if none found.
+func (m *AddResourceClassifyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddResourceClassifyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := AddResourceClassifyRequestValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWeight() < 0 {
+		err := AddResourceClassifyRequestValidationError{
+			field:  "Weight",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return AddResourceClassifyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddResourceClassifyRequestMultiError is an error wrapping multiple
+// validation errors returned by AddResourceClassifyRequest.ValidateAll() if
+// the designated constraints aren't met.
+type AddResourceClassifyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddResourceClassifyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddResourceClassifyRequestMultiError) AllErrors() []error { return m }
+
+// AddResourceClassifyRequestValidationError is the validation error returned
+// by AddResourceClassifyRequest.Validate if the designated constraints aren't met.
+type AddResourceClassifyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddResourceClassifyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddResourceClassifyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddResourceClassifyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddResourceClassifyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddResourceClassifyRequestValidationError) ErrorName() string {
+	return "AddResourceClassifyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddResourceClassifyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddResourceClassifyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddResourceClassifyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddResourceClassifyRequestValidationError{}
+
+// Validate checks the field values on UpdateResourceClassifyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateResourceClassifyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateResourceClassifyRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateResourceClassifyRequestMultiError, or nil if none found.
+func (m *UpdateResourceClassifyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateResourceClassifyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetId() <= 0 {
+		err := UpdateResourceClassifyRequestValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := UpdateResourceClassifyRequestValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWeight() < 0 {
+		err := UpdateResourceClassifyRequestValidationError{
+			field:  "Weight",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return UpdateResourceClassifyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateResourceClassifyRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateResourceClassifyRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateResourceClassifyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateResourceClassifyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateResourceClassifyRequestMultiError) AllErrors() []error { return m }
+
+// UpdateResourceClassifyRequestValidationError is the validation error
+// returned by UpdateResourceClassifyRequest.Validate if the designated
+// constraints aren't met.
+type UpdateResourceClassifyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateResourceClassifyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateResourceClassifyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateResourceClassifyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateResourceClassifyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateResourceClassifyRequestValidationError) ErrorName() string {
+	return "UpdateResourceClassifyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateResourceClassifyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateResourceClassifyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateResourceClassifyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateResourceClassifyRequestValidationError{}
+
+// Validate checks the field values on DeleteResourceClassifyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteResourceClassifyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteResourceClassifyRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteResourceClassifyRequestMultiError, or nil if none found.
+func (m *DeleteResourceClassifyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteResourceClassifyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetId() <= 0 {
+		err := DeleteResourceClassifyRequestValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return DeleteResourceClassifyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteResourceClassifyRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteResourceClassifyRequest.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteResourceClassifyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteResourceClassifyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteResourceClassifyRequestMultiError) AllErrors() []error { return m }
+
+// DeleteResourceClassifyRequestValidationError is the validation error
+// returned by DeleteResourceClassifyRequest.Validate if the designated
+// constraints aren't met.
+type DeleteResourceClassifyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteResourceClassifyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteResourceClassifyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteResourceClassifyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteResourceClassifyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteResourceClassifyRequestValidationError) ErrorName() string {
+	return "DeleteResourceClassifyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteResourceClassifyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteResourceClassifyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteResourceClassifyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteResourceClassifyRequestValidationError{}
+
+// Validate checks the field values on ResourceContent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ResourceContent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ResourceContent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ResourceContentMultiError, or nil if none found.
+func (m *ResourceContent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ResourceContent) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -77,7 +699,7 @@ func (m *Resource) validate(all bool) error {
 		switch v := interface{}(m.GetResourceClassify()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ResourceValidationError{
+				errors = append(errors, ResourceContentValidationError{
 					field:  "ResourceClassify",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -85,7 +707,7 @@ func (m *Resource) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ResourceValidationError{
+				errors = append(errors, ResourceContentValidationError{
 					field:  "ResourceClassify",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -94,7 +716,7 @@ func (m *Resource) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetResourceClassify()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ResourceValidationError{
+			return ResourceContentValidationError{
 				field:  "ResourceClassify",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -106,7 +728,7 @@ func (m *Resource) validate(all bool) error {
 		switch v := interface{}(m.GetResource()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ResourceValidationError{
+				errors = append(errors, ResourceContentValidationError{
 					field:  "Resource",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -114,7 +736,7 @@ func (m *Resource) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ResourceValidationError{
+				errors = append(errors, ResourceContentValidationError{
 					field:  "Resource",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -123,7 +745,7 @@ func (m *Resource) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetResource()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ResourceValidationError{
+			return ResourceContentValidationError{
 				field:  "Resource",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -132,18 +754,19 @@ func (m *Resource) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ResourceMultiError(errors)
+		return ResourceContentMultiError(errors)
 	}
 
 	return nil
 }
 
-// ResourceMultiError is an error wrapping multiple validation errors returned
-// by Resource.ValidateAll() if the designated constraints aren't met.
-type ResourceMultiError []error
+// ResourceContentMultiError is an error wrapping multiple validation errors
+// returned by ResourceContent.ValidateAll() if the designated constraints
+// aren't met.
+type ResourceContentMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ResourceMultiError) Error() string {
+func (m ResourceContentMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -152,11 +775,11 @@ func (m ResourceMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ResourceMultiError) AllErrors() []error { return m }
+func (m ResourceContentMultiError) AllErrors() []error { return m }
 
-// ResourceValidationError is the validation error returned by
-// Resource.Validate if the designated constraints aren't met.
-type ResourceValidationError struct {
+// ResourceContentValidationError is the validation error returned by
+// ResourceContent.Validate if the designated constraints aren't met.
+type ResourceContentValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -164,22 +787,22 @@ type ResourceValidationError struct {
 }
 
 // Field function returns field value.
-func (e ResourceValidationError) Field() string { return e.field }
+func (e ResourceContentValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ResourceValidationError) Reason() string { return e.reason }
+func (e ResourceContentValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ResourceValidationError) Cause() error { return e.cause }
+func (e ResourceContentValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ResourceValidationError) Key() bool { return e.key }
+func (e ResourceContentValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ResourceValidationError) ErrorName() string { return "ResourceValidationError" }
+func (e ResourceContentValidationError) ErrorName() string { return "ResourceContentValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ResourceValidationError) Error() string {
+func (e ResourceContentValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -191,14 +814,14 @@ func (e ResourceValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sResource.%s: %s%s",
+		"invalid %sResourceContent.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ResourceValidationError{}
+var _ error = ResourceContentValidationError{}
 
 var _ interface {
 	Field() string
@@ -206,24 +829,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ResourceValidationError{}
+} = ResourceContentValidationError{}
 
-// Validate checks the field values on GetResourceRequest with the rules
+// Validate checks the field values on GetResourceContentRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetResourceRequest) Validate() error {
+func (m *GetResourceContentRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on GetResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetResourceRequestMultiError, or nil if none found.
-func (m *GetResourceRequest) ValidateAll() error {
+// GetResourceContentRequestMultiError, or nil if none found.
+func (m *GetResourceContentRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetResourceRequest) validate(all bool) error {
+func (m *GetResourceContentRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -231,7 +854,7 @@ func (m *GetResourceRequest) validate(all bool) error {
 	var errors []error
 
 	if m.GetId() <= 0 {
-		err := GetResourceRequestValidationError{
+		err := GetResourceContentRequestValidationError{
 			field:  "Id",
 			reason: "value must be greater than 0",
 		}
@@ -242,19 +865,19 @@ func (m *GetResourceRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetResourceRequestMultiError(errors)
+		return GetResourceContentRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetResourceRequestMultiError is an error wrapping multiple validation errors
-// returned by GetResourceRequest.ValidateAll() if the designated constraints
-// aren't met.
-type GetResourceRequestMultiError []error
+// GetResourceContentRequestMultiError is an error wrapping multiple validation
+// errors returned by GetResourceContentRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetResourceContentRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetResourceRequestMultiError) Error() string {
+func (m GetResourceContentRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -263,11 +886,11 @@ func (m GetResourceRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetResourceRequestMultiError) AllErrors() []error { return m }
+func (m GetResourceContentRequestMultiError) AllErrors() []error { return m }
 
-// GetResourceRequestValidationError is the validation error returned by
-// GetResourceRequest.Validate if the designated constraints aren't met.
-type GetResourceRequestValidationError struct {
+// GetResourceContentRequestValidationError is the validation error returned by
+// GetResourceContentRequest.Validate if the designated constraints aren't met.
+type GetResourceContentRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -275,24 +898,24 @@ type GetResourceRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetResourceRequestValidationError) Field() string { return e.field }
+func (e GetResourceContentRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetResourceRequestValidationError) Reason() string { return e.reason }
+func (e GetResourceContentRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetResourceRequestValidationError) Cause() error { return e.cause }
+func (e GetResourceContentRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetResourceRequestValidationError) Key() bool { return e.key }
+func (e GetResourceContentRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetResourceRequestValidationError) ErrorName() string {
-	return "GetResourceRequestValidationError"
+func (e GetResourceContentRequestValidationError) ErrorName() string {
+	return "GetResourceContentRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetResourceRequestValidationError) Error() string {
+func (e GetResourceContentRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -304,14 +927,14 @@ func (e GetResourceRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetResourceRequest.%s: %s%s",
+		"invalid %sGetResourceContentRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetResourceRequestValidationError{}
+var _ error = GetResourceContentRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -319,24 +942,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetResourceRequestValidationError{}
+} = GetResourceContentRequestValidationError{}
 
-// Validate checks the field values on PageResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on PageResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *PageResourceRequest) Validate() error {
+func (m *PageResourceContentRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on PageResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on PageResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// PageResourceRequestMultiError, or nil if none found.
-func (m *PageResourceRequest) ValidateAll() error {
+// PageResourceContentRequestMultiError, or nil if none found.
+func (m *PageResourceContentRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *PageResourceRequest) validate(all bool) error {
+func (m *PageResourceContentRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -344,7 +967,7 @@ func (m *PageResourceRequest) validate(all bool) error {
 	var errors []error
 
 	if m.GetPage() <= 0 {
-		err := PageResourceRequestValidationError{
+		err := PageResourceContentRequestValidationError{
 			field:  "Page",
 			reason: "value must be greater than 0",
 		}
@@ -355,7 +978,7 @@ func (m *PageResourceRequest) validate(all bool) error {
 	}
 
 	if val := m.GetPageSize(); val <= 0 || val > 50 {
-		err := PageResourceRequestValidationError{
+		err := PageResourceContentRequestValidationError{
 			field:  "PageSize",
 			reason: "value must be inside range (0, 50]",
 		}
@@ -374,19 +997,19 @@ func (m *PageResourceRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return PageResourceRequestMultiError(errors)
+		return PageResourceContentRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// PageResourceRequestMultiError is an error wrapping multiple validation
-// errors returned by PageResourceRequest.ValidateAll() if the designated
-// constraints aren't met.
-type PageResourceRequestMultiError []error
+// PageResourceContentRequestMultiError is an error wrapping multiple
+// validation errors returned by PageResourceContentRequest.ValidateAll() if
+// the designated constraints aren't met.
+type PageResourceContentRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m PageResourceRequestMultiError) Error() string {
+func (m PageResourceContentRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -395,11 +1018,11 @@ func (m PageResourceRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m PageResourceRequestMultiError) AllErrors() []error { return m }
+func (m PageResourceContentRequestMultiError) AllErrors() []error { return m }
 
-// PageResourceRequestValidationError is the validation error returned by
-// PageResourceRequest.Validate if the designated constraints aren't met.
-type PageResourceRequestValidationError struct {
+// PageResourceContentRequestValidationError is the validation error returned
+// by PageResourceContentRequest.Validate if the designated constraints aren't met.
+type PageResourceContentRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -407,24 +1030,24 @@ type PageResourceRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e PageResourceRequestValidationError) Field() string { return e.field }
+func (e PageResourceContentRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PageResourceRequestValidationError) Reason() string { return e.reason }
+func (e PageResourceContentRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PageResourceRequestValidationError) Cause() error { return e.cause }
+func (e PageResourceContentRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PageResourceRequestValidationError) Key() bool { return e.key }
+func (e PageResourceContentRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PageResourceRequestValidationError) ErrorName() string {
-	return "PageResourceRequestValidationError"
+func (e PageResourceContentRequestValidationError) ErrorName() string {
+	return "PageResourceContentRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e PageResourceRequestValidationError) Error() string {
+func (e PageResourceContentRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -436,14 +1059,14 @@ func (e PageResourceRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sPageResourceRequest.%s: %s%s",
+		"invalid %sPageResourceContentRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PageResourceRequestValidationError{}
+var _ error = PageResourceContentRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -451,24 +1074,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PageResourceRequestValidationError{}
+} = PageResourceContentRequestValidationError{}
 
-// Validate checks the field values on PageResourceReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *PageResourceReply) Validate() error {
+// Validate checks the field values on PageResourceContentReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PageResourceContentReply) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on PageResourceReply with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on PageResourceContentReply with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// PageResourceReplyMultiError, or nil if none found.
-func (m *PageResourceReply) ValidateAll() error {
+// PageResourceContentReplyMultiError, or nil if none found.
+func (m *PageResourceContentReply) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *PageResourceReply) validate(all bool) error {
+func (m *PageResourceContentReply) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -484,7 +1107,7 @@ func (m *PageResourceReply) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, PageResourceReplyValidationError{
+					errors = append(errors, PageResourceContentReplyValidationError{
 						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -492,7 +1115,7 @@ func (m *PageResourceReply) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, PageResourceReplyValidationError{
+					errors = append(errors, PageResourceContentReplyValidationError{
 						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -501,7 +1124,7 @@ func (m *PageResourceReply) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return PageResourceReplyValidationError{
+				return PageResourceContentReplyValidationError{
 					field:  fmt.Sprintf("List[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -512,19 +1135,19 @@ func (m *PageResourceReply) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return PageResourceReplyMultiError(errors)
+		return PageResourceContentReplyMultiError(errors)
 	}
 
 	return nil
 }
 
-// PageResourceReplyMultiError is an error wrapping multiple validation errors
-// returned by PageResourceReply.ValidateAll() if the designated constraints
-// aren't met.
-type PageResourceReplyMultiError []error
+// PageResourceContentReplyMultiError is an error wrapping multiple validation
+// errors returned by PageResourceContentReply.ValidateAll() if the designated
+// constraints aren't met.
+type PageResourceContentReplyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m PageResourceReplyMultiError) Error() string {
+func (m PageResourceContentReplyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -533,11 +1156,11 @@ func (m PageResourceReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m PageResourceReplyMultiError) AllErrors() []error { return m }
+func (m PageResourceContentReplyMultiError) AllErrors() []error { return m }
 
-// PageResourceReplyValidationError is the validation error returned by
-// PageResourceReply.Validate if the designated constraints aren't met.
-type PageResourceReplyValidationError struct {
+// PageResourceContentReplyValidationError is the validation error returned by
+// PageResourceContentReply.Validate if the designated constraints aren't met.
+type PageResourceContentReplyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -545,24 +1168,24 @@ type PageResourceReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e PageResourceReplyValidationError) Field() string { return e.field }
+func (e PageResourceContentReplyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PageResourceReplyValidationError) Reason() string { return e.reason }
+func (e PageResourceContentReplyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PageResourceReplyValidationError) Cause() error { return e.cause }
+func (e PageResourceContentReplyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PageResourceReplyValidationError) Key() bool { return e.key }
+func (e PageResourceContentReplyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PageResourceReplyValidationError) ErrorName() string {
-	return "PageResourceReplyValidationError"
+func (e PageResourceContentReplyValidationError) ErrorName() string {
+	return "PageResourceContentReplyValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e PageResourceReplyValidationError) Error() string {
+func (e PageResourceContentReplyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -574,14 +1197,14 @@ func (e PageResourceReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sPageResourceReply.%s: %s%s",
+		"invalid %sPageResourceContentReply.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PageResourceReplyValidationError{}
+var _ error = PageResourceContentReplyValidationError{}
 
 var _ interface {
 	Field() string
@@ -589,24 +1212,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PageResourceReplyValidationError{}
+} = PageResourceContentReplyValidationError{}
 
-// Validate checks the field values on AddResourceRequest with the rules
+// Validate checks the field values on AddResourceContentRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddResourceRequest) Validate() error {
+func (m *AddResourceContentRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AddResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on AddResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AddResourceRequestMultiError, or nil if none found.
-func (m *AddResourceRequest) ValidateAll() error {
+// AddResourceContentRequestMultiError, or nil if none found.
+func (m *AddResourceContentRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AddResourceRequest) validate(all bool) error {
+func (m *AddResourceContentRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -614,7 +1237,7 @@ func (m *AddResourceRequest) validate(all bool) error {
 	var errors []error
 
 	if utf8.RuneCountInString(m.GetTitle()) < 1 {
-		err := AddResourceRequestValidationError{
+		err := AddResourceContentRequestValidationError{
 			field:  "Title",
 			reason: "value length must be at least 1 runes",
 		}
@@ -625,7 +1248,7 @@ func (m *AddResourceRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetDesc()) < 1 {
-		err := AddResourceRequestValidationError{
+		err := AddResourceContentRequestValidationError{
 			field:  "Desc",
 			reason: "value length must be at least 1 runes",
 		}
@@ -636,7 +1259,7 @@ func (m *AddResourceRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetUrl()) < 1 {
-		err := AddResourceRequestValidationError{
+		err := AddResourceContentRequestValidationError{
 			field:  "Url",
 			reason: "value length must be at least 1 runes",
 		}
@@ -647,7 +1270,7 @@ func (m *AddResourceRequest) validate(all bool) error {
 	}
 
 	if m.GetClassifyId() <= 0 {
-		err := AddResourceRequestValidationError{
+		err := AddResourceContentRequestValidationError{
 			field:  "ClassifyId",
 			reason: "value must be greater than 0",
 		}
@@ -658,19 +1281,19 @@ func (m *AddResourceRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return AddResourceRequestMultiError(errors)
+		return AddResourceContentRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// AddResourceRequestMultiError is an error wrapping multiple validation errors
-// returned by AddResourceRequest.ValidateAll() if the designated constraints
-// aren't met.
-type AddResourceRequestMultiError []error
+// AddResourceContentRequestMultiError is an error wrapping multiple validation
+// errors returned by AddResourceContentRequest.ValidateAll() if the
+// designated constraints aren't met.
+type AddResourceContentRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AddResourceRequestMultiError) Error() string {
+func (m AddResourceContentRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -679,11 +1302,11 @@ func (m AddResourceRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AddResourceRequestMultiError) AllErrors() []error { return m }
+func (m AddResourceContentRequestMultiError) AllErrors() []error { return m }
 
-// AddResourceRequestValidationError is the validation error returned by
-// AddResourceRequest.Validate if the designated constraints aren't met.
-type AddResourceRequestValidationError struct {
+// AddResourceContentRequestValidationError is the validation error returned by
+// AddResourceContentRequest.Validate if the designated constraints aren't met.
+type AddResourceContentRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -691,24 +1314,24 @@ type AddResourceRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e AddResourceRequestValidationError) Field() string { return e.field }
+func (e AddResourceContentRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AddResourceRequestValidationError) Reason() string { return e.reason }
+func (e AddResourceContentRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AddResourceRequestValidationError) Cause() error { return e.cause }
+func (e AddResourceContentRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AddResourceRequestValidationError) Key() bool { return e.key }
+func (e AddResourceContentRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AddResourceRequestValidationError) ErrorName() string {
-	return "AddResourceRequestValidationError"
+func (e AddResourceContentRequestValidationError) ErrorName() string {
+	return "AddResourceContentRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AddResourceRequestValidationError) Error() string {
+func (e AddResourceContentRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -720,14 +1343,14 @@ func (e AddResourceRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAddResourceRequest.%s: %s%s",
+		"invalid %sAddResourceContentRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AddResourceRequestValidationError{}
+var _ error = AddResourceContentRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -735,24 +1358,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AddResourceRequestValidationError{}
+} = AddResourceContentRequestValidationError{}
 
-// Validate checks the field values on UpdateResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on UpdateResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateResourceRequest) Validate() error {
+func (m *UpdateResourceContentRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on UpdateResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// UpdateResourceRequestMultiError, or nil if none found.
-func (m *UpdateResourceRequest) ValidateAll() error {
+// UpdateResourceContentRequestMultiError, or nil if none found.
+func (m *UpdateResourceContentRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateResourceRequest) validate(all bool) error {
+func (m *UpdateResourceContentRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -760,7 +1383,7 @@ func (m *UpdateResourceRequest) validate(all bool) error {
 	var errors []error
 
 	if utf8.RuneCountInString(m.GetTitle()) < 1 {
-		err := UpdateResourceRequestValidationError{
+		err := UpdateResourceContentRequestValidationError{
 			field:  "Title",
 			reason: "value length must be at least 1 runes",
 		}
@@ -771,7 +1394,7 @@ func (m *UpdateResourceRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetDesc()) < 1 {
-		err := UpdateResourceRequestValidationError{
+		err := UpdateResourceContentRequestValidationError{
 			field:  "Desc",
 			reason: "value length must be at least 1 runes",
 		}
@@ -782,7 +1405,7 @@ func (m *UpdateResourceRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetUrl()) < 1 {
-		err := UpdateResourceRequestValidationError{
+		err := UpdateResourceContentRequestValidationError{
 			field:  "Url",
 			reason: "value length must be at least 1 runes",
 		}
@@ -793,7 +1416,7 @@ func (m *UpdateResourceRequest) validate(all bool) error {
 	}
 
 	if m.GetClassifyId() <= 0 {
-		err := UpdateResourceRequestValidationError{
+		err := UpdateResourceContentRequestValidationError{
 			field:  "ClassifyId",
 			reason: "value must be greater than 0",
 		}
@@ -804,7 +1427,7 @@ func (m *UpdateResourceRequest) validate(all bool) error {
 	}
 
 	if m.GetId() <= 0 {
-		err := UpdateResourceRequestValidationError{
+		err := UpdateResourceContentRequestValidationError{
 			field:  "Id",
 			reason: "value must be greater than 0",
 		}
@@ -815,19 +1438,19 @@ func (m *UpdateResourceRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return UpdateResourceRequestMultiError(errors)
+		return UpdateResourceContentRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateResourceRequestMultiError is an error wrapping multiple validation
-// errors returned by UpdateResourceRequest.ValidateAll() if the designated
-// constraints aren't met.
-type UpdateResourceRequestMultiError []error
+// UpdateResourceContentRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateResourceContentRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateResourceContentRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateResourceRequestMultiError) Error() string {
+func (m UpdateResourceContentRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -836,11 +1459,12 @@ func (m UpdateResourceRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateResourceRequestMultiError) AllErrors() []error { return m }
+func (m UpdateResourceContentRequestMultiError) AllErrors() []error { return m }
 
-// UpdateResourceRequestValidationError is the validation error returned by
-// UpdateResourceRequest.Validate if the designated constraints aren't met.
-type UpdateResourceRequestValidationError struct {
+// UpdateResourceContentRequestValidationError is the validation error returned
+// by UpdateResourceContentRequest.Validate if the designated constraints
+// aren't met.
+type UpdateResourceContentRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -848,24 +1472,24 @@ type UpdateResourceRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateResourceRequestValidationError) Field() string { return e.field }
+func (e UpdateResourceContentRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateResourceRequestValidationError) Reason() string { return e.reason }
+func (e UpdateResourceContentRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateResourceRequestValidationError) Cause() error { return e.cause }
+func (e UpdateResourceContentRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateResourceRequestValidationError) Key() bool { return e.key }
+func (e UpdateResourceContentRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateResourceRequestValidationError) ErrorName() string {
-	return "UpdateResourceRequestValidationError"
+func (e UpdateResourceContentRequestValidationError) ErrorName() string {
+	return "UpdateResourceContentRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateResourceRequestValidationError) Error() string {
+func (e UpdateResourceContentRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -877,14 +1501,14 @@ func (e UpdateResourceRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateResourceRequest.%s: %s%s",
+		"invalid %sUpdateResourceContentRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateResourceRequestValidationError{}
+var _ error = UpdateResourceContentRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -892,24 +1516,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateResourceRequestValidationError{}
+} = UpdateResourceContentRequestValidationError{}
 
-// Validate checks the field values on DeleteResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on DeleteResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DeleteResourceRequest) Validate() error {
+func (m *DeleteResourceContentRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DeleteResourceRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on DeleteResourceContentRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DeleteResourceRequestMultiError, or nil if none found.
-func (m *DeleteResourceRequest) ValidateAll() error {
+// DeleteResourceContentRequestMultiError, or nil if none found.
+func (m *DeleteResourceContentRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteResourceRequest) validate(all bool) error {
+func (m *DeleteResourceContentRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -917,7 +1541,7 @@ func (m *DeleteResourceRequest) validate(all bool) error {
 	var errors []error
 
 	if m.GetId() <= 0 {
-		err := DeleteResourceRequestValidationError{
+		err := DeleteResourceContentRequestValidationError{
 			field:  "Id",
 			reason: "value must be greater than 0",
 		}
@@ -928,19 +1552,19 @@ func (m *DeleteResourceRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return DeleteResourceRequestMultiError(errors)
+		return DeleteResourceContentRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteResourceRequestMultiError is an error wrapping multiple validation
-// errors returned by DeleteResourceRequest.ValidateAll() if the designated
-// constraints aren't met.
-type DeleteResourceRequestMultiError []error
+// DeleteResourceContentRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteResourceContentRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteResourceContentRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteResourceRequestMultiError) Error() string {
+func (m DeleteResourceContentRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -949,11 +1573,12 @@ func (m DeleteResourceRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteResourceRequestMultiError) AllErrors() []error { return m }
+func (m DeleteResourceContentRequestMultiError) AllErrors() []error { return m }
 
-// DeleteResourceRequestValidationError is the validation error returned by
-// DeleteResourceRequest.Validate if the designated constraints aren't met.
-type DeleteResourceRequestValidationError struct {
+// DeleteResourceContentRequestValidationError is the validation error returned
+// by DeleteResourceContentRequest.Validate if the designated constraints
+// aren't met.
+type DeleteResourceContentRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -961,24 +1586,24 @@ type DeleteResourceRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteResourceRequestValidationError) Field() string { return e.field }
+func (e DeleteResourceContentRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteResourceRequestValidationError) Reason() string { return e.reason }
+func (e DeleteResourceContentRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteResourceRequestValidationError) Cause() error { return e.cause }
+func (e DeleteResourceContentRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteResourceRequestValidationError) Key() bool { return e.key }
+func (e DeleteResourceContentRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteResourceRequestValidationError) ErrorName() string {
-	return "DeleteResourceRequestValidationError"
+func (e DeleteResourceContentRequestValidationError) ErrorName() string {
+	return "DeleteResourceContentRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteResourceRequestValidationError) Error() string {
+func (e DeleteResourceContentRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -990,14 +1615,14 @@ func (e DeleteResourceRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteResourceRequest.%s: %s%s",
+		"invalid %sDeleteResourceContentRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteResourceRequestValidationError{}
+var _ error = DeleteResourceContentRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1005,4 +1630,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteResourceRequestValidationError{}
+} = DeleteResourceContentRequestValidationError{}

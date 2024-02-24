@@ -16,11 +16,16 @@ message TaskValue{
   string value = 4;
   uint32 created_at = 5;
   uint32 updated_at = 6;
-  user_center.User user = 7;
+  user.BaseUser user = 7;
+}
+
+message GetCurTaskValueRequest{
+  uint32 task_id = 1[(validate.rules).uint32 = {gt: 0}];
 }
 
 message GetTaskValueRequest{
   uint32 task_id = 1[(validate.rules).uint32 = {gt: 0}];
+  uint32 user_id = 2[(validate.rules).uint32 = {gt: 0}];
 }
 
 message PageTaskValueRequest{

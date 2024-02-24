@@ -62,11 +62,7 @@ func (m *Banner) validate(all bool) error {
 
 	// no validation rules for Src
 
-	// no validation rules for App
-
-	// no validation rules for Url
-
-	// no validation rules for Params
+	// no validation rules for Path
 
 	// no validation rules for Weight
 
@@ -358,16 +354,8 @@ func (m *AddBannerRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if m.App != nil {
-		// no validation rules for App
-	}
-
-	if m.Url != nil {
-		// no validation rules for Url
-	}
-
-	if m.Params != nil {
-		// no validation rules for Params
+	if m.Path != nil {
+		// no validation rules for Path
 	}
 
 	if len(errors) > 0 {
@@ -503,16 +491,8 @@ func (m *UpdateBannerRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if m.App != nil {
-		// no validation rules for App
-	}
-
-	if m.Url != nil {
-		// no validation rules for Url
-	}
-
-	if m.Params != nil {
-		// no validation rules for Params
+	if m.Path != nil {
+		// no validation rules for Path
 	}
 
 	if len(errors) > 0 {

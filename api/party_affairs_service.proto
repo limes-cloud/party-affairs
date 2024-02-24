@@ -5,14 +5,64 @@ option go_package = "./v1;v1";
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
-import "party_affairs_news_classify.proto";
 import "party_affairs_news.proto";
-import "party_affairs_resource_classify.proto";
 import "party_affairs_resource.proto";
 import "party_affairs_banner.proto";
 import "party_affairs_task.proto";
 import "party_affairs_task_value.proto";
+import "party_affairs_notice.proto";
+import "party_affairs_video.proto";
+
 service Service {
+  rpc PageNoticeUser (PageNoticeUserRequest) returns (PageNoticeUserReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/notice/users",
+    };
+  }
+
+  rpc PageNotice (PageNoticeRequest) returns (PageNoticeReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/notices",
+      additional_bindings {
+        get: "/party-affairs/client/v1/notices"
+      },
+    };
+  }
+
+  rpc GetNotice (GetNoticeRequest) returns (Notice) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/notice",
+      additional_bindings {
+        get: "/party-affairs/client/v1/notice"
+      },
+    };
+  }
+
+  rpc ReadNotice (ReadNoticeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      get: "/party-affairs/client/v1/notice/read",
+    };
+  }
+
+  rpc AddNotice (AddNoticeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/notice",
+      body: "*"
+    };
+  }
+
+  rpc UpdateNotice (UpdateNoticeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/notice",
+      body: "*"
+    };
+  }
+
+  rpc DeleteNotice (DeleteNoticeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/notice"
+    };
+  }
 
   rpc AllNewsClassify (google.protobuf.Empty) returns (AllNewsClassifyReply) {
     option (google.api.http) = {
@@ -43,7 +93,7 @@ service Service {
     };
   }
 
-  rpc PageNewsContent (PageNewsRequest) returns (PageNewsReply) {
+  rpc PageNewsContent (PageNewsContentRequest) returns (PageNewsContentReply) {
     option (google.api.http) = {
       get: "/party-affairs/admin/v1/news/contents",
       additional_bindings {
@@ -52,7 +102,7 @@ service Service {
     };
   }
 
-  rpc GetNewsContent (GetNewsRequest) returns (News) {
+  rpc GetNewsContent (GetNewsContentRequest) returns (NewsContent) {
     option (google.api.http) = {
       get: "/party-affairs/admin/v1/news/content",
       additional_bindings {
@@ -61,23 +111,48 @@ service Service {
     };
   }
 
-  rpc AddNewsContent (AddNewsRequest) returns (google.protobuf.Empty) {
+  rpc AddNewsContent (AddNewsContentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/party-affairs/admin/v1/news/content",
       body: "*"
     };
   }
 
-  rpc UpdateNewsContent (UpdateNewsRequest) returns (google.protobuf.Empty) {
+  rpc UpdateNewsContent (UpdateNewsContentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       put: "/party-affairs/admin/v1/news/content",
       body: "*"
     };
   }
 
-  rpc DeleteNewsContent (DeleteNewsRequest) returns (google.protobuf.Empty) {
+  rpc DeleteNewsContent (DeleteNewsContentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/party-affairs/admin/v1/news/content"
+    };
+  }
+
+  rpc PageNewsComment (PageNewsCommentRequest) returns (PageNewsCommentReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/news/comments",
+    };
+  }
+
+  rpc DeleteNewsComment (DeleteNewsCommentRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/news/comment"
+    };
+  }
+
+  rpc AddNewsComment (AddNewsCommentRequest) returns (AddNewsCommentReply) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/news/comment",
+      body: "*"
+    };
+  }
+
+  rpc DeleteCurNewsComment (DeleteNewsCommentRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/client/v1/news/comment"
     };
   }
 
@@ -110,7 +185,7 @@ service Service {
     };
   }
 
-  rpc PageResourceContent (PageResourceRequest) returns (PageResourceReply) {
+  rpc PageResourceContent (PageResourceContentRequest) returns (PageResourceContentReply) {
     option (google.api.http) = {
       get: "/party-affairs/admin/v1/resource/contents",
       additional_bindings {
@@ -119,7 +194,7 @@ service Service {
     };
   }
 
-  rpc GetResourceContent (GetResourceRequest) returns (Resource) {
+  rpc GetResourceContent (GetResourceContentRequest) returns (ResourceContent) {
     option (google.api.http) = {
       get: "/party-affairs/admin/v1/resource/content",
       additional_bindings {
@@ -128,21 +203,21 @@ service Service {
     };
   }
 
-  rpc AddResourceContent (AddResourceRequest) returns (google.protobuf.Empty) {
+  rpc AddResourceContent (AddResourceContentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/party-affairs/admin/v1/resource/content",
       body: "*"
     };
   }
 
-  rpc UpdateResourceContent (UpdateResourceRequest) returns (google.protobuf.Empty) {
+  rpc UpdateResourceContent (UpdateResourceContentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       put: "/party-affairs/admin/v1/resource/content",
       body: "*"
     };
   }
 
-  rpc DeleteResourceContent (DeleteResourceRequest) returns (google.protobuf.Empty) {
+  rpc DeleteResourceContent (DeleteResourceContentRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/party-affairs/admin/v1/resource/content"
     };
@@ -224,9 +299,12 @@ service Service {
   rpc GetTaskValue (GetTaskValueRequest) returns (TaskValue) {
     option (google.api.http) = {
       get: "/party-affairs/admin/v1/task/value",
-      additional_bindings {
-        get: "/party-affairs/client/v1/task/value",
-      },
+    };
+  }
+
+  rpc GetCurTaskValue (GetCurTaskValueRequest) returns (TaskValue) {
+    option (google.api.http) = {
+      get: "/party-affairs/client/v1/task/value",
     };
   }
 
@@ -247,6 +325,80 @@ service Service {
   rpc DeleteTaskValue (DeleteTaskValueRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/party-affairs/admin/v1/task/value"
+    };
+  }
+
+  rpc PageVideoClassify (PageVideoClassifyRequest) returns (PageVideoClassifyReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/video/classify",
+      additional_bindings {
+        get: "/party-affairs/client/v1/video/classify",
+      },
+    };
+  }
+
+  rpc AddVideoClassify (AddVideoClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/video/classify",
+      body: "*"
+    };
+  }
+
+  rpc UpdateVideoClassify (UpdateVideoClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/video/classify",
+      body: "*"
+    };
+  }
+
+  rpc DeleteVideoClassify (DeleteVideoClassifyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/video/classify"
+    };
+  }
+
+  rpc PageVideoContent (PageVideoContentRequest) returns (PageVideoContentReply) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/video/contents",
+      additional_bindings {
+        get: "/party-affairs/client/v1/video/contents",
+      },
+    };
+  }
+
+  rpc GetVideoContent (GetVideoContentRequest) returns (VideoContent) {
+    option (google.api.http) = {
+      get: "/party-affairs/admin/v1/video/content",
+      additional_bindings {
+        get: "/party-affairs/client/v1/video/content",
+      },
+    };
+  }
+
+  rpc AddVideoContent (AddVideoContentRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/admin/v1/video/content",
+      body: "*"
+    };
+  }
+
+  rpc UpdateVideoContent (UpdateVideoContentRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/party-affairs/admin/v1/video/content",
+      body: "*"
+    };
+  }
+
+  rpc DeleteVideoContent (DeleteVideoContentRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/party-affairs/admin/v1/video/content"
+    };
+  }
+
+  rpc UpdateUserVideoProcess (UpdateUserVideoProcessRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/client/v1/video/process",
+      body: "*"
     };
   }
 }

@@ -175,6 +175,119 @@ var _ interface {
 	ErrorName() string
 } = TaskValueValidationError{}
 
+// Validate checks the field values on GetCurTaskValueRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCurTaskValueRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCurTaskValueRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCurTaskValueRequestMultiError, or nil if none found.
+func (m *GetCurTaskValueRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCurTaskValueRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetTaskId() <= 0 {
+		err := GetCurTaskValueRequestValidationError{
+			field:  "TaskId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetCurTaskValueRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCurTaskValueRequestMultiError is an error wrapping multiple validation
+// errors returned by GetCurTaskValueRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetCurTaskValueRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCurTaskValueRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCurTaskValueRequestMultiError) AllErrors() []error { return m }
+
+// GetCurTaskValueRequestValidationError is the validation error returned by
+// GetCurTaskValueRequest.Validate if the designated constraints aren't met.
+type GetCurTaskValueRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCurTaskValueRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCurTaskValueRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCurTaskValueRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCurTaskValueRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCurTaskValueRequestValidationError) ErrorName() string {
+	return "GetCurTaskValueRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCurTaskValueRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCurTaskValueRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCurTaskValueRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCurTaskValueRequestValidationError{}
+
 // Validate checks the field values on GetTaskValueRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -200,6 +313,17 @@ func (m *GetTaskValueRequest) validate(all bool) error {
 	if m.GetTaskId() <= 0 {
 		err := GetTaskValueRequestValidationError{
 			field:  "TaskId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetUserId() <= 0 {
+		err := GetTaskValueRequestValidationError{
+			field:  "UserId",
 			reason: "value must be greater than 0",
 		}
 		if !all {
