@@ -42,7 +42,7 @@ require (
 	github.com/glebarez/sqlite v1.10.0 // indirect
 	github.com/go-faster/city v1.0.1 // indirect
 	github.com/go-faster/errors v0.7.1 // indirect
-	github.com/go-kratos/aegis v0.2.0 // indirect
+	github.com/go-kratos/aegis v0.2.1-0.20230616030432-99110a3f05f4 // indirect
 	github.com/go-kratos/kratos/contrib/log/zap/v2 v2.0.0-20240202023911-c7fa51df7ae7 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect

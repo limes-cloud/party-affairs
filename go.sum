@@ -1115,6 +1115,7 @@ github.com/go-kit/log v0.1.0/go.mod h1:zbhenjAZHb184qTLMA9ZjW7ThYL0H2mk7Q6pNt4vb
 github.com/go-kit/log v0.2.0/go.mod h1:NwTd00d/i8cPZ3xOwwiv2PO5MOcx78fFErGNcVmBjv0=
 github.com/go-kratos/aegis v0.2.0 h1:dObzCDWn3XVjUkgxyBp6ZeWtx/do0DPZ7LY3yNSJLUQ=
 github.com/go-kratos/aegis v0.2.0/go.mod h1:v0R2m73WgEEYB3XYu6aE2WcMwsZkJ/Rzuf5eVccm7bI=
+github.com/go-kratos/aegis v0.2.1-0.20230616030432-99110a3f05f4/go.mod h1:jqdJn8QOoobkmqfhO51kb/qUeHAQ8r0WpjPKl7cP3nQ=
 github.com/go-kratos/kratos/contrib/log/zap/v2 v2.0.0-20240202023911-c7fa51df7ae7 h1:Lbmg3z+OrhjfmeZHNiDxiC9t95AdnHt9UxZhjeb058Y=
 github.com/go-kratos/kratos/contrib/log/zap/v2 v2.0.0-20240202023911-c7fa51df7ae7/go.mod h1:siBp3MH8GEAM04S1jPG9ZCzZiZ8QGBr2vRuz2bd9ZTE=
 github.com/go-kratos/kratos/v2 v2.7.2 h1:WVPGFNLKpv+0odMnCPxM4ZHa2hy9I5FOnwpG3Vv4w5c=
@@ -1503,6 +1504,7 @@ github.com/limes-cloud/configure v1.0.14 h1:7XzMsa1Xnm76xmatRpcOk4yvyLevtcbvigs2
 github.com/limes-cloud/configure v1.0.14/go.mod h1:dlx/YoAfRrQlMfj/O6N4NdnNk4qwnRKH62u9Hqnw+3g=
 github.com/limes-cloud/kratosx v1.0.21 h1:sQiSwEbTHs2kcbfUj/Vnyuf9QgpyG50U21+1FlCosMc=
 github.com/limes-cloud/kratosx v1.0.21/go.mod h1:Pv8joM6cDU+TcU8RFbH1taugq2ccok2mAKijdJMG8Ak=
+github.com/limes-cloud/kratosx v1.0.25/go.mod h1:yOXNr410UoLFV+31y0lCD8xerDj2J1E+Mr/XvUYdf9g=
 github.com/limes-cloud/resource v1.0.2 h1:mdwBLTM0JLf8rQ1lBF/VP+ujS4VYGXurzUaeae7T1JU=
 github.com/limes-cloud/resource v1.0.2/go.mod h1:TTUJGAwbkqZmi4h38LKUTYUqgK2gq0zc0z01N1OxmW4=
 github.com/limes-cloud/user-center v1.0.3 h1:9cnkQOUGQ7MoMVCK8lKiUKkkJesBKb3NkG+ZurwZvWU=
