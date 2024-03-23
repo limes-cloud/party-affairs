@@ -7,11 +7,7 @@ type AuthInfo struct {
 
 type Config struct {
 	DefaultUserAvatar string
-	Service           struct {
-		Resource   string
-		UserCenter string
-	}
-	Auth struct {
+	Auth              struct {
 		YiBan AuthInfo
 	}
 }
