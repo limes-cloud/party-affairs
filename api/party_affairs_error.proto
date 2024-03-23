@@ -26,6 +26,8 @@ enum ErrorReason {
   RefreshTokenError = 15 [(errors.code)=401,(errors.message)="刷新token失败"];
   AuthInfoError = 16[(errors.message)="授权信息错误"];
   UserCenterError = 17[(errors.message)="用户中心连接失败"];
+  ResourceError = 18[(errors.message)="资源中心连接失败"];
+
 }
 
 

@@ -44,7 +44,7 @@ func (s *Service) PageNoticeUser(ctx context.Context, in *v1.PageNoticeUserReque
 		return nil, err
 	}
 
-	client, err := service.NewUser(ctx, s.conf.Service.UserCenter)
+	client, err := service.NewUser(ctx)
 	if err != nil {
 		return nil, v1.UserCenterError()
 	}

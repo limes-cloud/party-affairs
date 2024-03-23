@@ -99,7 +99,7 @@ func (u *NoticeUseCase) SendNoticeEmail(ctx kratosx.Context, nid uint32) error {
 	}
 
 	// 获取全部应用用户
-	client, err := service.NewUser(ctx, u.config.Service.UserCenter)
+	client, err := service.NewUser(ctx)
 	if err != nil {
 		return v1.UserCenterError()
 	}

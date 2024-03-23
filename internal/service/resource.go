@@ -63,7 +63,7 @@ func (s *Service) PageResourceContent(ctx context.Context, in *v1.PageResourceCo
 		return nil, v1.TransformError()
 	}
 
-	resource, err := service.NewResource(ctx, s.conf.Service.Resource)
+	resource, err := service.NewResource(ctx)
 	if err == nil {
 		for ind, item := range reply.List {
 			reply.List[ind].Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: item.Url})
@@ -84,7 +84,7 @@ func (s *Service) GetResourceContent(ctx context.Context, in *v1.GetResourceCont
 		return nil, v1.TransformError()
 	}
 
-	resource, err := service.NewResource(ctx, s.conf.Service.Resource)
+	resource, err := service.NewResource(ctx)
 	if err == nil {
 		reply.Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.Url})
 	}

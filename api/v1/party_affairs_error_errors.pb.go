@@ -298,3 +298,19 @@ func UserCenterErrorFormat(format string, args ...any) *errors.Error {
 func UserCenterError() *errors.Error {
 	return errors.New(200, ErrorReason_UserCenterError.String(), "用户中心连接失败")
 }
+
+func IsResourceError(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ResourceError.String() && e.Code == 200
+}
+
+func ResourceErrorFormat(format string, args ...any) *errors.Error {
+	return errors.New(200, ErrorReason_ResourceError.String(), "资源中心连接失败:"+fmt.Sprintf(format, args...))
+}
+
+func ResourceError() *errors.Error {
+	return errors.New(200, ErrorReason_ResourceError.String(), "资源中心连接失败")
+}

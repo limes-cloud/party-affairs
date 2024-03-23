@@ -64,7 +64,7 @@ func (s *Service) PageNewsContent(ctx context.Context, in *v1.PageNewsContentReq
 		return nil, v1.TransformError()
 	}
 
-	resource, err := service.NewResource(ctx, s.conf.Service.Resource)
+	resource, err := service.NewResource(ctx)
 	if err == nil {
 		for ind, item := range reply.List {
 			reply.List[ind].Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: item.Cover})
@@ -86,13 +86,13 @@ func (s *Service) GetNewsContent(ctx context.Context, in *v1.GetNewsContentReque
 	}
 
 	// 转换资源
-	resource, err := service.NewResource(ctx, s.conf.Service.Resource)
+	resource, err := service.NewResource(ctx)
 	if err == nil {
 		reply.Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.Cover})
 	}
 
 	// 获取用户
-	user, err := service.NewUser(ctx, s.conf.Service.UserCenter)
+	user, err := service.NewUser(ctx)
 	if err == nil {
 		for ind, item := range nc.Comments {
 			if item.FromUid != 0 {
@@ -162,7 +162,7 @@ func (s *Service) PageNewsComment(ctx context.Context, in *v1.PageNewsCommentReq
 	}
 
 	// 获取用户
-	user, err := service.NewUser(ctx, s.conf.Service.UserCenter)
+	user, err := service.NewUser(ctx)
 	if err == nil {
 		for ind, item := range list {
 			if item.FromUid != 0 {

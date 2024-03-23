@@ -24,7 +24,7 @@ func (s *Service) AllBanner(ctx context.Context, _ *empty.Empty) (*v1.AllBannerR
 		return nil, v1.TransformError()
 	}
 
-	resource, err := service.NewResource(ctx, s.conf.Service.Resource)
+	resource, err := service.NewResource(ctx)
 	if err == nil {
 		for ind, item := range reply.List {
 			reply.List[ind].Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: item.Src})

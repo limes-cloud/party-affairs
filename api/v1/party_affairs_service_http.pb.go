@@ -134,73 +134,73 @@ type ServiceHTTPServer interface {
 
 func RegisterServiceHTTPServer(s *http.Server, srv ServiceHTTPServer) {
 	r := s.Route("/")
-	r.GET("/party-affairs/admin/v1/notice/users", _Service_PageNoticeUser0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/notice/users", _Service_PageNoticeUser0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/notices", _Service_PageNotice0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/notices", _Service_PageNotice1_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/notices", _Service_PageNotice1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/notice", _Service_GetNotice0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/notice", _Service_GetNotice1_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/notice", _Service_GetNotice1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/notice/read", _Service_ReadNotice0_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/notice", _Service_AddNotice0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/notice", _Service_UpdateNotice0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/notice", _Service_DeleteNotice0_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/notice", _Service_AddNotice0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/notice", _Service_UpdateNotice0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/notice", _Service_DeleteNotice0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/news/classify", _Service_AllNewsClassify0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/news/classify", _Service_AllNewsClassify1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/news/classify", _Service_AddNewsClassify0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/news/classify", _Service_UpdateNewsClassify0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/news/classify", _Service_DeleteNewsClassify0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/news/classify", _Service_AllNewsClassify1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/news/classify", _Service_AddNewsClassify0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/news/classify", _Service_UpdateNewsClassify0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/news/classify", _Service_DeleteNewsClassify0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/news/contents", _Service_PageNewsContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/news/contents", _Service_PageNewsContent1_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/news/contents", _Service_PageNewsContent1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/news/content", _Service_GetNewsContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/news/content", _Service_GetNewsContent1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/news/content", _Service_AddNewsContent0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/news/content", _Service_UpdateNewsContent0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/news/content", _Service_DeleteNewsContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/news/comments", _Service_PageNewsComment0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/news/comment", _Service_DeleteNewsComment0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/news/content", _Service_GetNewsContent1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/news/content", _Service_AddNewsContent0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/news/content", _Service_UpdateNewsContent0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/news/content", _Service_DeleteNewsContent0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/news/comments", _Service_PageNewsComment0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/news/comment", _Service_DeleteNewsComment0_HTTP_Handler(srv))
 	r.POST("/party-affairs/client/v1/news/comment", _Service_AddNewsComment0_HTTP_Handler(srv))
 	r.DELETE("/party-affairs/client/v1/news/comment", _Service_DeleteCurNewsComment0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/resource/classify", _Service_AllResourceClassify0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/resource/classify", _Service_AllResourceClassify1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/resource/classify", _Service_AddResourceClassify0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/resource/classify", _Service_UpdateResourceClassify0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/resource/classify", _Service_DeleteResourceClassify0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/resource/classify", _Service_AllResourceClassify1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/resource/classify", _Service_AddResourceClassify0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/resource/classify", _Service_UpdateResourceClassify0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/resource/classify", _Service_DeleteResourceClassify0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/resource/contents", _Service_PageResourceContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/resource/contents", _Service_PageResourceContent1_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/resource/contents", _Service_PageResourceContent1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/resource/content", _Service_GetResourceContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/resource/content", _Service_GetResourceContent1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/resource/content", _Service_AddResourceContent0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/resource/content", _Service_UpdateResourceContent0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/resource/content", _Service_DeleteResourceContent0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/resource/content", _Service_GetResourceContent1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/resource/content", _Service_AddResourceContent0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/resource/content", _Service_UpdateResourceContent0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/resource/content", _Service_DeleteResourceContent0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/banners", _Service_AllBanner0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/banners", _Service_AllBanner1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/banner", _Service_AddBanner0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/banner", _Service_UpdateBanner0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/banner", _Service_DeleteBanner0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/banners", _Service_AllBanner1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/banner", _Service_AddBanner0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/banner", _Service_UpdateBanner0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/banner", _Service_DeleteBanner0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/tasks", _Service_PageTask0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/tasks", _Service_PageTask1_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/tasks", _Service_PageTask1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/task", _Service_GetTask0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/task", _Service_GetTask1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/task", _Service_AddTask0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/task", _Service_UpdateTask0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/task", _Service_DeleteTask0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/task/values", _Service_PageTaskValue0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/task/value", _Service_GetTaskValue0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/task", _Service_GetTask1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/task", _Service_AddTask0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/task", _Service_UpdateTask0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/task", _Service_DeleteTask0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/task/values", _Service_PageTaskValue0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/task/value", _Service_GetTaskValue0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/task/value", _Service_GetCurTaskValue0_HTTP_Handler(srv))
 	r.POST("/party-affairs/client/v1/task/value", _Service_AddTaskValue0_HTTP_Handler(srv))
 	r.PUT("/party-affairs/client/v1/task/value", _Service_UpdateTaskValue0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/task/value", _Service_DeleteTaskValue0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/task/value", _Service_DeleteTaskValue0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/video/classify", _Service_PageVideoClassify0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/video/classify", _Service_PageVideoClassify1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/video/classify", _Service_AddVideoClassify0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/video/classify", _Service_UpdateVideoClassify0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/video/classify", _Service_DeleteVideoClassify0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/video/classify", _Service_PageVideoClassify1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/video/classify", _Service_AddVideoClassify0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/video/classify", _Service_UpdateVideoClassify0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/video/classify", _Service_DeleteVideoClassify0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/video/contents", _Service_PageVideoContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/video/contents", _Service_PageVideoContent1_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/video/contents", _Service_PageVideoContent1_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/video/content", _Service_GetVideoContent0_HTTP_Handler(srv))
-	r.GET("/party-affairs/admin/v1/video/content", _Service_GetVideoContent1_HTTP_Handler(srv))
-	r.POST("/party-affairs/admin/v1/video/content", _Service_AddVideoContent0_HTTP_Handler(srv))
-	r.PUT("/party-affairs/admin/v1/video/content", _Service_UpdateVideoContent0_HTTP_Handler(srv))
-	r.DELETE("/party-affairs/admin/v1/video/content", _Service_DeleteVideoContent0_HTTP_Handler(srv))
+	r.GET("/party-affairs/v1/video/content", _Service_GetVideoContent1_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/video/content", _Service_AddVideoContent0_HTTP_Handler(srv))
+	r.PUT("/party-affairs/v1/video/content", _Service_UpdateVideoContent0_HTTP_Handler(srv))
+	r.DELETE("/party-affairs/v1/video/content", _Service_DeleteVideoContent0_HTTP_Handler(srv))
 	r.POST("/party-affairs/client/v1/video/process", _Service_UpdateUserVideoProcess0_HTTP_Handler(srv))
 }
 
@@ -1629,7 +1629,7 @@ func NewServiceHTTPClient(client *http.Client) ServiceHTTPClient {
 
 func (c *ServiceHTTPClientImpl) AddBanner(ctx context.Context, in *AddBannerRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/banner"
+	pattern := "/party-affairs/v1/banner"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddBanner))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1642,7 +1642,7 @@ func (c *ServiceHTTPClientImpl) AddBanner(ctx context.Context, in *AddBannerRequ
 
 func (c *ServiceHTTPClientImpl) AddNewsClassify(ctx context.Context, in *AddNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1668,7 +1668,7 @@ func (c *ServiceHTTPClientImpl) AddNewsComment(ctx context.Context, in *AddNewsC
 
 func (c *ServiceHTTPClientImpl) AddNewsContent(ctx context.Context, in *AddNewsContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/v1/news/content"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1681,7 +1681,7 @@ func (c *ServiceHTTPClientImpl) AddNewsContent(ctx context.Context, in *AddNewsC
 
 func (c *ServiceHTTPClientImpl) AddNotice(ctx context.Context, in *AddNoticeRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/notice"
+	pattern := "/party-affairs/v1/notice"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddNotice))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1694,7 +1694,7 @@ func (c *ServiceHTTPClientImpl) AddNotice(ctx context.Context, in *AddNoticeRequ
 
 func (c *ServiceHTTPClientImpl) AddResourceClassify(ctx context.Context, in *AddResourceClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/resource/classify"
+	pattern := "/party-affairs/v1/resource/classify"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddResourceClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1707,7 +1707,7 @@ func (c *ServiceHTTPClientImpl) AddResourceClassify(ctx context.Context, in *Add
 
 func (c *ServiceHTTPClientImpl) AddResourceContent(ctx context.Context, in *AddResourceContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/resource/content"
+	pattern := "/party-affairs/v1/resource/content"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddResourceContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1720,7 +1720,7 @@ func (c *ServiceHTTPClientImpl) AddResourceContent(ctx context.Context, in *AddR
 
 func (c *ServiceHTTPClientImpl) AddTask(ctx context.Context, in *AddTaskRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/task"
+	pattern := "/party-affairs/v1/task"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddTask))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1746,7 +1746,7 @@ func (c *ServiceHTTPClientImpl) AddTaskValue(ctx context.Context, in *AddTaskVal
 
 func (c *ServiceHTTPClientImpl) AddVideoClassify(ctx context.Context, in *AddVideoClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/video/classify"
+	pattern := "/party-affairs/v1/video/classify"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddVideoClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1759,7 +1759,7 @@ func (c *ServiceHTTPClientImpl) AddVideoClassify(ctx context.Context, in *AddVid
 
 func (c *ServiceHTTPClientImpl) AddVideoContent(ctx context.Context, in *AddVideoContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/video/content"
+	pattern := "/party-affairs/v1/video/content"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceAddVideoContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1772,7 +1772,7 @@ func (c *ServiceHTTPClientImpl) AddVideoContent(ctx context.Context, in *AddVide
 
 func (c *ServiceHTTPClientImpl) AllBanner(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*AllBannerReply, error) {
 	var out AllBannerReply
-	pattern := "/party-affairs/admin/v1/banners"
+	pattern := "/party-affairs/v1/banners"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceAllBanner))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1785,7 +1785,7 @@ func (c *ServiceHTTPClientImpl) AllBanner(ctx context.Context, in *emptypb.Empty
 
 func (c *ServiceHTTPClientImpl) AllNewsClassify(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*AllNewsClassifyReply, error) {
 	var out AllNewsClassifyReply
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceAllNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1798,7 +1798,7 @@ func (c *ServiceHTTPClientImpl) AllNewsClassify(ctx context.Context, in *emptypb
 
 func (c *ServiceHTTPClientImpl) AllResourceClassify(ctx context.Context, in *emptypb.Empty, opts ...http.CallOption) (*AllResourceClassifyReply, error) {
 	var out AllResourceClassifyReply
-	pattern := "/party-affairs/admin/v1/resource/classify"
+	pattern := "/party-affairs/v1/resource/classify"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceAllResourceClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1811,7 +1811,7 @@ func (c *ServiceHTTPClientImpl) AllResourceClassify(ctx context.Context, in *emp
 
 func (c *ServiceHTTPClientImpl) DeleteBanner(ctx context.Context, in *DeleteBannerRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/banner"
+	pattern := "/party-affairs/v1/banner"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteBanner))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1837,7 +1837,7 @@ func (c *ServiceHTTPClientImpl) DeleteCurNewsComment(ctx context.Context, in *De
 
 func (c *ServiceHTTPClientImpl) DeleteNewsClassify(ctx context.Context, in *DeleteNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1850,7 +1850,7 @@ func (c *ServiceHTTPClientImpl) DeleteNewsClassify(ctx context.Context, in *Dele
 
 func (c *ServiceHTTPClientImpl) DeleteNewsComment(ctx context.Context, in *DeleteNewsCommentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/comment"
+	pattern := "/party-affairs/v1/news/comment"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteNewsComment))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1863,7 +1863,7 @@ func (c *ServiceHTTPClientImpl) DeleteNewsComment(ctx context.Context, in *Delet
 
 func (c *ServiceHTTPClientImpl) DeleteNewsContent(ctx context.Context, in *DeleteNewsContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/v1/news/content"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1876,7 +1876,7 @@ func (c *ServiceHTTPClientImpl) DeleteNewsContent(ctx context.Context, in *Delet
 
 func (c *ServiceHTTPClientImpl) DeleteNotice(ctx context.Context, in *DeleteNoticeRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/notice"
+	pattern := "/party-affairs/v1/notice"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteNotice))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1889,7 +1889,7 @@ func (c *ServiceHTTPClientImpl) DeleteNotice(ctx context.Context, in *DeleteNoti
 
 func (c *ServiceHTTPClientImpl) DeleteResourceClassify(ctx context.Context, in *DeleteResourceClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/resource/classify"
+	pattern := "/party-affairs/v1/resource/classify"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteResourceClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1902,7 +1902,7 @@ func (c *ServiceHTTPClientImpl) DeleteResourceClassify(ctx context.Context, in *
 
 func (c *ServiceHTTPClientImpl) DeleteResourceContent(ctx context.Context, in *DeleteResourceContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/resource/content"
+	pattern := "/party-affairs/v1/resource/content"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteResourceContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1915,7 +1915,7 @@ func (c *ServiceHTTPClientImpl) DeleteResourceContent(ctx context.Context, in *D
 
 func (c *ServiceHTTPClientImpl) DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/task"
+	pattern := "/party-affairs/v1/task"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteTask))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1928,7 +1928,7 @@ func (c *ServiceHTTPClientImpl) DeleteTask(ctx context.Context, in *DeleteTaskRe
 
 func (c *ServiceHTTPClientImpl) DeleteTaskValue(ctx context.Context, in *DeleteTaskValueRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/task/value"
+	pattern := "/party-affairs/v1/task/value"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteTaskValue))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1941,7 +1941,7 @@ func (c *ServiceHTTPClientImpl) DeleteTaskValue(ctx context.Context, in *DeleteT
 
 func (c *ServiceHTTPClientImpl) DeleteVideoClassify(ctx context.Context, in *DeleteVideoClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/video/classify"
+	pattern := "/party-affairs/v1/video/classify"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteVideoClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1954,7 +1954,7 @@ func (c *ServiceHTTPClientImpl) DeleteVideoClassify(ctx context.Context, in *Del
 
 func (c *ServiceHTTPClientImpl) DeleteVideoContent(ctx context.Context, in *DeleteVideoContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/video/content"
+	pattern := "/party-affairs/v1/video/content"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceDeleteVideoContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1980,7 +1980,7 @@ func (c *ServiceHTTPClientImpl) GetCurTaskValue(ctx context.Context, in *GetCurT
 
 func (c *ServiceHTTPClientImpl) GetNewsContent(ctx context.Context, in *GetNewsContentRequest, opts ...http.CallOption) (*NewsContent, error) {
 	var out NewsContent
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/v1/news/content"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceGetNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1993,7 +1993,7 @@ func (c *ServiceHTTPClientImpl) GetNewsContent(ctx context.Context, in *GetNewsC
 
 func (c *ServiceHTTPClientImpl) GetNotice(ctx context.Context, in *GetNoticeRequest, opts ...http.CallOption) (*Notice, error) {
 	var out Notice
-	pattern := "/party-affairs/admin/v1/notice"
+	pattern := "/party-affairs/v1/notice"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceGetNotice))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2006,7 +2006,7 @@ func (c *ServiceHTTPClientImpl) GetNotice(ctx context.Context, in *GetNoticeRequ
 
 func (c *ServiceHTTPClientImpl) GetResourceContent(ctx context.Context, in *GetResourceContentRequest, opts ...http.CallOption) (*ResourceContent, error) {
 	var out ResourceContent
-	pattern := "/party-affairs/admin/v1/resource/content"
+	pattern := "/party-affairs/v1/resource/content"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceGetResourceContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2019,7 +2019,7 @@ func (c *ServiceHTTPClientImpl) GetResourceContent(ctx context.Context, in *GetR
 
 func (c *ServiceHTTPClientImpl) GetTask(ctx context.Context, in *GetTaskRequest, opts ...http.CallOption) (*Task, error) {
 	var out Task
-	pattern := "/party-affairs/admin/v1/task"
+	pattern := "/party-affairs/v1/task"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceGetTask))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2032,7 +2032,7 @@ func (c *ServiceHTTPClientImpl) GetTask(ctx context.Context, in *GetTaskRequest,
 
 func (c *ServiceHTTPClientImpl) GetTaskValue(ctx context.Context, in *GetTaskValueRequest, opts ...http.CallOption) (*TaskValue, error) {
 	var out TaskValue
-	pattern := "/party-affairs/admin/v1/task/value"
+	pattern := "/party-affairs/v1/task/value"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceGetTaskValue))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2045,7 +2045,7 @@ func (c *ServiceHTTPClientImpl) GetTaskValue(ctx context.Context, in *GetTaskVal
 
 func (c *ServiceHTTPClientImpl) GetVideoContent(ctx context.Context, in *GetVideoContentRequest, opts ...http.CallOption) (*VideoContent, error) {
 	var out VideoContent
-	pattern := "/party-affairs/admin/v1/video/content"
+	pattern := "/party-affairs/v1/video/content"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServiceGetVideoContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2058,7 +2058,7 @@ func (c *ServiceHTTPClientImpl) GetVideoContent(ctx context.Context, in *GetVide
 
 func (c *ServiceHTTPClientImpl) PageNewsComment(ctx context.Context, in *PageNewsCommentRequest, opts ...http.CallOption) (*PageNewsCommentReply, error) {
 	var out PageNewsCommentReply
-	pattern := "/party-affairs/admin/v1/news/comments"
+	pattern := "/party-affairs/v1/news/comments"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageNewsComment))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2071,7 +2071,7 @@ func (c *ServiceHTTPClientImpl) PageNewsComment(ctx context.Context, in *PageNew
 
 func (c *ServiceHTTPClientImpl) PageNewsContent(ctx context.Context, in *PageNewsContentRequest, opts ...http.CallOption) (*PageNewsContentReply, error) {
 	var out PageNewsContentReply
-	pattern := "/party-affairs/admin/v1/news/contents"
+	pattern := "/party-affairs/v1/news/contents"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2084,7 +2084,7 @@ func (c *ServiceHTTPClientImpl) PageNewsContent(ctx context.Context, in *PageNew
 
 func (c *ServiceHTTPClientImpl) PageNotice(ctx context.Context, in *PageNoticeRequest, opts ...http.CallOption) (*PageNoticeReply, error) {
 	var out PageNoticeReply
-	pattern := "/party-affairs/admin/v1/notices"
+	pattern := "/party-affairs/v1/notices"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageNotice))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2097,7 +2097,7 @@ func (c *ServiceHTTPClientImpl) PageNotice(ctx context.Context, in *PageNoticeRe
 
 func (c *ServiceHTTPClientImpl) PageNoticeUser(ctx context.Context, in *PageNoticeUserRequest, opts ...http.CallOption) (*PageNoticeUserReply, error) {
 	var out PageNoticeUserReply
-	pattern := "/party-affairs/admin/v1/notice/users"
+	pattern := "/party-affairs/v1/notice/users"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageNoticeUser))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2110,7 +2110,7 @@ func (c *ServiceHTTPClientImpl) PageNoticeUser(ctx context.Context, in *PageNoti
 
 func (c *ServiceHTTPClientImpl) PageResourceContent(ctx context.Context, in *PageResourceContentRequest, opts ...http.CallOption) (*PageResourceContentReply, error) {
 	var out PageResourceContentReply
-	pattern := "/party-affairs/admin/v1/resource/contents"
+	pattern := "/party-affairs/v1/resource/contents"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageResourceContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2123,7 +2123,7 @@ func (c *ServiceHTTPClientImpl) PageResourceContent(ctx context.Context, in *Pag
 
 func (c *ServiceHTTPClientImpl) PageTask(ctx context.Context, in *PageTaskRequest, opts ...http.CallOption) (*PageTaskReply, error) {
 	var out PageTaskReply
-	pattern := "/party-affairs/admin/v1/tasks"
+	pattern := "/party-affairs/v1/tasks"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageTask))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2136,7 +2136,7 @@ func (c *ServiceHTTPClientImpl) PageTask(ctx context.Context, in *PageTaskReques
 
 func (c *ServiceHTTPClientImpl) PageTaskValue(ctx context.Context, in *PageTaskValueRequest, opts ...http.CallOption) (*PageTaskValueReply, error) {
 	var out PageTaskValueReply
-	pattern := "/party-affairs/admin/v1/task/values"
+	pattern := "/party-affairs/v1/task/values"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageTaskValue))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2149,7 +2149,7 @@ func (c *ServiceHTTPClientImpl) PageTaskValue(ctx context.Context, in *PageTaskV
 
 func (c *ServiceHTTPClientImpl) PageVideoClassify(ctx context.Context, in *PageVideoClassifyRequest, opts ...http.CallOption) (*PageVideoClassifyReply, error) {
 	var out PageVideoClassifyReply
-	pattern := "/party-affairs/admin/v1/video/classify"
+	pattern := "/party-affairs/v1/video/classify"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageVideoClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2162,7 +2162,7 @@ func (c *ServiceHTTPClientImpl) PageVideoClassify(ctx context.Context, in *PageV
 
 func (c *ServiceHTTPClientImpl) PageVideoContent(ctx context.Context, in *PageVideoContentRequest, opts ...http.CallOption) (*PageVideoContentReply, error) {
 	var out PageVideoContentReply
-	pattern := "/party-affairs/admin/v1/video/contents"
+	pattern := "/party-affairs/v1/video/contents"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationServicePageVideoContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2188,7 +2188,7 @@ func (c *ServiceHTTPClientImpl) ReadNotice(ctx context.Context, in *ReadNoticeRe
 
 func (c *ServiceHTTPClientImpl) UpdateBanner(ctx context.Context, in *UpdateBannerRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/banner"
+	pattern := "/party-affairs/v1/banner"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateBanner))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2201,7 +2201,7 @@ func (c *ServiceHTTPClientImpl) UpdateBanner(ctx context.Context, in *UpdateBann
 
 func (c *ServiceHTTPClientImpl) UpdateNewsClassify(ctx context.Context, in *UpdateNewsClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/classify"
+	pattern := "/party-affairs/v1/news/classify"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateNewsClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2214,7 +2214,7 @@ func (c *ServiceHTTPClientImpl) UpdateNewsClassify(ctx context.Context, in *Upda
 
 func (c *ServiceHTTPClientImpl) UpdateNewsContent(ctx context.Context, in *UpdateNewsContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/news/content"
+	pattern := "/party-affairs/v1/news/content"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateNewsContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2227,7 +2227,7 @@ func (c *ServiceHTTPClientImpl) UpdateNewsContent(ctx context.Context, in *Updat
 
 func (c *ServiceHTTPClientImpl) UpdateNotice(ctx context.Context, in *UpdateNoticeRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/notice"
+	pattern := "/party-affairs/v1/notice"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateNotice))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2240,7 +2240,7 @@ func (c *ServiceHTTPClientImpl) UpdateNotice(ctx context.Context, in *UpdateNoti
 
 func (c *ServiceHTTPClientImpl) UpdateResourceClassify(ctx context.Context, in *UpdateResourceClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/resource/classify"
+	pattern := "/party-affairs/v1/resource/classify"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateResourceClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2253,7 +2253,7 @@ func (c *ServiceHTTPClientImpl) UpdateResourceClassify(ctx context.Context, in *
 
 func (c *ServiceHTTPClientImpl) UpdateResourceContent(ctx context.Context, in *UpdateResourceContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/resource/content"
+	pattern := "/party-affairs/v1/resource/content"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateResourceContent))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2266,7 +2266,7 @@ func (c *ServiceHTTPClientImpl) UpdateResourceContent(ctx context.Context, in *U
 
 func (c *ServiceHTTPClientImpl) UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/task"
+	pattern := "/party-affairs/v1/task"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateTask))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2305,7 +2305,7 @@ func (c *ServiceHTTPClientImpl) UpdateUserVideoProcess(ctx context.Context, in *
 
 func (c *ServiceHTTPClientImpl) UpdateVideoClassify(ctx context.Context, in *UpdateVideoClassifyRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/video/classify"
+	pattern := "/party-affairs/v1/video/classify"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateVideoClassify))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -2318,7 +2318,7 @@ func (c *ServiceHTTPClientImpl) UpdateVideoClassify(ctx context.Context, in *Upd
 
 func (c *ServiceHTTPClientImpl) UpdateVideoContent(ctx context.Context, in *UpdateVideoContentRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
 	var out emptypb.Empty
-	pattern := "/party-affairs/admin/v1/video/content"
+	pattern := "/party-affairs/v1/video/content"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationServiceUpdateVideoContent))
 	opts = append(opts, http.PathTemplate(pattern))

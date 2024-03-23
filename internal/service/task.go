@@ -79,7 +79,7 @@ func (s *Service) PageTaskValue(ctx context.Context, in *v1.PageTaskValueRequest
 		return nil, v1.TransformError()
 	}
 
-	user, err := service.NewUser(ctx, s.conf.Service.UserCenter)
+	user, err := service.NewUser(ctx)
 	if err == nil {
 		for ind, item := range reply.List {
 			reply.List[ind].User, _ = user.GetBaseUser(ctx, &userV1.GetBaseUserRequest{Id: item.UserId})
