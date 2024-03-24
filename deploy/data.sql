@@ -36,7 +36,7 @@ CREATE TABLE `banner` (
   PRIMARY KEY (`id`),
   KEY `idx_banner_created_at` (`created_at`),
   KEY `idx_banner_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='轮播';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4  COMMENT='轮播';
 
 -- ----------------------------
 -- Records of banner
@@ -66,7 +66,7 @@ CREATE TABLE `news` (
   KEY `idx_news_updated_at` (`updated_at`),
   KEY `fk_news_news_classify` (`classify_id`),
   CONSTRAINT `fk_news_news_classify` FOREIGN KEY (`classify_id`) REFERENCES `news_classify` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='新闻';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COMMENT='新闻';
 
 -- ----------------------------
 -- Records of news
@@ -87,7 +87,7 @@ CREATE TABLE `news_classify` (
   PRIMARY KEY (`id`),
   KEY `idx_news_classify_created_at` (`created_at`),
   KEY `idx_news_classify_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='新闻分类';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='新闻分类';
 
 -- ----------------------------
 -- Records of news_classify
@@ -112,7 +112,7 @@ CREATE TABLE `news_comment` (
   KEY `idx_news_comment_created_at` (`created_at`),
   KEY `fk_news_content_comments` (`content_id`),
   CONSTRAINT `fk_news_content_comments` FOREIGN KEY (`content_id`) REFERENCES `news_content` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='新闻评论';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4  COMMENT='新闻评论';
 
 -- ----------------------------
 -- Records of news_comment
@@ -146,7 +146,7 @@ CREATE TABLE `news_content` (
   KEY `idx_news_content_updated_at` (`updated_at`),
   KEY `fk_news_content_classify` (`classify_id`),
   CONSTRAINT `fk_news_content_classify` FOREIGN KEY (`classify_id`) REFERENCES `news_classify` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='新闻内容';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='新闻内容';
 
 -- ----------------------------
 -- Records of news_content
@@ -171,7 +171,7 @@ CREATE TABLE `notice` (
   PRIMARY KEY (`id`),
   KEY `idx_notice_created_at` (`created_at`),
   KEY `idx_notice_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='通知';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='通知';
 
 -- ----------------------------
 -- Records of notice
@@ -194,7 +194,7 @@ CREATE TABLE `notice_user` (
   KEY `idx_notice_user_created_at` (`created_at`),
   KEY `fk_notice_notice_user` (`notice_id`),
   CONSTRAINT `fk_notice_notice_user` FOREIGN KEY (`notice_id`) REFERENCES `notice` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='通知用户';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4  COMMENT='通知用户';
 
 -- ----------------------------
 -- Records of notice_user
@@ -221,7 +221,7 @@ CREATE TABLE `resource` (
   KEY `idx_resource_updated_at` (`updated_at`),
   KEY `fk_resource_resource_classify` (`classify_id`),
   CONSTRAINT `fk_resource_resource_classify` FOREIGN KEY (`classify_id`) REFERENCES `resource_classify` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='资料';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COMMENT='资料';
 
 -- ----------------------------
 -- Records of resource
@@ -242,7 +242,7 @@ CREATE TABLE `resource_classify` (
   PRIMARY KEY (`id`),
   KEY `idx_resource_classify_created_at` (`created_at`),
   KEY `idx_resource_classify_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='资料分类';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='资料分类';
 
 -- ----------------------------
 -- Records of resource_classify
@@ -269,7 +269,7 @@ CREATE TABLE `resource_content` (
   KEY `idx_resource_content_updated_at` (`updated_at`),
   KEY `fk_resource_content_resource_classify` (`classify_id`),
   CONSTRAINT `fk_resource_content_resource_classify` FOREIGN KEY (`classify_id`) REFERENCES `resource_classify` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='资料';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='资料';
 
 -- ----------------------------
 -- Records of resource_content
@@ -295,7 +295,7 @@ CREATE TABLE `task` (
   PRIMARY KEY (`id`),
   KEY `idx_task_created_at` (`created_at`),
   KEY `idx_task_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='任务';
 
 -- ----------------------------
 -- Records of task
@@ -320,7 +320,7 @@ CREATE TABLE `task_value` (
   KEY `idx_task_value_created_at` (`created_at`),
   KEY `idx_task_value_updated_at` (`updated_at`),
   CONSTRAINT `fk_task_task_value` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务值';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4  COMMENT='任务值';
 
 -- ----------------------------
 -- Records of task_value
@@ -346,7 +346,7 @@ CREATE TABLE `user_video_process` (
   KEY `idx_user_video_process_created_at` (`created_at`),
   KEY `idx_user_video_process_updated_at` (`updated_at`),
   CONSTRAINT `fk_video_content_process` FOREIGN KEY (`video_id`) REFERENCES `video_content` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户视频进度';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4  COMMENT='用户视频进度';
 
 -- ----------------------------
 -- Records of user_video_process
@@ -376,7 +376,7 @@ CREATE TABLE `video_classify` (
   PRIMARY KEY (`id`),
   KEY `idx_video_classify_created_at` (`created_at`),
   KEY `idx_video_classify_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='视频分类';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4  COMMENT='视频分类';
 
 -- ----------------------------
 -- Records of video_classify
@@ -405,7 +405,7 @@ CREATE TABLE `video_content` (
   KEY `fk_video_content_classify` (`classify_id`),
   CONSTRAINT `fk_video_content_classify` FOREIGN KEY (`classify_id`) REFERENCES `video_classify` (`id`),
   CONSTRAINT `fk_video_content_video_classify` FOREIGN KEY (`classify_id`) REFERENCES `video_classify` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='视频内容';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4  COMMENT='视频内容';
 
 -- ----------------------------
 -- Records of video_content
