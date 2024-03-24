@@ -13,7 +13,7 @@ import (
 	"party-affairs/internal/biz"
 	"party-affairs/internal/biz/types"
 	"party-affairs/internal/consts"
-	"party-affairs/pkg/service"
+	"party-affairs/internal/pkg/service"
 )
 
 func (s *Service) PageNotice(ctx context.Context, in *v1.PageNoticeRequest) (*v1.PageNoticeReply, error) {

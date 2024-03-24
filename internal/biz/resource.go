@@ -5,8 +5,8 @@ import (
 	ktypes "github.com/limes-cloud/kratosx/types"
 
 	v1 "party-affairs/api/v1"
-	"party-affairs/config"
 	"party-affairs/internal/biz/types"
+	"party-affairs/internal/config"
 )
 
 type ResourceClassify struct {

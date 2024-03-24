@@ -11,10 +11,10 @@ import (
 	"google.golang.org/protobuf/proto"
 
 	v1 "party-affairs/api/v1"
-	"party-affairs/config"
 	"party-affairs/internal/biz/types"
+	"party-affairs/internal/config"
 	"party-affairs/internal/consts"
-	"party-affairs/pkg/service"
+	"party-affairs/internal/pkg/service"
 )
 
 type Notice struct {

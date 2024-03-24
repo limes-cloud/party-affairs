@@ -10,7 +10,7 @@ import (
 
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
-	"party-affairs/pkg/service"
+	"party-affairs/internal/pkg/service"
 )
 
 func (s *Service) AllBanner(ctx context.Context, _ *empty.Empty) (*v1.AllBannerReply, error) {

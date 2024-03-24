@@ -5,7 +5,7 @@ import (
 	ktypes "github.com/limes-cloud/kratosx/types"
 
 	v1 "party-affairs/api/v1"
-	"party-affairs/config"
+	"party-affairs/internal/config"
 )
 
 type Banner struct {

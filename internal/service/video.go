@@ -11,7 +11,7 @@ import (
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
 	"party-affairs/internal/biz/types"
-	"party-affairs/pkg/service"
+	"party-affairs/internal/pkg/service"
 )
 
 func (s *Service) PageVideoClassify(ctx context.Context, in *v1.PageVideoClassifyRequest) (*v1.PageVideoClassifyReply, error) {

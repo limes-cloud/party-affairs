@@ -6,8 +6,8 @@ import (
 	"github.com/limes-cloud/user-center/api/auth"
 
 	v1 "party-affairs/api/v1"
-	"party-affairs/config"
 	"party-affairs/internal/biz/types"
+	"party-affairs/internal/config"
 )
 
 type NewsClassify struct {

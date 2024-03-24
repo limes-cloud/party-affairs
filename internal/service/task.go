@@ -12,7 +12,7 @@ import (
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
 	"party-affairs/internal/biz/types"
-	"party-affairs/pkg/service"
+	"party-affairs/internal/pkg/service"
 )
 
 func (s *Service) PageTask(ctx context.Context, in *v1.PageTaskRequest) (*v1.PageTaskReply, error) {

@@ -2,8 +2,8 @@ package service
 
 import (
 	v1 "party-affairs/api/v1"
-	"party-affairs/config"
 	"party-affairs/internal/biz"
+	"party-affairs/internal/config"
 	"party-affairs/internal/data"
 )
 
