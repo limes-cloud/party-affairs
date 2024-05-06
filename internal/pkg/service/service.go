@@ -4,10 +4,11 @@ import (
 	"context"
 
 	"github.com/limes-cloud/kratosx"
-	resource "github.com/limes-cloud/resource/api/v1"
+	export "github.com/limes-cloud/resource/api/export/v1"
+	file "github.com/limes-cloud/resource/api/file/v1"
 	user "github.com/limes-cloud/user-center/api/user/v1"
 
-	v1 "party-affairs/api/v1"
+	"party-affairs/api/errors"
 )
 
 const (
@@ -15,18 +16,26 @@ const (
 	UserCenter = "UserCenter"
 )
 
-func NewResource(ctx context.Context) (resource.ServiceClient, error) {
+func NewResourceExport(ctx context.Context) (export.ServiceClient, error) {
 	conn, err := kratosx.MustContext(ctx).GrpcConn(Resource)
 	if err != nil {
-		return nil, v1.ResourceError()
+		return nil, errors.Resource()
 	}
-	return resource.NewServiceClient(conn), nil
+	return export.NewServiceClient(conn), nil
+}
+
+func NewResourceFile(ctx context.Context) (file.ServiceClient, error) {
+	conn, err := kratosx.MustContext(ctx).GrpcConn(Resource)
+	if err != nil {
+		return nil, errors.Resource()
+	}
+	return file.NewServiceClient(conn), nil
 }
 
 func NewUser(ctx context.Context) (user.ServiceClient, error) {
 	conn, err := kratosx.MustContext(ctx).GrpcConn(UserCenter)
 	if err != nil {
-		return nil, v1.ResourceError()
+		return nil, errors.Resource()
 	}
 	return user.NewServiceClient(conn), nil
 }

@@ -5,7 +5,7 @@ import (
 	ktypes "github.com/limes-cloud/kratosx/types"
 	"github.com/limes-cloud/user-center/api/auth"
 
-	v1 "party-affairs/api/v1"
+	"party-affairs/api/errors"
 	"party-affairs/internal/biz/types"
 	"party-affairs/internal/config"
 )
@@ -69,7 +69,7 @@ func NewNewsUseCase(config *config.Config, repo NewsRepo) *NewsUseCase {
 func (u *NewsUseCase) AllClassify(ctx kratosx.Context) ([]*NewsClassify, error) {
 	nc, err := u.repo.AllClassify(ctx)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return nc, nil
 }
@@ -78,7 +78,7 @@ func (u *NewsUseCase) AllClassify(ctx kratosx.Context) ([]*NewsClassify, error) 
 func (u *NewsUseCase) AddClassify(ctx kratosx.Context, nc *NewsClassify) (uint32, error) {
 	id, err := u.repo.AddClassify(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -86,7 +86,7 @@ func (u *NewsUseCase) AddClassify(ctx kratosx.Context, nc *NewsClassify) (uint32
 // UpdateClassify 更新新闻分类信息
 func (u *NewsUseCase) UpdateClassify(ctx kratosx.Context, nc *NewsClassify) error {
 	if err := u.repo.UpdateClassify(ctx, nc); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -94,7 +94,7 @@ func (u *NewsUseCase) UpdateClassify(ctx kratosx.Context, nc *NewsClassify) erro
 // DeleteClassify 删除新闻分类信息
 func (u *NewsUseCase) DeleteClassify(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteClassify(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -103,11 +103,11 @@ func (u *NewsUseCase) DeleteClassify(ctx kratosx.Context, id uint32) error {
 func (u *NewsUseCase) GetContent(ctx kratosx.Context, id uint32) (*NewsContent, error) {
 	nc, err := u.repo.GetContent(ctx, id)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 
 	if err = u.repo.AddContentReadCount(ctx, nc.ID); err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return nc, nil
 }
@@ -116,7 +116,7 @@ func (u *NewsUseCase) GetContent(ctx kratosx.Context, id uint32) (*NewsContent, 
 func (u *NewsUseCase) PageContent(ctx kratosx.Context, req *types.PageNewsContentRequest) ([]*NewsContent, uint32, error) {
 	nc, total, err := u.repo.PageContent(ctx, req)
 	if err != nil {
-		return nil, 0, v1.DatabaseError()
+		return nil, 0, errors.Database()
 	}
 	return nc, total, nil
 }
@@ -125,7 +125,7 @@ func (u *NewsUseCase) PageContent(ctx kratosx.Context, req *types.PageNewsConten
 func (u *NewsUseCase) AddContent(ctx kratosx.Context, nc *NewsContent) (uint32, error) {
 	id, err := u.repo.AddContent(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -133,7 +133,7 @@ func (u *NewsUseCase) AddContent(ctx kratosx.Context, nc *NewsContent) (uint32, 
 // UpdateContent 更新新闻
 func (u *NewsUseCase) UpdateContent(ctx kratosx.Context, nc *NewsContent) error {
 	if err := u.repo.UpdateContent(ctx, nc); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -141,7 +141,7 @@ func (u *NewsUseCase) UpdateContent(ctx kratosx.Context, nc *NewsContent) error 
 // DeleteContent 删除新闻
 func (u *NewsUseCase) DeleteContent(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteContent(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -150,7 +150,7 @@ func (u *NewsUseCase) DeleteContent(ctx kratosx.Context, id uint32) error {
 func (u *NewsUseCase) PageComment(ctx kratosx.Context, req *types.PageNewsCommentRequest) ([]*NewsComment, uint32, error) {
 	list, total, err := u.repo.PageComment(ctx, req)
 	if err != nil {
-		return nil, total, v1.DatabaseErrorFormat(err.Error())
+		return nil, total, errors.DatabaseFormat(err.Error())
 	}
 	return list, total, nil
 }
@@ -159,12 +159,12 @@ func (u *NewsUseCase) PageComment(ctx kratosx.Context, req *types.PageNewsCommen
 func (u *NewsUseCase) AddComment(ctx kratosx.Context, nc *NewsComment) (uint32, error) {
 	md, err := auth.Get(ctx)
 	if err != nil {
-		return 0, v1.AuthInfoError()
+		return 0, errors.AuthInfo()
 	}
 	nc.FromUid = md.UserID
 	id, err := u.repo.AddComment(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -172,7 +172,7 @@ func (u *NewsUseCase) AddComment(ctx kratosx.Context, nc *NewsComment) (uint32, 
 // DeleteComment 删除评论
 func (u *NewsUseCase) DeleteComment(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteComment(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -181,20 +181,20 @@ func (u *NewsUseCase) DeleteComment(ctx kratosx.Context, id uint32) error {
 func (u *NewsUseCase) DeleteCurComment(ctx kratosx.Context, id uint32) error {
 	ua, err := auth.Get(ctx)
 	if err != nil {
-		return v1.AuthInfoError()
+		return errors.AuthInfo()
 	}
 
 	comment, err := u.repo.GetComment(ctx, id)
 	if err != nil {
-		return v1.DatabaseError()
+		return errors.Database()
 	}
 
 	if ua.UserID != comment.FromUid {
-		return v1.DatabaseError()
+		return errors.Database()
 	}
 
 	if err := u.repo.DeleteComment(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }

@@ -3,8 +3,8 @@ package biz
 import (
 	"github.com/limes-cloud/kratosx"
 	ktypes "github.com/limes-cloud/kratosx/types"
+	"github.com/limes-cloud/manager/api/errors"
 
-	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz/types"
 	"party-affairs/internal/config"
 )
@@ -50,7 +50,7 @@ func NewResourceUseCase(config *config.Config, repo ResourceRepo) *ResourceUseCa
 func (u *ResourceUseCase) AllClassify(ctx kratosx.Context) ([]*ResourceClassify, error) {
 	nc, err := u.repo.AllClassify(ctx)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return nc, nil
 }
@@ -59,7 +59,7 @@ func (u *ResourceUseCase) AllClassify(ctx kratosx.Context) ([]*ResourceClassify,
 func (u *ResourceUseCase) AddClassify(ctx kratosx.Context, nc *ResourceClassify) (uint32, error) {
 	id, err := u.repo.AddClassify(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -67,7 +67,7 @@ func (u *ResourceUseCase) AddClassify(ctx kratosx.Context, nc *ResourceClassify)
 // UpdateClassify 更新资源分类信息
 func (u *ResourceUseCase) UpdateClassify(ctx kratosx.Context, nc *ResourceClassify) error {
 	if err := u.repo.UpdateClassify(ctx, nc); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -75,7 +75,7 @@ func (u *ResourceUseCase) UpdateClassify(ctx kratosx.Context, nc *ResourceClassi
 // DeleteClassify 删除资源分类信息
 func (u *ResourceUseCase) DeleteClassify(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteClassify(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -84,7 +84,7 @@ func (u *ResourceUseCase) DeleteClassify(ctx kratosx.Context, id uint32) error {
 func (u *ResourceUseCase) GetContent(ctx kratosx.Context, id uint32) (*ResourceContent, error) {
 	nc, err := u.repo.GetContent(ctx, id)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return nc, nil
 }
@@ -93,7 +93,7 @@ func (u *ResourceUseCase) GetContent(ctx kratosx.Context, id uint32) (*ResourceC
 func (u *ResourceUseCase) PageContent(ctx kratosx.Context, req *types.PageResourceContentRequest) ([]*ResourceContent, uint32, error) {
 	nc, total, err := u.repo.PageContent(ctx, req)
 	if err != nil {
-		return nil, 0, v1.DatabaseError()
+		return nil, 0, errors.Database()
 	}
 	return nc, total, nil
 }
@@ -102,7 +102,7 @@ func (u *ResourceUseCase) PageContent(ctx kratosx.Context, req *types.PageResour
 func (u *ResourceUseCase) AddContent(ctx kratosx.Context, nc *ResourceContent) (uint32, error) {
 	id, err := u.repo.AddContent(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -110,7 +110,7 @@ func (u *ResourceUseCase) AddContent(ctx kratosx.Context, nc *ResourceContent) (
 // UpdateContent 更新资源
 func (u *ResourceUseCase) UpdateContent(ctx kratosx.Context, nc *ResourceContent) error {
 	if err := u.repo.UpdateContent(ctx, nc); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -118,7 +118,7 @@ func (u *ResourceUseCase) UpdateContent(ctx kratosx.Context, nc *ResourceContent
 // DeleteContent 删除资源
 func (u *ResourceUseCase) DeleteContent(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteContent(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }

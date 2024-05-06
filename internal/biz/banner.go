@@ -4,7 +4,7 @@ import (
 	"github.com/limes-cloud/kratosx"
 	ktypes "github.com/limes-cloud/kratosx/types"
 
-	v1 "party-affairs/api/v1"
+	"party-affairs/api/errors"
 	"party-affairs/internal/config"
 )
 
@@ -36,7 +36,7 @@ func NewBannerUseCase(config *config.Config, repo BannerRepo) *BannerUseCase {
 func (u *BannerUseCase) All(ctx kratosx.Context) ([]*Banner, error) {
 	app, err := u.repo.All(ctx)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return app, nil
 }
@@ -45,7 +45,7 @@ func (u *BannerUseCase) All(ctx kratosx.Context) ([]*Banner, error) {
 func (u *BannerUseCase) Add(ctx kratosx.Context, app *Banner) (uint32, error) {
 	id, err := u.repo.Create(ctx, app)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -53,7 +53,7 @@ func (u *BannerUseCase) Add(ctx kratosx.Context, app *Banner) (uint32, error) {
 // Update 更新轮播图信息
 func (u *BannerUseCase) Update(ctx kratosx.Context, app *Banner) error {
 	if err := u.repo.Update(ctx, app); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -61,7 +61,7 @@ func (u *BannerUseCase) Update(ctx kratosx.Context, app *Banner) error {
 // Delete 删除轮播图信息
 func (u *BannerUseCase) Delete(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.Delete(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }

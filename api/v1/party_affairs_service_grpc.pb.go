@@ -60,6 +60,7 @@ const (
 	Service_DeleteTask_FullMethodName             = "/admin.Service/DeleteTask"
 	Service_PageTaskValue_FullMethodName          = "/admin.Service/PageTaskValue"
 	Service_GetTaskValue_FullMethodName           = "/admin.Service/GetTaskValue"
+	Service_ExportTaskValue_FullMethodName        = "/admin.Service/ExportTaskValue"
 	Service_GetCurTaskValue_FullMethodName        = "/admin.Service/GetCurTaskValue"
 	Service_AddTaskValue_FullMethodName           = "/admin.Service/AddTaskValue"
 	Service_UpdateTaskValue_FullMethodName        = "/admin.Service/UpdateTaskValue"
@@ -120,6 +121,7 @@ type ServiceClient interface {
 	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	PageTaskValue(ctx context.Context, in *PageTaskValueRequest, opts ...grpc.CallOption) (*PageTaskValueReply, error)
 	GetTaskValue(ctx context.Context, in *GetTaskValueRequest, opts ...grpc.CallOption) (*TaskValue, error)
+	ExportTaskValue(ctx context.Context, in *ExportTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetCurTaskValue(ctx context.Context, in *GetCurTaskValueRequest, opts ...grpc.CallOption) (*TaskValue, error)
 	AddTaskValue(ctx context.Context, in *AddTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateTaskValue(ctx context.Context, in *UpdateTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -504,6 +506,15 @@ func (c *serviceClient) GetTaskValue(ctx context.Context, in *GetTaskValueReques
 	return out, nil
 }
 
+func (c *serviceClient) ExportTaskValue(ctx context.Context, in *ExportTaskValueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Service_ExportTaskValue_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *serviceClient) GetCurTaskValue(ctx context.Context, in *GetCurTaskValueRequest, opts ...grpc.CallOption) (*TaskValue, error) {
 	out := new(TaskValue)
 	err := c.cc.Invoke(ctx, Service_GetCurTaskValue_FullMethodName, in, out, opts...)
@@ -674,6 +685,7 @@ type ServiceServer interface {
 	DeleteTask(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error)
 	PageTaskValue(context.Context, *PageTaskValueRequest) (*PageTaskValueReply, error)
 	GetTaskValue(context.Context, *GetTaskValueRequest) (*TaskValue, error)
+	ExportTaskValue(context.Context, *ExportTaskValueRequest) (*emptypb.Empty, error)
 	GetCurTaskValue(context.Context, *GetCurTaskValueRequest) (*TaskValue, error)
 	AddTaskValue(context.Context, *AddTaskValueRequest) (*emptypb.Empty, error)
 	UpdateTaskValue(context.Context, *UpdateTaskValueRequest) (*emptypb.Empty, error)
@@ -814,6 +826,9 @@ func (UnimplementedServiceServer) PageTaskValue(context.Context, *PageTaskValueR
 }
 func (UnimplementedServiceServer) GetTaskValue(context.Context, *GetTaskValueRequest) (*TaskValue, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaskValue not implemented")
+}
+func (UnimplementedServiceServer) ExportTaskValue(context.Context, *ExportTaskValueRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportTaskValue not implemented")
 }
 func (UnimplementedServiceServer) GetCurTaskValue(context.Context, *GetCurTaskValueRequest) (*TaskValue, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurTaskValue not implemented")
@@ -1590,6 +1605,24 @@ func _Service_GetTaskValue_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Service_ExportTaskValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportTaskValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).ExportTaskValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Service_ExportTaskValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).ExportTaskValue(ctx, req.(*ExportTaskValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Service_GetCurTaskValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCurTaskValueRequest)
 	if err := dec(in); err != nil {
@@ -2008,6 +2041,10 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTaskValue",
 			Handler:    _Service_GetTaskValue_Handler,
+		},
+		{
+			MethodName: "ExportTaskValue",
+			Handler:    _Service_ExportTaskValue_Handler,
 		},
 		{
 			MethodName: "GetCurTaskValue",

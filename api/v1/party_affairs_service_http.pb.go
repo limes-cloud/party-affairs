@@ -46,6 +46,7 @@ const OperationServiceDeleteTask = "/admin.Service/DeleteTask"
 const OperationServiceDeleteTaskValue = "/admin.Service/DeleteTaskValue"
 const OperationServiceDeleteVideoClassify = "/admin.Service/DeleteVideoClassify"
 const OperationServiceDeleteVideoContent = "/admin.Service/DeleteVideoContent"
+const OperationServiceExportTaskValue = "/admin.Service/ExportTaskValue"
 const OperationServiceGetCurTaskValue = "/admin.Service/GetCurTaskValue"
 const OperationServiceGetNewsContent = "/admin.Service/GetNewsContent"
 const OperationServiceGetNotice = "/admin.Service/GetNotice"
@@ -102,6 +103,7 @@ type ServiceHTTPServer interface {
 	DeleteTaskValue(context.Context, *DeleteTaskValueRequest) (*emptypb.Empty, error)
 	DeleteVideoClassify(context.Context, *DeleteVideoClassifyRequest) (*emptypb.Empty, error)
 	DeleteVideoContent(context.Context, *DeleteVideoContentRequest) (*emptypb.Empty, error)
+	ExportTaskValue(context.Context, *ExportTaskValueRequest) (*emptypb.Empty, error)
 	GetCurTaskValue(context.Context, *GetCurTaskValueRequest) (*TaskValue, error)
 	GetNewsContent(context.Context, *GetNewsContentRequest) (*NewsContent, error)
 	GetNotice(context.Context, *GetNoticeRequest) (*Notice, error)
@@ -185,6 +187,7 @@ func RegisterServiceHTTPServer(s *http.Server, srv ServiceHTTPServer) {
 	r.DELETE("/party-affairs/v1/task", _Service_DeleteTask0_HTTP_Handler(srv))
 	r.GET("/party-affairs/v1/task/values", _Service_PageTaskValue0_HTTP_Handler(srv))
 	r.GET("/party-affairs/v1/task/value", _Service_GetTaskValue0_HTTP_Handler(srv))
+	r.POST("/party-affairs/v1/task/values", _Service_ExportTaskValue0_HTTP_Handler(srv))
 	r.GET("/party-affairs/client/v1/task/value", _Service_GetCurTaskValue0_HTTP_Handler(srv))
 	r.POST("/party-affairs/client/v1/task/value", _Service_AddTaskValue0_HTTP_Handler(srv))
 	r.PUT("/party-affairs/client/v1/task/value", _Service_UpdateTaskValue0_HTTP_Handler(srv))
@@ -1218,6 +1221,28 @@ func _Service_GetTaskValue0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Co
 	}
 }
 
+func _Service_ExportTaskValue0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportTaskValueRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationServiceExportTaskValue)
+		h := ctx.Middleware(func(ctx context.Context, req any) (any, error) {
+			return srv.ExportTaskValue(ctx, req.(*ExportTaskValueRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*emptypb.Empty)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Service_GetCurTaskValue0_HTTP_Handler(srv ServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetCurTaskValueRequest
@@ -1589,6 +1614,7 @@ type ServiceHTTPClient interface {
 	DeleteTaskValue(ctx context.Context, req *DeleteTaskValueRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	DeleteVideoClassify(ctx context.Context, req *DeleteVideoClassifyRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	DeleteVideoContent(ctx context.Context, req *DeleteVideoContentRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
+	ExportTaskValue(ctx context.Context, req *ExportTaskValueRequest, opts ...http.CallOption) (rsp *emptypb.Empty, err error)
 	GetCurTaskValue(ctx context.Context, req *GetCurTaskValueRequest, opts ...http.CallOption) (rsp *TaskValue, err error)
 	GetNewsContent(ctx context.Context, req *GetNewsContentRequest, opts ...http.CallOption) (rsp *NewsContent, err error)
 	GetNotice(ctx context.Context, req *GetNoticeRequest, opts ...http.CallOption) (rsp *Notice, err error)
@@ -1959,6 +1985,19 @@ func (c *ServiceHTTPClientImpl) DeleteVideoContent(ctx context.Context, in *Dele
 	opts = append(opts, http.Operation(OperationServiceDeleteVideoContent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *ServiceHTTPClientImpl) ExportTaskValue(ctx context.Context, in *ExportTaskValueRequest, opts ...http.CallOption) (*emptypb.Empty, error) {
+	var out emptypb.Empty
+	pattern := "/party-affairs/v1/task/values"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationServiceExportTaskValue))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

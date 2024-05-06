@@ -1420,6 +1420,26 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - Service
+            operationId: Service_ExportTaskValue
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportTaskValueRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /party-affairs/v1/tasks:
         get:
             tags:
@@ -1870,6 +1890,12 @@ components:
         BaseUser:
             type: object
             properties: {}
+        ExportTaskValueRequest:
+            type: object
+            properties:
+                taskId:
+                    type: integer
+                    format: uint32
         File:
             type: object
             properties: {}

@@ -302,6 +302,13 @@ service Service {
     };
   }
 
+  rpc ExportTaskValue (ExportTaskValueRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/party-affairs/v1/task/values",
+      body: "*"
+    };
+  }
+
   rpc GetCurTaskValue (GetCurTaskValueRequest) returns (TaskValue) {
     option (google.api.http) = {
       get: "/party-affairs/client/v1/task/value",

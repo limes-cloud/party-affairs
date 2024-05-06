@@ -10,7 +10,7 @@ import (
 	userV1 "github.com/limes-cloud/user-center/api/user/v1"
 	"google.golang.org/protobuf/proto"
 
-	v1 "party-affairs/api/v1"
+	"party-affairs/api/errors"
 	"party-affairs/internal/biz/types"
 	"party-affairs/internal/config"
 	"party-affairs/internal/consts"
@@ -56,7 +56,7 @@ func NewNoticeUseCase(config *config.Config, repo NoticeRepo) *NoticeUseCase {
 func (u *NoticeUseCase) Get(ctx kratosx.Context, id uint32) (*Notice, error) {
 	notice, err := u.repo.Get(ctx, id)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return notice, nil
 }
@@ -65,7 +65,7 @@ func (u *NoticeUseCase) Get(ctx kratosx.Context, id uint32) (*Notice, error) {
 func (u *NoticeUseCase) ReadUserIds(ctx kratosx.Context, nid uint32) ([]uint32, error) {
 	ids, err := u.repo.ReadUserIds(ctx, nid)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return ids, nil
 }
@@ -78,7 +78,7 @@ func (u *NoticeUseCase) Page(ctx kratosx.Context, req *types.PageNoticeRequest) 
 	}
 	notice, total, err := u.repo.Page(ctx, req)
 	if err != nil {
-		return nil, total, v1.DatabaseError()
+		return nil, total, errors.Database()
 	}
 	return notice, total, nil
 }
@@ -87,7 +87,7 @@ func (u *NoticeUseCase) Page(ctx kratosx.Context, req *types.PageNoticeRequest) 
 func (u *NoticeUseCase) Add(ctx kratosx.Context, notice *Notice) (uint32, error) {
 	id, err := u.repo.Create(ctx, notice)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -101,7 +101,7 @@ func (u *NoticeUseCase) SendNoticeEmail(ctx kratosx.Context, nid uint32) error {
 	// 获取全部应用用户
 	client, err := service.NewUser(ctx)
 	if err != nil {
-		return v1.UserCenterError()
+		return errors.UserCenter()
 	}
 
 	var page uint32 = 1
@@ -114,7 +114,7 @@ func (u *NoticeUseCase) SendNoticeEmail(ctx kratosx.Context, nid uint32) error {
 		}
 		resp, err := client.PageUser(context.Background(), req)
 		if err != nil {
-			return v1.UserCenterError()
+			return errors.UserCenter()
 		}
 
 		// 发送邮件
@@ -144,7 +144,7 @@ func (u *NoticeUseCase) SendNoticeEmail(ctx kratosx.Context, nid uint32) error {
 func (u *NoticeUseCase) Read(ctx kratosx.Context, id uint32) error {
 	md, err := auth.Get(ctx)
 	if err != nil {
-		return v1.AuthInfoError()
+		return errors.AuthInfo()
 	}
 	_ = u.repo.AddNoticeUser(ctx, &NoticeUser{
 		UserID:   md.UserID,
@@ -156,7 +156,7 @@ func (u *NoticeUseCase) Read(ctx kratosx.Context, id uint32) error {
 // Update 更新公告信息
 func (u *NoticeUseCase) Update(ctx kratosx.Context, notice *Notice) error {
 	if err := u.repo.Update(ctx, notice); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -164,7 +164,7 @@ func (u *NoticeUseCase) Update(ctx kratosx.Context, notice *Notice) error {
 // Delete 删除公告信息
 func (u *NoticeUseCase) Delete(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.Delete(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }

@@ -6,8 +6,9 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/jinzhu/copier"
 	"github.com/limes-cloud/kratosx"
-	resourceV1 "github.com/limes-cloud/resource/api/v1"
+	resourceV1 "github.com/limes-cloud/resource/api/file/v1"
 
+	"party-affairs/api/errors"
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
 	"party-affairs/internal/biz/types"
@@ -21,7 +22,7 @@ func (s *Service) AllResourceClassify(ctx context.Context, _ *empty.Empty) (*v1.
 	}
 	var reply v1.AllResourceClassifyReply
 	if err := copier.Copy(&reply.List, list); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return &reply, nil
 }
@@ -29,7 +30,7 @@ func (s *Service) AllResourceClassify(ctx context.Context, _ *empty.Empty) (*v1.
 func (s *Service) AddResourceClassify(ctx context.Context, in *v1.AddResourceClassifyRequest) (*empty.Empty, error) {
 	var nc biz.ResourceClassify
 	if err := copier.Copy(&nc, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	_, err := s.resource.AddClassify(kratosx.MustContext(ctx), &nc)
 	return nil, err
@@ -38,7 +39,7 @@ func (s *Service) AddResourceClassify(ctx context.Context, in *v1.AddResourceCla
 func (s *Service) UpdateResourceClassify(ctx context.Context, in *v1.UpdateResourceClassifyRequest) (*empty.Empty, error) {
 	var nc biz.ResourceClassify
 	if err := copier.Copy(&nc, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return nil, s.resource.UpdateClassify(kratosx.MustContext(ctx), &nc)
 }
@@ -50,7 +51,7 @@ func (s *Service) DeleteResourceClassify(ctx context.Context, in *v1.DeleteResou
 func (s *Service) PageResourceContent(ctx context.Context, in *v1.PageResourceContentRequest) (*v1.PageResourceContentReply, error) {
 	var req types.PageResourceContentRequest
 	if err := copier.Copy(&req, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
 	list, total, err := s.resource.PageContent(kratosx.MustContext(ctx), &req)
@@ -60,10 +61,10 @@ func (s *Service) PageResourceContent(ctx context.Context, in *v1.PageResourceCo
 
 	reply := v1.PageResourceContentReply{Total: total}
 	if err := copier.Copy(&reply.List, list); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
-	resource, err := service.NewResource(ctx)
+	resource, err := service.NewResourceFile(ctx)
 	if err == nil {
 		for ind, item := range reply.List {
 			reply.List[ind].Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: item.Url})
@@ -81,10 +82,10 @@ func (s *Service) GetResourceContent(ctx context.Context, in *v1.GetResourceCont
 
 	reply := v1.ResourceContent{}
 	if err := copier.Copy(&reply, nc); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
-	resource, err := service.NewResource(ctx)
+	resource, err := service.NewResourceFile(ctx)
 	if err == nil {
 		reply.Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: reply.Url})
 	}
@@ -95,7 +96,7 @@ func (s *Service) GetResourceContent(ctx context.Context, in *v1.GetResourceCont
 func (s *Service) AddResourceContent(ctx context.Context, in *v1.AddResourceContentRequest) (*empty.Empty, error) {
 	var nc biz.ResourceContent
 	if err := copier.Copy(&nc, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	_, err := s.resource.AddContent(kratosx.MustContext(ctx), &nc)
 	return nil, err
@@ -104,7 +105,7 @@ func (s *Service) AddResourceContent(ctx context.Context, in *v1.AddResourceCont
 func (s *Service) UpdateResourceContent(ctx context.Context, in *v1.UpdateResourceContentRequest) (*empty.Empty, error) {
 	var nc biz.ResourceContent
 	if err := copier.Copy(&nc, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return nil, s.resource.UpdateContent(kratosx.MustContext(ctx), &nc)
 }

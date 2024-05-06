@@ -6,8 +6,9 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/jinzhu/copier"
 	"github.com/limes-cloud/kratosx"
-	resourceV1 "github.com/limes-cloud/resource/api/v1"
+	resourceV1 "github.com/limes-cloud/resource/api/file/v1"
 
+	"party-affairs/api/errors"
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
 	"party-affairs/internal/pkg/service"
@@ -21,10 +22,10 @@ func (s *Service) AllBanner(ctx context.Context, _ *empty.Empty) (*v1.AllBannerR
 
 	var reply v1.AllBannerReply
 	if err := copier.Copy(&reply.List, list); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
-	resource, err := service.NewResource(ctx)
+	resource, err := service.NewResourceFile(ctx)
 	if err == nil {
 		for ind, item := range reply.List {
 			reply.List[ind].Resource, _ = resource.GetFileBySha(ctx, &resourceV1.GetFileByShaRequest{Sha: item.Src})
@@ -36,7 +37,7 @@ func (s *Service) AllBanner(ctx context.Context, _ *empty.Empty) (*v1.AllBannerR
 func (s *Service) AddBanner(ctx context.Context, in *v1.AddBannerRequest) (*empty.Empty, error) {
 	var banner biz.Banner
 	if err := copier.Copy(&banner, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	_, err := s.banner.Add(kratosx.MustContext(ctx), &banner)
 	return nil, err
@@ -45,7 +46,7 @@ func (s *Service) AddBanner(ctx context.Context, in *v1.AddBannerRequest) (*empt
 func (s *Service) UpdateBanner(ctx context.Context, in *v1.UpdateBannerRequest) (*empty.Empty, error) {
 	var banner biz.Banner
 	if err := copier.Copy(&banner, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return nil, s.banner.Update(kratosx.MustContext(ctx), &banner)
 }

@@ -9,6 +9,7 @@ import (
 	"github.com/limes-cloud/user-center/api/auth"
 	userV1 "github.com/limes-cloud/user-center/api/user/v1"
 
+	"party-affairs/api/errors"
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
 	"party-affairs/internal/biz/types"
@@ -27,7 +28,7 @@ func (s *Service) PageTask(ctx context.Context, in *v1.PageTaskRequest) (*v1.Pag
 	}
 	reply := v1.PageTaskReply{Total: total}
 	if err := copier.Copy(&reply.List, list); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return &reply, nil
 }
@@ -39,7 +40,7 @@ func (s *Service) GetTask(ctx context.Context, in *v1.GetTaskRequest) (*v1.Task,
 	}
 	reply := v1.Task{}
 	if err := copier.Copy(&reply, task); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return &reply, nil
 }
@@ -47,7 +48,7 @@ func (s *Service) GetTask(ctx context.Context, in *v1.GetTaskRequest) (*v1.Task,
 func (s *Service) AddTask(ctx context.Context, in *v1.AddTaskRequest) (*empty.Empty, error) {
 	var task biz.Task
 	if err := copier.Copy(&task, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	_, err := s.task.Add(kratosx.MustContext(ctx), &task)
 	return nil, err
@@ -56,7 +57,7 @@ func (s *Service) AddTask(ctx context.Context, in *v1.AddTaskRequest) (*empty.Em
 func (s *Service) UpdateTask(ctx context.Context, in *v1.UpdateTaskRequest) (*empty.Empty, error) {
 	var task biz.Task
 	if err := copier.Copy(&task, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return nil, s.task.Update(kratosx.MustContext(ctx), &task)
 }
@@ -76,7 +77,7 @@ func (s *Service) PageTaskValue(ctx context.Context, in *v1.PageTaskValueRequest
 	}
 	reply := v1.PageTaskValueReply{Total: total}
 	if err := copier.Copy(&reply.List, list); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
 	user, err := service.NewUser(ctx)
@@ -95,7 +96,7 @@ func (s *Service) GetTaskValue(ctx context.Context, in *v1.GetTaskValueRequest) 
 	}
 	reply := v1.TaskValue{}
 	if err := copier.Copy(&reply, task); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
 	return &reply, nil
@@ -106,7 +107,7 @@ func (s *Service) GetCurTaskValue(ctx context.Context, in *v1.GetCurTaskValueReq
 
 	md, err := auth.Get(kCtx)
 	if err != nil {
-		return nil, v1.AuthInfoError()
+		return nil, errors.AuthInfo()
 	}
 	task, err := s.task.GetValue(kratosx.MustContext(ctx), in.TaskId, md.UserID)
 	if err != nil {
@@ -114,7 +115,7 @@ func (s *Service) GetCurTaskValue(ctx context.Context, in *v1.GetCurTaskValueReq
 	}
 	reply := v1.TaskValue{}
 	if err := copier.Copy(&reply, task); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
 	return &reply, nil
@@ -123,16 +124,20 @@ func (s *Service) GetCurTaskValue(ctx context.Context, in *v1.GetCurTaskValueReq
 func (s *Service) AddTaskValue(ctx context.Context, in *v1.AddTaskValueRequest) (*empty.Empty, error) {
 	var task biz.TaskValue
 	if err := copier.Copy(&task, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	_, err := s.task.AddValue(kratosx.MustContext(ctx), &task)
 	return nil, err
 }
 
+func (s *Service) ExportTaskValue(ctx context.Context, in *v1.ExportTaskValueRequest) (*empty.Empty, error) {
+	return nil, s.task.ExportValue(kratosx.MustContext(ctx), in.TaskId)
+}
+
 func (s *Service) UpdateTaskValue(ctx context.Context, in *v1.UpdateTaskValueRequest) (*empty.Empty, error) {
 	var task biz.TaskValue
 	if err := copier.Copy(&task, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return nil, s.task.UpdateValue(kratosx.MustContext(ctx), &task)
 }

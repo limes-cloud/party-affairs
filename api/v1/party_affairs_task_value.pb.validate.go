@@ -700,6 +700,119 @@ var _ interface {
 	ErrorName() string
 } = PageTaskValueReplyValidationError{}
 
+// Validate checks the field values on ExportTaskValueRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportTaskValueRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportTaskValueRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportTaskValueRequestMultiError, or nil if none found.
+func (m *ExportTaskValueRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportTaskValueRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetTaskId() <= 0 {
+		err := ExportTaskValueRequestValidationError{
+			field:  "TaskId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ExportTaskValueRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportTaskValueRequestMultiError is an error wrapping multiple validation
+// errors returned by ExportTaskValueRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ExportTaskValueRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportTaskValueRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportTaskValueRequestMultiError) AllErrors() []error { return m }
+
+// ExportTaskValueRequestValidationError is the validation error returned by
+// ExportTaskValueRequest.Validate if the designated constraints aren't met.
+type ExportTaskValueRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportTaskValueRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportTaskValueRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportTaskValueRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportTaskValueRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportTaskValueRequestValidationError) ErrorName() string {
+	return "ExportTaskValueRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportTaskValueRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportTaskValueRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportTaskValueRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportTaskValueRequestValidationError{}
+
 // Validate checks the field values on AddTaskValueRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

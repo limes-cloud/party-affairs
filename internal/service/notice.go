@@ -9,6 +9,7 @@ import (
 	userV1 "github.com/limes-cloud/user-center/api/user/v1"
 	"google.golang.org/protobuf/proto"
 
+	"party-affairs/api/errors"
 	v1 "party-affairs/api/v1"
 	"party-affairs/internal/biz"
 	"party-affairs/internal/biz/types"
@@ -29,7 +30,7 @@ func (s *Service) PageNotice(ctx context.Context, in *v1.PageNoticeRequest) (*v1
 
 	reply := v1.PageNoticeReply{Total: total}
 	if err := copier.Copy(&reply.List, list); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	for ind, item := range list {
 		reply.List[ind].IsRead = item.NoticeUser != nil
@@ -46,7 +47,7 @@ func (s *Service) PageNoticeUser(ctx context.Context, in *v1.PageNoticeUserReque
 
 	client, err := service.NewUser(ctx)
 	if err != nil {
-		return nil, v1.UserCenterError()
+		return nil, errors.UserCenter()
 	}
 	req := &userV1.PageUserRequest{
 		App:      proto.String(consts.ClientApp),
@@ -76,7 +77,7 @@ func (s *Service) GetNotice(ctx context.Context, in *v1.GetNoticeRequest) (*v1.N
 
 	reply := v1.Notice{}
 	if err := copier.Copy(&reply, nc); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 	return &reply, nil
 }
@@ -89,7 +90,7 @@ func (s *Service) AddNotice(ctx context.Context, in *v1.AddNoticeRequest) (*empt
 	var notice biz.Notice
 	kCtx := kratosx.MustContext(ctx)
 	if err := copier.Copy(&notice, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
 	if _, err := s.notice.Add(kCtx, &notice); err != nil {
@@ -106,7 +107,7 @@ func (s *Service) AddNotice(ctx context.Context, in *v1.AddNoticeRequest) (*empt
 func (s *Service) UpdateNotice(ctx context.Context, in *v1.UpdateNoticeRequest) (*empty.Empty, error) {
 	var notice biz.Notice
 	if err := copier.Copy(&notice, in); err != nil {
-		return nil, v1.TransformError()
+		return nil, errors.Transform()
 	}
 
 	kCtx := kratosx.MustContext(ctx)

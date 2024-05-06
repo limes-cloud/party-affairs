@@ -40,6 +40,10 @@ message PageTaskValueReply{
   repeated TaskValue list = 2;
 }
 
+message ExportTaskValueRequest{
+  uint32 task_id = 1[(validate.rules).uint32 = {gt: 0}];
+}
+
 message AddTaskValueRequest {
   uint32 task_id = 1[(validate.rules).uint32 = {gt: 0}];
   string value = 2[(validate.rules).string = {min_len: 1}];

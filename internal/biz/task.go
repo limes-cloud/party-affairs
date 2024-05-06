@@ -1,13 +1,17 @@
 package biz
 
 import (
+	"encoding/json"
+
 	"github.com/limes-cloud/kratosx"
 	ktypes "github.com/limes-cloud/kratosx/types"
+	exportv1 "github.com/limes-cloud/resource/api/export/v1"
 	"github.com/limes-cloud/user-center/api/auth"
 
-	v1 "party-affairs/api/v1"
+	"party-affairs/api/errors"
 	"party-affairs/internal/biz/types"
 	"party-affairs/internal/config"
+	"party-affairs/internal/pkg/service"
 )
 
 type Task struct {
@@ -36,10 +40,16 @@ type TaskRepo interface {
 	Delete(ctx kratosx.Context, uint322 uint32) error
 
 	GetValue(ctx kratosx.Context, taskId, userId uint32) (*TaskValue, error)
+	AllValueByTaskId(ctx kratosx.Context, id uint32) ([]*TaskValue, error)
 	PageValue(ctx kratosx.Context, in *types.PageTaskValueRequest) ([]*TaskValue, uint32, error)
 	CreateValue(ctx kratosx.Context, c *TaskValue) (uint32, error)
 	UpdateValue(ctx kratosx.Context, c *TaskValue) error
 	DeleteValue(ctx kratosx.Context, uint322 uint32) error
+}
+
+type configure struct {
+	Type  string `json:"type"`
+	Field string `json:"field"`
 }
 
 type TaskUseCase struct {
@@ -55,7 +65,7 @@ func NewTaskUseCase(config *config.Config, repo TaskRepo) *TaskUseCase {
 func (u *TaskUseCase) Get(ctx kratosx.Context, id uint32) (*Task, error) {
 	task, err := u.repo.Get(ctx, id)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return task, nil
 }
@@ -68,7 +78,7 @@ func (u *TaskUseCase) Page(ctx kratosx.Context, req *types.PageTaskRequest) ([]*
 	}
 	task, total, err := u.repo.Page(ctx, req)
 	if err != nil {
-		return nil, total, v1.DatabaseError()
+		return nil, total, errors.Database()
 	}
 	return task, total, nil
 }
@@ -77,7 +87,7 @@ func (u *TaskUseCase) Page(ctx kratosx.Context, req *types.PageTaskRequest) ([]*
 func (u *TaskUseCase) Add(ctx kratosx.Context, task *Task) (uint32, error) {
 	id, err := u.repo.Create(ctx, task)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -85,7 +95,7 @@ func (u *TaskUseCase) Add(ctx kratosx.Context, task *Task) (uint32, error) {
 // Update 更新任务信息
 func (u *TaskUseCase) Update(ctx kratosx.Context, task *Task) error {
 	if err := u.repo.Update(ctx, task); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -93,7 +103,7 @@ func (u *TaskUseCase) Update(ctx kratosx.Context, task *Task) error {
 // Delete 删除任务信息
 func (u *TaskUseCase) Delete(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.Delete(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -108,7 +118,7 @@ func (u *TaskUseCase) GetValue(ctx kratosx.Context, taskId, userId uint32) (*Tas
 func (u *TaskUseCase) PageValue(ctx kratosx.Context, in *types.PageTaskValueRequest) ([]*TaskValue, uint32, error) {
 	task, total, err := u.repo.PageValue(ctx, in)
 	if err != nil {
-		return nil, total, v1.DatabaseError()
+		return nil, total, errors.Database()
 	}
 	return task, total, nil
 }
@@ -117,27 +127,82 @@ func (u *TaskUseCase) PageValue(ctx kratosx.Context, in *types.PageTaskValueRequ
 func (u *TaskUseCase) AddValue(ctx kratosx.Context, task *TaskValue) (uint32, error) {
 	md, err := auth.Get(ctx)
 	if err != nil {
-		return 0, v1.AuthInfoError()
+		return 0, errors.AuthInfo()
 	}
 	task.UserID = md.UserID
 
 	id, err := u.repo.CreateValue(ctx, task)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
+}
+
+// ExportValue 导出任务信息
+func (u *TaskUseCase) ExportValue(ctx kratosx.Context, id uint32) error {
+	task, err := u.repo.Get(ctx, id)
+	if err != nil {
+		return errors.DatabaseFormat(err.Error())
+	}
+
+	var (
+		cfg []configure
+		tps = make(map[string]string)
+	)
+	if err := json.Unmarshal([]byte(task.Config), &cfg); err != nil {
+		return errors.Transform()
+	}
+	for _, item := range cfg {
+		tp := "string"
+		if item.Type == "upload" {
+			tp = "image"
+		}
+		tps[item.Field] = tp
+	}
+
+	client, err := service.NewResourceExport(ctx)
+	if err != nil {
+		return errors.ResourceService()
+	}
+	var rows []*exportv1.AddExportExcelRequest_Row
+	list, err := u.repo.AllValueByTaskId(ctx, id)
+	for _, item := range list {
+		var (
+			value = make(map[string]string)
+			cols  []*exportv1.AddExportExcelRequest_Col
+		)
+		if err := json.Unmarshal([]byte(item.Value), &value); err != nil {
+			continue
+		}
+
+		for _, ite := range cfg {
+			cols = append(cols, &exportv1.AddExportExcelRequest_Col{
+				Type:  tps[ite.Field],
+				Value: value[ite.Field],
+			})
+		}
+		rows = append(rows, &exportv1.AddExportExcelRequest_Row{
+			Cols: cols,
+		})
+	}
+
+	_, err = client.AddExportExcel(ctx, &exportv1.AddExportExcelRequest{
+		Name: task.Title,
+		Rows: rows,
+	})
+	return err
 }
 
 // UpdateValue 更新任务信息
 func (u *TaskUseCase) UpdateValue(ctx kratosx.Context, task *TaskValue) error {
 	md, err := auth.Get(ctx)
 	if err != nil {
-		return v1.AuthInfoError()
+		return errors.AuthInfo()
 	}
 	task.UserID = md.UserID
 
 	if err := u.repo.UpdateValue(ctx, task); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -145,7 +210,7 @@ func (u *TaskUseCase) UpdateValue(ctx kratosx.Context, task *TaskValue) error {
 // DeleteValue 删除任务信息
 func (u *TaskUseCase) DeleteValue(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteValue(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }

@@ -5,7 +5,7 @@ import (
 	ktypes "github.com/limes-cloud/kratosx/types"
 	"github.com/limes-cloud/user-center/api/auth"
 
-	v1 "party-affairs/api/v1"
+	"party-affairs/api/errors"
 	"party-affairs/internal/biz/types"
 	"party-affairs/internal/config"
 )
@@ -70,7 +70,7 @@ func NewVideoUseCase(config *config.Config, repo VideoRepo) *VideoUseCase {
 func (u *VideoUseCase) PageClassify(ctx kratosx.Context, in *types.PageVideoClassifyRequest) ([]*VideoClassify, uint32, error) {
 	nc, total, err := u.repo.PageClassify(ctx, in)
 	if err != nil {
-		return nil, 0, v1.DatabaseError()
+		return nil, 0, errors.Database()
 	}
 	return nc, total, nil
 }
@@ -79,7 +79,7 @@ func (u *VideoUseCase) PageClassify(ctx kratosx.Context, in *types.PageVideoClas
 func (u *VideoUseCase) AddClassify(ctx kratosx.Context, nc *VideoClassify) (uint32, error) {
 	id, err := u.repo.AddClassify(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -87,7 +87,7 @@ func (u *VideoUseCase) AddClassify(ctx kratosx.Context, nc *VideoClassify) (uint
 // UpdateClassify 更新资源分类信息
 func (u *VideoUseCase) UpdateClassify(ctx kratosx.Context, nc *VideoClassify) error {
 	if err := u.repo.UpdateClassify(ctx, nc); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -95,7 +95,7 @@ func (u *VideoUseCase) UpdateClassify(ctx kratosx.Context, nc *VideoClassify) er
 // DeleteClassify 删除资源分类信息
 func (u *VideoUseCase) DeleteClassify(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteClassify(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -104,7 +104,7 @@ func (u *VideoUseCase) DeleteClassify(ctx kratosx.Context, id uint32) error {
 func (u *VideoUseCase) GetContent(ctx kratosx.Context, id uint32) (*VideoContent, error) {
 	nc, err := u.repo.GetContent(ctx, id)
 	if err != nil {
-		return nil, v1.DatabaseError()
+		return nil, errors.Database()
 	}
 	return nc, nil
 }
@@ -117,7 +117,7 @@ func (u *VideoUseCase) PageContent(ctx kratosx.Context, req *types.PageVideoCont
 	}
 	nc, total, err := u.repo.PageContent(ctx, req)
 	if err != nil {
-		return nil, 0, v1.DatabaseError()
+		return nil, 0, errors.Database()
 	}
 	return nc, total, nil
 }
@@ -126,7 +126,7 @@ func (u *VideoUseCase) PageContent(ctx kratosx.Context, req *types.PageVideoCont
 func (u *VideoUseCase) AddContent(ctx kratosx.Context, nc *VideoContent) (uint32, error) {
 	id, err := u.repo.AddContent(ctx, nc)
 	if err != nil {
-		return 0, v1.DatabaseErrorFormat(err.Error())
+		return 0, errors.DatabaseFormat(err.Error())
 	}
 	return id, nil
 }
@@ -134,7 +134,7 @@ func (u *VideoUseCase) AddContent(ctx kratosx.Context, nc *VideoContent) (uint32
 // UpdateContent 更新资源
 func (u *VideoUseCase) UpdateContent(ctx kratosx.Context, nc *VideoContent) error {
 	if err := u.repo.UpdateContent(ctx, nc); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -142,7 +142,7 @@ func (u *VideoUseCase) UpdateContent(ctx kratosx.Context, nc *VideoContent) erro
 // DeleteContent 删除资源
 func (u *VideoUseCase) DeleteContent(ctx kratosx.Context, id uint32) error {
 	if err := u.repo.DeleteContent(ctx, id); err != nil {
-		return v1.DatabaseErrorFormat(err.Error())
+		return errors.DatabaseFormat(err.Error())
 	}
 	return nil
 }
@@ -151,12 +151,12 @@ func (u *VideoUseCase) DeleteContent(ctx kratosx.Context, id uint32) error {
 func (u *VideoUseCase) UpdateUserVideoProcess(ctx kratosx.Context, vid uint32, ct uint32) error {
 	info, err := auth.Get(ctx)
 	if err != nil {
-		return v1.AuthInfoError()
+		return errors.AuthInfo()
 	}
 
 	video, err := u.repo.GetContent(ctx, vid)
 	if err != nil {
-		return v1.DatabaseError()
+		return errors.Database()
 	}
 
 	uvp := &UserVideoProcess{
@@ -171,7 +171,7 @@ func (u *VideoUseCase) UpdateUserVideoProcess(ctx kratosx.Context, vid uint32, c
 	ouv, err := u.repo.GetUserVideo(ctx, vid, info.UserID)
 	if err != nil { // 不存在则创建
 		if _, err := u.repo.AddUserVideo(ctx, uvp); err != nil {
-			return v1.DatabaseError()
+			return errors.Database()
 		}
 		return nil
 	}
@@ -180,7 +180,7 @@ func (u *VideoUseCase) UpdateUserVideoProcess(ctx kratosx.Context, vid uint32, c
 		return nil
 	}
 	if err := u.repo.UpdateUserVideo(ctx, uvp); err != nil {
-		return v1.DatabaseError()
+		return errors.Database()
 	}
 	return nil
 }

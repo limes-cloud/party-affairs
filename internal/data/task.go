@@ -79,6 +79,11 @@ func (u *taskRepo) PageValue(ctx kratosx.Context, req *types.PageTaskValueReques
 	return list, uint32(total), db.Find(&list).Error
 }
 
+func (u *taskRepo) AllValueByTaskId(ctx kratosx.Context, id uint32) ([]*biz.TaskValue, error) {
+	var list []*biz.TaskValue
+	return list, ctx.DB().Where("task_id=?", id).Find(&list).Error
+}
+
 func (u *taskRepo) CreateValue(ctx kratosx.Context, task *biz.TaskValue) (uint32, error) {
 	return task.ID, ctx.DB().Create(task).Error
 }
