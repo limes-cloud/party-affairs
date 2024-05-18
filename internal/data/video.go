@@ -79,7 +79,7 @@ func (u *videoRepo) UpdateContent(ctx kratosx.Context, video *biz.VideoContent) 
 }
 
 func (u *videoRepo) DeleteContent(ctx kratosx.Context, id uint32) error {
-	return ctx.DB().Delete(biz.VideoClassify{}, "id=?", id).Error
+	return ctx.DB().Delete(biz.VideoContent{}, "id=?", id).Error
 }
 
 func (u *videoRepo) UpdateUserVideo(ctx kratosx.Context, video *biz.UserVideoProcess) error {

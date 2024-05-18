@@ -7,6 +7,7 @@ import (
 	ktypes "github.com/limes-cloud/kratosx/types"
 	exportv1 "github.com/limes-cloud/resource/api/export/v1"
 	"github.com/limes-cloud/user-center/api/auth"
+	userV1 "github.com/limes-cloud/user-center/api/user/v1"
 
 	"party-affairs/api/errors"
 	"party-affairs/internal/biz/types"
@@ -48,8 +49,11 @@ type TaskRepo interface {
 }
 
 type configure struct {
-	Type  string `json:"type"`
-	Field string `json:"field"`
+	Type   string `json:"type"`
+	Field  string `json:"field"`
+	Config struct {
+		Label string `json:"label"`
+	} `json:"config"`
 }
 
 type TaskUseCase struct {
@@ -146,25 +150,47 @@ func (u *TaskUseCase) ExportValue(ctx kratosx.Context, id uint32) error {
 	}
 
 	var (
-		cfg []configure
-		tps = make(map[string]string)
+		cfg     []configure
+		tps     = make(map[string]string)
+		headCol []*exportv1.AddExportExcelRequest_Col
 	)
 	if err := json.Unmarshal([]byte(task.Config), &cfg); err != nil {
 		return errors.Transform()
 	}
+
+	// 假如用户姓名
+	headCol = append(headCol, &exportv1.AddExportExcelRequest_Col{
+		Type:  "string",
+		Value: "姓名",
+	})
+
 	for _, item := range cfg {
 		tp := "string"
 		if item.Type == "upload" {
 			tp = "image"
 		}
 		tps[item.Field] = tp
+		headCol = append(headCol, &exportv1.AddExportExcelRequest_Col{
+			Type:  "string",
+			Value: item.Config.Label,
+		})
 	}
 
-	client, err := service.NewResourceExport(ctx)
+	rc, err := service.NewResourceExport(ctx)
 	if err != nil {
 		return errors.ResourceService()
 	}
+
+	uc, err := service.NewUser(ctx)
+	if err != nil {
+		return errors.ResourceService()
+	}
+
 	var rows []*exportv1.AddExportExcelRequest_Row
+	rows = append(rows, &exportv1.AddExportExcelRequest_Row{
+		Cols: headCol,
+	})
+
 	list, err := u.repo.AllValueByTaskId(ctx, id)
 	for _, item := range list {
 		var (
@@ -175,18 +201,28 @@ func (u *TaskUseCase) ExportValue(ctx kratosx.Context, id uint32) error {
 			continue
 		}
 
+		user, err := uc.GetBaseUser(ctx, &userV1.GetBaseUserRequest{Id: item.UserID})
+		if err != nil {
+			return err
+		}
+		cols = append(cols, &exportv1.AddExportExcelRequest_Col{
+			Type:  "string",
+			Value: user.RealName,
+		})
+
 		for _, ite := range cfg {
 			cols = append(cols, &exportv1.AddExportExcelRequest_Col{
 				Type:  tps[ite.Field],
 				Value: value[ite.Field],
 			})
 		}
+
 		rows = append(rows, &exportv1.AddExportExcelRequest_Row{
 			Cols: cols,
 		})
 	}
 
-	_, err = client.AddExportExcel(ctx, &exportv1.AddExportExcelRequest{
+	_, err = rc.AddExportExcel(ctx, &exportv1.AddExportExcelRequest{
 		Name: task.Title,
 		Rows: rows,
 	})
