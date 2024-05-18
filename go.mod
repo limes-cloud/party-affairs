@@ -7,7 +7,7 @@ require (
 	github.com/go-kratos/kratos/v2 v2.7.3
 	github.com/golang/protobuf v1.5.4
 	github.com/jinzhu/copier v0.4.0
-	github.com/limes-cloud/configure v1.0.32
+	github.com/limes-cloud/configure v1.0.33
 	github.com/limes-cloud/kratosx v1.0.31
 	github.com/limes-cloud/manager v1.0.13
 	github.com/limes-cloud/resource v1.0.8
